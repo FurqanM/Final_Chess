@@ -1,14 +1,21 @@
 package Controller;
 
-import java.lang.reflect.Array;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.regex.Pattern;
 
 import Model.Piece;
-import Model.PieceType;
 
 public class Board
 {
-	private final String FILE = "ABCDEFGH";
-	private final String RANK = "123456789";
+	private File file = new File("Chess.txt");
+	private static final String CHESS_PATTERN = "([KQNBR][ld][a-h][1-8])|([a-h][1-8]\\s[a-h][1-8]\\*?)";
+	private final String FILE = "012345678";
+	private final String RANK = "ABCDEFGH";
 	private Piece[][] boardSetup;
 	private final int BOARD_FILE = 8;
 	private final int BOARD_RANK = 8;
@@ -27,7 +34,7 @@ public class Board
 	public Board()
 	{
 		this.boardSetup = new Piece[8][8];
-		boardSetup[0][0] = new Piece(PieceType.ROOK);
+		boardSetup[0][0] = new Piece("RL");
 		boardSetup[0][1] = new Piece(PieceType.KNIGHT);
 		boardSetup[0][2] = new Piece(PieceType.BISHOP);
 		boardSetup[0][3] = new Piece(PieceType.QUEEN);
@@ -69,33 +76,35 @@ public class Board
 			for (int x = 0; x < BOARD_RANK; x++)
 			{
 				if (boardSetup[y][x].getType() == PieceType.PAWN)
-					boardSetup[y][x].setPicture("WPN");
+					boardSetup[y][x].setPicture("PL");
 				else if (boardSetup[y][x].getType() == PieceType.ROOK)
-					boardSetup[y][x].setPicture("WRK");
+					boardSetup[y][x].setPicture("RL");
 				else if (boardSetup[y][x].getType() == PieceType.BISHOP)
-					boardSetup[y][x].setPicture("WBP");
+					boardSetup[y][x].setPicture("BL");
 				else if (boardSetup[y][x].getType() == PieceType.KNIGHT)
-					boardSetup[y][x].setPicture("WKT");
+					boardSetup[y][x].setPicture("KL");
 				else if (boardSetup[y][x].getType() == PieceType.QUEEN)
-					boardSetup[y][x].setPicture("WQN");
+					boardSetup[y][x].setPicture("QL");
 				else if (boardSetup[y][x].getType() == PieceType.KING)
-					boardSetup[y][x].setPicture("WKG");
+					boardSetup[y][x].setPicture("KL");
 				else if (boardSetup[y][x].getType() == PieceType.PAWN)
-					boardSetup[y][x].setPicture("BPN");
+					boardSetup[y][x].setPicture("PD");
 				else if (boardSetup[y][x].getType() == PieceType.ROOK)
-					boardSetup[y][x].setPicture("BRK");
+					boardSetup[y][x].setPicture("RD");
 				else if (boardSetup[y][x].getType() == PieceType.BISHOP)
-					boardSetup[y][x].setPicture("BBP");
+					boardSetup[y][x].setPicture("BD");
 				else if (boardSetup[y][x].getType() == PieceType.KNIGHT)
-					boardSetup[y][x].setPicture("BKT");
+					boardSetup[y][x].setPicture("KD");
 				else if (boardSetup[y][x].getType() == PieceType.QUEEN)
-					boardSetup[y][x].setPicture("BQN");
+					boardSetup[y][x].setPicture("QD");
 				else if (boardSetup[y][x].getType() == PieceType.KING)
-					boardSetup[y][x].setPicture("BKG");
+					boardSetup[y][x].setPicture("KD");
 				else
 					boardSetup[y][x].setPicture(" ");
 			}
 	}
+	
+
 
 	public void draw()
 	{
@@ -114,22 +123,61 @@ public class Board
 	}
 
 	public void movePiece(String boardPosition, String newPosition)
-	{
+	{		
+		int initialRank = RANK.indexOf(boardPosition.substring(0, 1).trim());
+		int initialFile = FILE.indexOf(boardPosition.substring(1).trim());
 		
-		// with letterSideInitial and letterSideNew the input should be something like (a7) 
-		// so splitting it into the letter and into the number, then converting them all to
-		// int to be able to manipulate the position on the 2d array
-		this.boardSetup[][]
+		int newRank = RANK.indexOf(newPosition.substring(0, 1).trim());
+		int newFile = FILE.indexOf(newPosition.substring(1).trim());
 		
-		// these 2 lines actually change the position to move to to the old piece
-		// and the original position with a NOPIECE
 		
-				this.boardSetup[newY][newX].setPiece(this.boardSetup[initialY][initialX]);
-				this.boardSetup[initialY][initialX].setType(PieceType.NOPIECE);
+		this.boardSetup[newFile][newRank].setPiece(this.boardSetup[initialFile][initialRank]);
+		this.boardSetup[initialFile][initialRank].setType(PieceType.NOPIECE);
 				
-		
-		//test and modulate the castling and isolation
-		//of the checkmate and check application between methods
 	}
+
+	// regex pattern for reading chess input
+	// ([BKNPQR][ld][a-h][1-8])|((([a-h][1-8][ \*]?){2})+)
+	// ([BKNPQR][ld][a-h][1-8])|((?:(?:[a-h][1-8][ ]?){2})+) THIS WORKS
+	// ([BKNPQR]?)([a-hl]?)([0-9]?)([x=]?)([BKNPQR\*]|[a-h][1-8])([+#]?)
+	// ([KQNBR]?([a-h]?[1-8]?x)?[a-h]([2-7]|[18](=[KQNBR])?)|0-0(-0)?)(\(ep\)|\+{1,2})?
+
+	public void loadFile()
+	{
+
+		FileInputStream fstream = null;
+		try
+		{
+			fstream = new FileInputStream(file);
+		}
+		catch (FileNotFoundException e1)
+		{
+			e1.printStackTrace();
+		}
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+		String strLine;
+
+		try
+		{
+			while ((strLine = br.readLine()) != null)
+			{
+				if(Pattern.matches(CHESS_PATTERN, strLine))
+				{
+					
+				}
+			}
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+	
+	
 
 }
