@@ -3,7 +3,12 @@ package Model;
 public class Piece
 {
 	private String picture;
-	private Piece type;
+	private PieceType type;
+
+	public Piece(PieceType type)
+	{
+		this.type = type;
+	}
 
 	public String getPicture()
 	{
@@ -15,16 +20,16 @@ public class Piece
 		this.picture = picture;
 	}
 
-	public Piece getType()
+	public PieceType getType()
 	{
 		return type;
 
 	}
 
-	public void setType(Piece type)
+	public void setType(PieceType type)
 	{
 		this.type = type;
-		if (type.equals(" "))
+		if (type == PieceType.NOPIECE)
 		{
 			this.picture = " ";
 		}

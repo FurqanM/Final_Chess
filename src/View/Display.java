@@ -27,7 +27,7 @@ public class Display
 		}
 		else if(option.equals("2"))
 		{
-			while(game)
+			do
 			{
 				board.draw();
 
@@ -42,7 +42,8 @@ public class Display
 				board.movePiece(boardPosition, newPosition);
 
 				board.draw();
-			} 
+				
+			}  while(!game);
 		}
 	}
 }

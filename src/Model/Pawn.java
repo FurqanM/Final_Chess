@@ -2,21 +2,11 @@ package Model;
 
 public class Pawn extends Piece
 {
-	boolean isWhite;
 
-	/**
-	 * @return the isWhite
-	 */
-	public boolean isWhite()
+	public Pawn(PieceType type)
 	{
-		return isWhite;
+		super(type);
+		// TODO Auto-generated constructor stub
 	}
-
-	/**
-	 * @param isWhite the isWhite to set
-	 */
-	public void setWhite(boolean isWhite)
-	{
-		this.isWhite = isWhite;
-	}
+	
 }

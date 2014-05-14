@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.util.regex.Pattern;
 
 import Model.Piece;
+import Model.PieceType;
+import Model.Rook;
 
 public class Board
 {
@@ -34,70 +36,70 @@ public class Board
 	public Board()
 	{
 		this.boardSetup = new Piece[8][8];
-		boardSetup[0][0] = new Piece("RL");
-		boardSetup[0][1] = new Piece(PieceType.KNIGHT);
-		boardSetup[0][2] = new Piece(PieceType.BISHOP);
-		boardSetup[0][3] = new Piece(PieceType.QUEEN);
-		boardSetup[0][4] = new Piece(PieceType.KING);
-		boardSetup[0][5] = new Piece(PieceType.BISHOP);
-		boardSetup[0][6] = new Piece(PieceType.KNIGHT);
-		boardSetup[0][7] = new Piece(PieceType.ROOK);
-		boardSetup[1][0] = new Piece(PieceType.PAWN);
-		boardSetup[1][1] = new Piece(PieceType.PAWN);
-		boardSetup[1][2] = new Piece(PieceType.PAWN);
-		boardSetup[1][3] = new Piece(PieceType.PAWN);
-		boardSetup[1][4] = new Piece(PieceType.PAWN);
-		boardSetup[1][5] = new Piece(PieceType.PAWN);
-		boardSetup[1][6] = new Piece(PieceType.PAWN);
-		boardSetup[1][7] = new Piece(PieceType.PAWN);
+		boardSetup[0][0] = new Piece(PieceType.WROOK);
+		boardSetup[0][1] = new Piece(PieceType.WKNIGHT);
+		boardSetup[0][2] = new Piece(PieceType.WBISHOP);
+		boardSetup[0][3] = new Piece(PieceType.WQUEEN);
+		boardSetup[0][4] = new Piece(PieceType.WKING);
+		boardSetup[0][5] = new Piece(PieceType.WBISHOP);
+		boardSetup[0][6] = new Piece(PieceType.WKNIGHT);
+		boardSetup[0][7] = new Piece(PieceType.WROOK);
+		boardSetup[1][0] = new Piece(PieceType.WPAWN);
+		boardSetup[1][1] = new Piece(PieceType.WPAWN);
+		boardSetup[1][2] = new Piece(PieceType.WPAWN);
+		boardSetup[1][3] = new Piece(PieceType.WPAWN);
+		boardSetup[1][4] = new Piece(PieceType.WPAWN);
+		boardSetup[1][5] = new Piece(PieceType.WPAWN);
+		boardSetup[1][6] = new Piece(PieceType.WPAWN);
+		boardSetup[1][7] = new Piece(PieceType.WPAWN);
 
 		for (int y = 2; y <= 5; y++)
 			for (int x = 0; x < BOARD_RANK; x++)
 				boardSetup[y][x] = new Piece(PieceType.NOPIECE);
 
-		boardSetup[7][0] = new Piece(PieceType.ROOK);
-		boardSetup[7][1] = new Piece(PieceType.KNIGHT);
-		boardSetup[7][2] = new Piece(PieceType.BISHOP);
-		boardSetup[7][3] = new Piece(PieceType.QUEEN);
-		boardSetup[7][4] = new Piece(PieceType.KING);
-		boardSetup[7][5] = new Piece(PieceType.BISHOP);
-		boardSetup[7][6] = new Piece(PieceType.KNIGHT);
-		boardSetup[7][7] = new Piece(PieceType.ROOK);
-		boardSetup[6][0] = new Piece(PieceType.PAWN);
-		boardSetup[6][1] = new Piece(PieceType.PAWN);
-		boardSetup[6][2] = new Piece(PieceType.PAWN);
-		boardSetup[6][3] = new Piece(PieceType.PAWN);
-		boardSetup[6][4] = new Piece(PieceType.PAWN);
-		boardSetup[6][5] = new Piece(PieceType.PAWN);
-		boardSetup[6][6] = new Piece(PieceType.PAWN);
-		boardSetup[6][7] = new Piece(PieceType.PAWN);
+		boardSetup[7][0] = new Piece(PieceType.BROOK);
+		boardSetup[7][1] = new Piece(PieceType.BKNIGHT);
+		boardSetup[7][2] = new Piece(PieceType.BBISHOP);
+		boardSetup[7][3] = new Piece(PieceType.BQUEEN);
+		boardSetup[7][4] = new Piece(PieceType.BKING);
+		boardSetup[7][5] = new Piece(PieceType.BBISHOP);
+		boardSetup[7][6] = new Piece(PieceType.BKNIGHT);
+		boardSetup[7][7] = new Piece(PieceType.BROOK);
+		boardSetup[6][0] = new Piece(PieceType.BPAWN);
+		boardSetup[6][1] = new Piece(PieceType.BPAWN);
+		boardSetup[6][2] = new Piece(PieceType.BPAWN);
+		boardSetup[6][3] = new Piece(PieceType.BPAWN);
+		boardSetup[6][4] = new Piece(PieceType.BPAWN);
+		boardSetup[6][5] = new Piece(PieceType.BPAWN);
+		boardSetup[6][6] = new Piece(PieceType.BPAWN);
+		boardSetup[6][7] = new Piece(PieceType.BPAWN);
 
 		for (int y = 0; y < BOARD_FILE; y++)
 			for (int x = 0; x < BOARD_RANK; x++)
 			{
-				if (boardSetup[y][x].getType() == PieceType.PAWN)
+				if (boardSetup[y][x].getType() == PieceType.WPAWN)
 					boardSetup[y][x].setPicture("PL");
-				else if (boardSetup[y][x].getType() == PieceType.ROOK)
+				else if (boardSetup[y][x].getType() == PieceType.WROOK)
 					boardSetup[y][x].setPicture("RL");
-				else if (boardSetup[y][x].getType() == PieceType.BISHOP)
+				else if (boardSetup[y][x].getType() == PieceType.WBISHOP)
 					boardSetup[y][x].setPicture("BL");
-				else if (boardSetup[y][x].getType() == PieceType.KNIGHT)
+				else if (boardSetup[y][x].getType() == PieceType.WKNIGHT)
 					boardSetup[y][x].setPicture("KL");
-				else if (boardSetup[y][x].getType() == PieceType.QUEEN)
+				else if (boardSetup[y][x].getType() == PieceType.WQUEEN)
 					boardSetup[y][x].setPicture("QL");
-				else if (boardSetup[y][x].getType() == PieceType.KING)
+				else if (boardSetup[y][x].getType() == PieceType.WKING)
 					boardSetup[y][x].setPicture("KL");
-				else if (boardSetup[y][x].getType() == PieceType.PAWN)
+				else if (boardSetup[y][x].getType() == PieceType.BPAWN)
 					boardSetup[y][x].setPicture("PD");
-				else if (boardSetup[y][x].getType() == PieceType.ROOK)
+				else if (boardSetup[y][x].getType() == PieceType.BROOK)
 					boardSetup[y][x].setPicture("RD");
-				else if (boardSetup[y][x].getType() == PieceType.BISHOP)
+				else if (boardSetup[y][x].getType() == PieceType.BBISHOP)
 					boardSetup[y][x].setPicture("BD");
-				else if (boardSetup[y][x].getType() == PieceType.KNIGHT)
+				else if (boardSetup[y][x].getType() == PieceType.BKNIGHT)
 					boardSetup[y][x].setPicture("KD");
-				else if (boardSetup[y][x].getType() == PieceType.QUEEN)
+				else if (boardSetup[y][x].getType() == PieceType.BQUEEN)
 					boardSetup[y][x].setPicture("QD");
-				else if (boardSetup[y][x].getType() == PieceType.KING)
+				else if (boardSetup[y][x].getType() == PieceType.BKING)
 					boardSetup[y][x].setPicture("KD");
 				else
 					boardSetup[y][x].setPicture(" ");
@@ -135,6 +137,28 @@ public class Board
 		this.boardSetup[initialFile][initialRank].setType(PieceType.NOPIECE);
 				
 	}
+	
+	public void placePiece(String position)
+	{
+		//Qld8
+		
+		String piece = position.substring(0, 2).trim().toLowerCase(); //Ql
+		int boardPosition = FILE.indexOf(position.substring(2).trim()); //d8
+		
+		switch(piece)
+		{
+		case "ql":
+			//piece = PieceType.WQUEEN;
+			break;
+		}
+		
+		int initialRank = RANK.indexOf(position.substring(2, 3).trim()); //d
+		int initialFile = FILE.indexOf(position.substring(3).trim()); //8
+		
+		
+		
+	//	this.boardSetup[initialFile][initialRank].setType(boardPiece);
+	}
 
 	// regex pattern for reading chess input
 	// ([BKNPQR][ld][a-h][1-8])|((([a-h][1-8][ \*]?){2})+)
@@ -164,13 +188,12 @@ public class Board
 			{
 				if(Pattern.matches(CHESS_PATTERN, strLine))
 				{
-					
+					placePiece(strLine);				
 				}
 			}
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

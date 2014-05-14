@@ -2,21 +2,9 @@ package Model;
 
 public class Knight extends Piece
 {
-	boolean isWhite;
 
-	/**
-	 * @return the isWhite
-	 */
-	public boolean isWhite()
+	public Knight(PieceType type)
 	{
-		return isWhite;
-	}
-
-	/**
-	 * @param isWhite the isWhite to set
-	 */
-	public void setWhite(boolean isWhite)
-	{
-		this.isWhite = isWhite;
+		super(type);
 	}
 }
