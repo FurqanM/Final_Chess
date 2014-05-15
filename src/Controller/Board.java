@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 import Model.Bishop;
 import Model.King;
+import Model.Knight;
 import Model.Pawn;
 import Model.Piece;
 import Model.Queen;
@@ -19,8 +20,16 @@ public class Board
 {
 	//this.color = (this.file + this.rank) % 2 == 0 ? ColorDefinition.DARK : ColorDefinition.LIGHT;
 	private static final File file = new File("src\\moves.txt");
+
+	// regex pattern for reading chess input
+	// ([BKNPQR][ld][a-h][1-8])|((([a-h][1-8][ \*]?){2})+)
+	// ([BKNPQR][ld][a-h][1-8])|((?:(?:[a-h][1-8][ ]?){2})+)
+	// ([BKNPQR]?)([a-hl]?)([0-9]?)([x=]?)([BKNPQR\*]|[a-h][1-8])([+#]?)
+	// ([KQNBR]?([a-h]?[1-8]?x)?[a-h]([2-7]|[18](=[KQNBR])?)|0-0(-0)?)(\(ep\)|\+{1,2})?
+	
 	private static final String CHESS_PATTERN = "(([bknpqr]?)([a-hl]?)([0-9]?)([x=]?)([bknpqr\\*]|[a-h][1-8])([+#]?))";
-	private final String FILE = "12345678";
+//	private final String FILE = "12345678";
+	private final String FILE = "87654321";
 	private final String RANK = "abcdefgh";
 	private Piece[][] boardSetup;
 	private final int BOARD_FILE = 8;
@@ -47,14 +56,18 @@ public class Board
 				
 	}
 	
-
-
+	
+	
 	public void draw()
 	{
+		int j = BOARD_FILE;
+		System.out.println("    A   B   C   D   E   F   G   H ");
 		System.out.println("  +---+---+---+---+---+---+---+---+");
 		for (int y = 0; y < BOARD_RANK; y++)
 		{
-			System.out.print(y + " |");
+				j--;
+				System.out.print(j + 1 + " |");
+			
 			for (int x = 0; x < BOARD_RANK; x++)
 			{
 				if(boardSetup[y][x] == null)
@@ -70,7 +83,7 @@ public class Board
 			System.out.println();
 			System.out.println("  +---+---+---+---+---+---+---+---+");
 		}
-		System.out.println("  + A + B + C + D + E + F + G + H +");
+		System.out.println("    A   B   C   D   E   F   G   H ");
 	}
 
 	public void movePiece(String boardPosition, String newPosition)
@@ -89,14 +102,14 @@ public class Board
 	
 	public void placePiece(String position)
 	{
-		//pda7
+		//ple4
 		
-		String piece = position.substring(0, 2).trim().toLowerCase(); //pd
+		String piece = position.substring(0, 2).trim().toLowerCase(); //pl
 		
 		
 		
-		int initialRank = RANK.indexOf(position.substring(2, 3).trim()); //a
-		int initialFile = FILE.indexOf(position.substring(3).trim()); //7
+		int initialRank = RANK.indexOf(position.substring(2, 3).trim()); //e
+		int initialFile = FILE.indexOf(position.substring(3).trim()); //4
 		
 		boolean isWhite;
 		if(piece.substring(1,2).toLowerCase().equals("l"))
@@ -126,17 +139,14 @@ public class Board
 		case "p":
 			this.boardSetup[initialFile][initialRank] = new Pawn(isWhite);
 			break;
+		case "n":
+			this.boardSetup[initialFile][initialRank] = new Knight(isWhite);
 		default:
 			
 			break;
 		}
 	}
 
-	// regex pattern for reading chess input
-	// ([BKNPQR][ld][a-h][1-8])|((([a-h][1-8][ \*]?){2})+)
-	// ([BKNPQR][ld][a-h][1-8])|((?:(?:[a-h][1-8][ ]?){2})+) THIS WORKS
-	// ([BKNPQR]?)([a-hl]?)([0-9]?)([x=]?)([BKNPQR\*]|[a-h][1-8])([+#]?)
-	// ([KQNBR]?([a-h]?[1-8]?x)?[a-h]([2-7]|[18](=[KQNBR])?)|0-0(-0)?)(\(ep\)|\+{1,2})?
 
 	public void loadFile()
 	{

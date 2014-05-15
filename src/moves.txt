@@ -30,16 +30,6 @@ blc1
 blf1
 qld1
 kle1
-kle1
-kle99
-kle7
-a2 a3
-a3 a7
-a3 a4*
-b2 b3*
-e1 g1 h1 f1
-e1 g1 h1 f1
-a1 a2 e8 a2
-a1 a2 d1 e1
-a8 d8 e8 c8
-a8 d8 e8 c8
+
+
+kle4
