@@ -4,14 +4,12 @@ import java.util.Scanner;
 
 import Controller.Board;
 import Model.Piece;
-import Model.PieceType;
 
 public class Display
 {
 	public static void main(String[] args)
 	{
 		Scanner input = new Scanner(System.in);
-		Board board = new Board();
 		String boardPosition;
 		String newPosition;
 		boolean game = false;
@@ -23,25 +21,26 @@ public class Display
 		
 		if(option.equals("1"))
 		{
-			
+			Board.getInstance().loadFile();
+			Board.getInstance().draw();
 		}
 		else if(option.equals("2"))
 		{
 			do
 			{
-				board.draw();
+				Board.getInstance().draw();
 
 				System.out.println("Choose the piece you'd like to move example: (A7)");
 
-				boardPosition = input.nextLine().toUpperCase();
+				boardPosition = input.nextLine().toLowerCase();
 
 				System.out.println("Choose where to go: (A7)");
 
-				newPosition = input.nextLine().toUpperCase();
+				newPosition = input.nextLine().toLowerCase();
 
-				board.movePiece(boardPosition, newPosition);
+				Board.getInstance().movePiece(boardPosition, newPosition);
 
-				board.draw();
+				Board.getInstance().draw();
 				
 			}  while(!game);
 		}

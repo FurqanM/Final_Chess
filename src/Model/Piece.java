@@ -3,13 +3,13 @@ package Model;
 public class Piece
 {
 	private String picture;
-	private PieceType type;
+	protected boolean isWhite;
 
-	public Piece(PieceType type)
+	public Piece(boolean isWhite)
 	{
-		this.type = type;
+		this.isWhite = isWhite;
 	}
-
+	
 	public String getPicture()
 	{
 		return picture;
@@ -19,25 +19,12 @@ public class Piece
 	{
 		this.picture = picture;
 	}
-
-	public PieceType getType()
+	
+	@Override
+	public String toString()
 	{
-		return type;
-
+		String name = "" + this.getClass().getCanonicalName();
+		return name.substring(6, 7);
 	}
-
-	public void setType(PieceType type)
-	{
-		this.type = type;
-		if (type == PieceType.NOPIECE)
-		{
-			this.picture = " ";
-		}
-	}
-
-	public void setPiece(Piece piece)
-	{
-		this.type = piece.type;
-		this.picture = piece.picture;
-	}
+	
 }

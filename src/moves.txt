@@ -1,0 +1,45 @@
+pda7
+pdb7
+pdc7
+pdd7
+pde7
+pdf7
+pdg7
+pdh7
+rda8
+rdh8
+ndb8
+ndg8
+bdc8
+bdf8
+qdd8
+kde8
+pla2
+plb2
+plc2
+pld2
+ple2
+plf2
+plg2
+plh2
+rla1
+rlh1
+nlb1
+nlg1
+blc1
+blf1
+qld1
+kle1
+kle1
+kle99
+kle7
+a2 a3
+a3 a7
+a3 a4*
+b2 b3*
+e1 g1 h1 f1
+e1 g1 h1 f1
+a1 a2 e8 a2
+a1 a2 d1 e1
+a8 d8 e8 c8
+a8 d8 e8 c8

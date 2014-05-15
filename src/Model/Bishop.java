@@ -3,9 +3,9 @@ package Model;
 public class Bishop extends Piece
 {
 
-	public Bishop(PieceType type)
+	public Bishop(boolean isWhite)
 	{
-		super(type);
-		// TODO Auto-generated constructor stub
+		super(isWhite);
 	}
+
 }

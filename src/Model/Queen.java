@@ -3,10 +3,9 @@ package Model;
 public class Queen extends Piece
 {
 
-	public Queen(PieceType type)
+	public Queen(boolean isWhite)
 	{
-		super(type);
-		// TODO Auto-generated constructor stub
+		super(isWhite);
 	}
 	
 }

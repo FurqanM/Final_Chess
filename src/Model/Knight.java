@@ -3,8 +3,9 @@ package Model;
 public class Knight extends Piece
 {
 
-	public Knight(PieceType type)
+	public Knight(boolean isWhite)
 	{
-		super(type);
+		super(isWhite);
 	}
+	
 }
