@@ -198,14 +198,17 @@ public class Board
 					if(strLine.length() == 4)
 					{
 						placePiece(strLine);
+						Board.getInstance().draw();
 					}
 					else if (strLine.length() == 5)
 					{
 						movePiece(strLine);
+						Board.getInstance().draw();
 					}
 					else if(strLine.length() == 6)
 					{
 						killPiece(strLine); // c4 d6*
+						Board.getInstance().draw();
 					}
 					else if (strLine.length() == 10)
 					{
