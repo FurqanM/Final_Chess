@@ -30,7 +30,7 @@ public class Board
 
 	private static final String CHESS_PATTERN = "^(([a-h][1-8])\\s*([a-h][1-8])(\\*?))|([qkbprn][dl][a-h][1-8])$";
 	// private final String FILE = "12345678";
-	private final String FILE = "87654321";
+	private final String FILE = "87654321"; //use ascii
 	private final String RANK = "abcdefgh";
 	private Piece[][] boardSetup;
 	private final int BOARD_FILE = 8;
@@ -121,15 +121,7 @@ public class Board
 		int initialRank = RANK.indexOf(position.substring(2, 3).trim()); // e
 		int initialFile = FILE.indexOf(position.substring(3).trim()); // 4
 
-		boolean isWhite;
-		if (piece.substring(1, 2).toLowerCase().equals("l"))
-		{
-			isWhite = true;
-		}
-		else
-		{
-			isWhite = false;
-		}
+		boolean isWhite = (piece.substring(1, 2).toLowerCase().equals("l"));
 
 		switch (piece.substring(0, 1).toLowerCase())
 		{
@@ -179,11 +171,11 @@ public class Board
 
 		String strLine;
 		/*
-		 * Move a single piece on the board (ex: d8 h4 – moves the piece at D8
+		 * Move a single piece on the board (ex: d8 h4 ï¿½ moves the piece at D8
 		 * to the square at H4, c4 d6* - moves the piece at C4 to D6 and
 		 * captures the piece at D6). Move two pieces in a single turn (ex: e1
-		 * g1 h1 f1 – moves the king from E1 to G1 and moves the rook from H1 to
-		 * F1. This is called a “king-side castle”).
+		 * g1 h1 f1 ï¿½ moves the king from E1 to G1 and moves the rook from H1 to
+		 * F1. This is called a ï¿½king-side castleï¿½).
 		 */
 
 		try
