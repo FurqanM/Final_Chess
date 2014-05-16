@@ -29,10 +29,7 @@ public class Board
 	// ([KQNBR]?([a-h]?[1-8]?x)?[a-h]([2-7]|[18](=[KQNBR])?)|0-0(-0)?)(\(ep\)|\+{1,2})?
 
 	private static final String CHESS_PATTERN = "^(([a-h][1-8])\\s*([a-h][1-8])(\\*?))|([qkbprn][dl][a-h][1-8])$";
-	// private final String FILE = "12345678";
-	private final long sleepTimer = 1000;
-	private final String FILE = "87654321"; //use ascii
-	private final String RANK = "abcdefgh";
+	private final long updateTimer = 1200;
 	private Piece[][] boardSetup;
 	private final int BOARD_FILE = 8;
 	private final int BOARD_RANK = 8;
@@ -67,10 +64,10 @@ public class Board
 		int j = BOARD_FILE;
 		System.out.println("    A   B   C   D   E   F   G   H ");
 		System.out.println("  +---+---+---+---+---+---+---+---+");
-		for (int y = 0; y < BOARD_RANK; y++)
+		for (int y = 7; y > 0; y--)
 		{
-			j--;
-			System.out.print(j + 1 + " |");
+
+			System.out.print(y + " |");
 
 			for (int x = 0; x < BOARD_RANK; x++)
 			{
@@ -88,9 +85,10 @@ public class Board
 			System.out.println("  +---+---+---+---+---+---+---+---+");
 		}
 		System.out.println("    A   B   C   D   E   F   G   H ");
+		System.out.println("================================================");
 		try
 		{
-			Thread.sleep(sleepTimer);
+			Thread.sleep(updateTimer);
 		}
 		catch (InterruptedException e)
 		{
@@ -103,11 +101,15 @@ public class Board
 	{
 
 		// c7 c5
-		int initialRank = RANK.indexOf(moveBoardPosition.substring(0, 1).trim()); // c
-		int initialFile = FILE.indexOf(moveBoardPosition.substring(1, 2).trim()); // 7
+		int initialRank = moveBoardPosition.substring(0, 1).trim().charAt(0) - 97;
+		//int initialRank = RANK.indexOf(moveBoardPosition.substring(0, 1).trim()); // c
+		//int initialFile = FILE.indexOf(moveBoardPosition.substring(1, 2).trim()); // 7
+		int initialFile = moveBoardPosition.substring(1, 2).trim().charAt(0) - 49;
 
-		int newRank = RANK.indexOf(moveBoardPosition.substring(3, 4).trim()); // c
-		int newFile = FILE.indexOf(moveBoardPosition.substring(4).trim()); // 5 maybe *
+		//int newRank = RANK.indexOf(moveBoardPosition.substring(3, 4).trim()); // c
+		int newRank = moveBoardPosition.substring(3, 4).trim().charAt(0) - 97;
+		//int newFile = FILE.indexOf(moveBoardPosition.substring(4).trim()); // 5 maybe *
+		int newFile = moveBoardPosition.substring(4).trim().charAt(0) - 49;
 
 		//this.boardSetup[initnewFile][newRank] = null;
 		this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
@@ -128,8 +130,10 @@ public class Board
 
 		String piece = position.substring(0, 2).trim().toLowerCase(); // pl
 
-		int initialRank = RANK.indexOf(position.substring(2, 3).trim()); // e
-		int initialFile = FILE.indexOf(position.substring(3).trim()); // 4
+		//int initialRank = RANK.indexOf(position.substring(2, 3).trim()); // e
+		int initialRank = position.substring(2, 3).trim().charAt(0) - 97;
+		//int initialFile = FILE.indexOf(position.substring(3).trim()); // 4
+		int initialFile = position.substring(3).trim().charAt(0) - 49;
 
 		boolean isWhite = (piece.substring(1, 2).toLowerCase().equals("l"));
 
@@ -234,11 +238,15 @@ public class Board
 	private void killPiece(String moveBoardPosition)
 	{
 		// c7 c5
-		int initialRank = RANK.indexOf(moveBoardPosition.substring(0, 1).trim()); // c
-		int initialFile = FILE.indexOf(moveBoardPosition.substring(1, 2).trim()); // 7
+		//int initialRank = RANK.indexOf(moveBoardPosition.substring(0, 1).trim()); // c
+		int initialRank = moveBoardPosition.substring(0, 1).trim().charAt(0) - 97;
+		//int initialFile = FILE.indexOf(moveBoardPosition.substring(1, 2).trim()); // 7
+		int initialFile = moveBoardPosition.substring(1, 2).trim().charAt(0) - 49;
 
-		int newRank = RANK.indexOf(moveBoardPosition.substring(3, 4).trim()); // c
-		int newFile = FILE.indexOf(moveBoardPosition.substring(4, 5).trim()); // 5 maybe *
+		//int newRank = RANK.indexOf(moveBoardPosition.substring(3, 4).trim()); // c
+		int newRank = moveBoardPosition.substring(3, 4).trim().charAt(0) - 97;
+		//int newFile = FILE.indexOf(moveBoardPosition.substring(4, 5).trim()); // 5 maybe *
+		int newFile = moveBoardPosition.substring(4, 5).trim().charAt(0) - 49;
 
 		//this.boardSetup[initnewFile][newRank] = null;
 		this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
