@@ -20,7 +20,7 @@ public class Board
 {
 	// this.color = (this.file + this.rank) % 2 == 0 ? ColorDefinition.DARK :
 	// ColorDefinition.LIGHT;
-	private static final File file = new File("src\\moves.txt");
+	
 
 	// regex pattern for reading chess input
 	// ([BKNPQR][ld][a-h][1-8])|((([a-h][1-8][ \*]?){2})+)
@@ -163,13 +163,13 @@ public class Board
 
 	}
 
-	public void loadFile()
+	public void loadFile(String filename)
 	{
 
 		FileInputStream fstream = null;
 		try
 		{
-			fstream = new FileInputStream(file);
+			fstream = new FileInputStream(new File(filename));
 		}
 		catch (FileNotFoundException e1)
 		{

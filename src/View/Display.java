@@ -39,7 +39,7 @@ public class Display
 
 			if (option == 1)
 			{
-				Board.getInstance().loadFile();
+				Board.getInstance().loadFile(args[0]);
 				Board.getInstance().draw();
 			}
 			else if (option == 2)
