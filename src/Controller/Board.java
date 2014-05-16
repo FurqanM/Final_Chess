@@ -30,6 +30,7 @@ public class Board
 
 	private static final String CHESS_PATTERN = "^(([a-h][1-8])\\s*([a-h][1-8])(\\*?))|([qkbprn][dl][a-h][1-8])$";
 	// private final String FILE = "12345678";
+	private final long sleepTimer = 1000;
 	private final String FILE = "87654321"; //use ascii
 	private final String RANK = "abcdefgh";
 	private Piece[][] boardSetup;
@@ -87,6 +88,15 @@ public class Board
 			System.out.println("  +---+---+---+---+---+---+---+---+");
 		}
 		System.out.println("    A   B   C   D   E   F   G   H ");
+		try
+		{
+			Thread.sleep(sleepTimer);
+		}
+		catch (InterruptedException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void movePiece(String moveBoardPosition)
@@ -192,7 +202,6 @@ public class Board
 					if(strLine.length() == 4)
 					{
 						placePiece(strLine);
-						Board.getInstance().draw();
 					}
 					else if (strLine.length() == 5)
 					{
