@@ -14,7 +14,7 @@ public class Knight extends Piece
 		String name = "" + this.getClass().getCanonicalName();
 		
 		
-		return (super.isWhite == true) ? name.substring(7, 8).toUpperCase() : name.substring(7, 8).toLowerCase();
+		return (super.isWhite) ? name.substring(7, 8).toUpperCase() : name.substring(7, 8).toLowerCase();
 	}
 	
 }

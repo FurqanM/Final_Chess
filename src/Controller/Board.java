@@ -123,36 +123,38 @@ public class Board
 
 		boolean isWhite = (piece.substring(1, 2).toLowerCase().equals("l"));
 
+		Piece newPiece = null;
 		switch (piece.substring(0, 1).toLowerCase())
 		{
 		case "q":
-			this.boardSetup[initialFile][initialRank] = new Queen(isWhite);
-			System.out.println("\t\t\t\t\t\t\tPlaced a " + ((isWhite == true) ? "Light Queen" : "Dark Queen") + " on "  + position.substring(2, 3).trim() + position.substring(3).trim());
+			newPiece = new Queen(isWhite);
+			
 			break;
 		case "k":
-			this.boardSetup[initialFile][initialRank] = new King(isWhite);
-			System.out.println("\t\t\t\t\t\t\tPlaced a " + ((isWhite == true) ? "Light King" : "Dark King") + " on "  + position.substring(2, 3).trim() + position.substring(3).trim());
+			newPiece = new King(isWhite);
+			
 			break;
 		case "r":
-			this.boardSetup[initialFile][initialRank] = new Rook(isWhite);
-			System.out.println("\t\t\t\t\t\t\tPlaced a " + ((isWhite == true) ? "Light Rook" : "Dark Rook") + " on "  + position.substring(2, 3).trim() + position.substring(3).trim());
+			newPiece = new Rook(isWhite);
+			
 			break;
 		case "b":
-			this.boardSetup[initialFile][initialRank] = new Bishop(isWhite);
-			System.out.println("\t\t\t\t\t\t\tPlaced a " + ((isWhite == true) ? "Light Bishop" : "Dark Bishop") + " on "  + position.substring(2, 3).trim() + position.substring(3).trim());
+			newPiece = new Bishop(isWhite);
+			
 			break;
 		case "p":
-			this.boardSetup[initialFile][initialRank] = new Pawn(isWhite);
-			System.out.println("\t\t\t\t\t\t\tPlaced a " + ((isWhite == true) ? "Light Pawn" : "Dark Pawn") + " on "  + position.substring(2, 3).trim() + position.substring(3).trim());
+			newPiece = new Pawn(isWhite);
+			
 			break;
 		case "n":
-			this.boardSetup[initialFile][initialRank] = new Knight(isWhite);
-			System.out.println("\t\t\t\t\t\t\tPlaced a " + ((isWhite == true) ? "Light Knight" : "Dark Knight") + " on "  + position.substring(2, 3).trim() + position.substring(3).trim());
+			newPiece = new Knight(isWhite);
+			
 		default:
 
 			break;
 		}
-
+		this.boardSetup[initialFile][initialRank] = newPiece;
+		System.out.println("\t\t\t\t\t\t\tPlaced a " + newPiece  + " on "  + position.substring(2, 3).trim() + position.substring(3).trim());
 	}
 
 	public void loadFile(String filename)
@@ -235,16 +237,6 @@ public class Board
 		this.boardSetup[initialFile][initialRank] = null;
 		
 		
-	}
-
-	public Piece[][] getBoardSetup()
-	{
-		return boardSetup;
-	}
-
-	public void setBoardSetup(Piece[][] boardSetup)
-	{
-		this.boardSetup = boardSetup;
 	}
 
 }
