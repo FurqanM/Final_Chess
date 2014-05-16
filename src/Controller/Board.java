@@ -103,7 +103,7 @@ public class Board
 		this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
 		this.boardSetup[initialFile][initialRank] = null;
 		
-		
+		System.out.println("\t\t\t\t\t\t\t" + " Moves piece from " + moveBoardPosition.substring(0, 2).trim() + " to " + moveBoardPosition.substring(3, 5).trim());
 		
 		//this.boardSetup[newFile][newRank].setPiece(this.boardSetup[initialFile][initialRank]);
 		
