@@ -30,6 +30,6 @@ blc1
 blf1
 qld1
 kle1
-
-
-kle4
+e2 e4
+e7 e5
+e2 e4*
