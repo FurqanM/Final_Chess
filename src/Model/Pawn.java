@@ -11,10 +11,11 @@ public class Pawn extends Piece
 	}
 	
 	@Override
-	public void movePiece(String position)
+	public boolean validateMovement()
 	{
-		System.out.println("I MOVED MOTHERFUCKER");
-		Board.getInstance().movePiece(position);
+		if(isWhite)
+			return true;
+		else return false;		
 	}
 	//move y - 1
 	//or ((x - 1) && (y - 1)) || ((x + 1) && (y - 1))

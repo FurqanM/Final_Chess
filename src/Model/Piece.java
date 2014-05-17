@@ -11,10 +11,11 @@ public class Piece
 		this.isWhite = isWhite;
 	}
 	
-	public void movePiece(String position)
+	public boolean validateMovement()
 	{
-		System.out.println("I MOVED BITCHASS!");
-		Board.getInstance().movePiece(position);
+		System.out.println("This is invoking the Piece classs");
+		return isWhite;
+		
 	}
 
 	@Override

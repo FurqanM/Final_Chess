@@ -103,6 +103,7 @@ public class Board
 	public void movePiece(String moveBoardPosition)
 	{
 
+		
 		// c7 c5
 		int initialRank = moveBoardPosition.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
 
@@ -110,13 +111,32 @@ public class Board
 
 		int newRank = moveBoardPosition.substring(3, 4).trim().toLowerCase().charAt(0) - 97; // c
 
-		int newFile = moveBoardPosition.substring(4).trim().charAt(0) - 49; // 5
-																			// maybe
-																			// *
-
+		int newFile = moveBoardPosition.substring(4).trim().charAt(0) - 49; // 5 maybe *
 		
-		this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
-		this.boardSetup[initialFile][initialRank] = null;
+		if (this.boardSetup[initialFile][initialRank].validateMovement()) //if white 
+		{
+			if((newRank == initialRank)&&(newFile - initialFile == 1)) //a = 0
+			{
+				this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
+				this.boardSetup[initialFile][initialRank] = null;
+				System.out.println("The White Pawn moved");
+			}
+			else
+			{}
+			
+		}
+		else
+		{
+			if((newRank == initialRank)&&(newFile - initialFile == -1)) //a = 0
+			{
+				this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
+				this.boardSetup[initialFile][initialRank] = null;
+				System.out.println("The Black Pawn moved");
+			}
+			else
+			{}
+		}
+		
 
 		System.out.println("\t\t\t\t\t\t\t" + " Moves piece from " + moveBoardPosition.substring(0, 2).trim() + " to " + moveBoardPosition.substring(3, 5).trim());
 
@@ -184,11 +204,11 @@ public class Board
 
 		String strLine;
 		/*
-		 * Move a single piece on the board (ex: d8 h4 � moves the piece at D8
+		 * Move a single piece on the board (ex: d8 h4 - moves the piece at D8
 		 * to the square at H4, c4 d6* - moves the piece at C4 to D6 and
 		 * captures the piece at D6). Move two pieces in a single turn (ex: e1
 		 * g1 h1 f1 � moves the king from E1 to G1 and moves the rook from H1
-		 * to F1. This is called a �king-side castle�).
+		 * to F1. This is called a - king-side castle).
 		 */
 		try
 		{
