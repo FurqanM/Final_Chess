@@ -13,7 +13,7 @@ public class Display
 	public static void main(String[] args)
 	{
 		Scanner input = new Scanner(System.in);
-		String moveCommand;
+		String moveCommand = null;
 		String newPosition;
 		boolean gameEnd = false;
 
@@ -33,13 +33,48 @@ public class Display
 					Board.getInstance().draw();
 
 					System.out.println("Choose the piece you'd like to move example: (B2 B3)");
+					System.out.println(" or (B2 C3*) to capture piece.");
+					System.out.println(" or (E1 G1 H1 F1 ) to castle");
 
 					moveCommand = input.nextLine().toLowerCase();
 					
-					Board.getInstance().movePiece(moveCommand);
+					playGame(moveCommand);
 					// gameEnd = true;
 				}
 			}
+		}
+	}
+	
+	
+	public static void playGame(String moveCommand)
+	{
+		if (Pattern.matches(Board.CHESS_PATTERN, moveCommand))
+		{
+			// e1 e4
+			// c4 d6*
+			// e1 g1 h1 f1
+			if (moveCommand.length() == 4)
+			{
+				Board.getInstance().placePiece(moveCommand);
+			}
+			else if (moveCommand.length() == 5)
+			{
+				Board.getInstance().movePiece(moveCommand);
+				Board.getInstance().draw();
+			}
+			else if (moveCommand.length() == 6)
+			{
+				Board.getInstance().killPiece(moveCommand); // c4 d6*
+				Board.getInstance().draw();
+			}
+			else if (moveCommand.length() == 10)
+			{
+				// moveTwoPieces();
+			}
+
+		}
+		else
+		{
 		}
 	}
 

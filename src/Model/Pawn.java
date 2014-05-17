@@ -17,7 +17,8 @@ public class Pawn extends Piece
 			return true;
 		else return false;		
 	}
-	//move y - 1
+	
+	//move y - 1      black Pawn
 	//or ((x - 1) && (y - 1)) || ((x + 1) && (y - 1))
 	//move one space down
 	//if has not moved yet then move two spaces y = 7

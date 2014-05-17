@@ -32,7 +32,7 @@ public class Board
 	// ^([qkbprn][dl][a-h][1-8])|((([a-h][1-8])\s*([a-h][1-8])(\*?))|([a-h][1-8])\s*([a-h][1-8])(\*?)\s*([a-h][1-8])\s*([a-h][1-8]))$
 	// complete Castling OR
 
-	private static final String CHESS_PATTERN = "^([qkbprn][dl][a-h][1-8])|((([a-h][1-8])\\s*([a-h][1-8])(\\*?))|([a-h][1-8])\\s*([a-h][1-8])(\\*?)\\s*([a-h][1-8])\\s*([a-h][1-8]))$";
+	public static final String CHESS_PATTERN = "^([qkbprn][dl][a-h][1-8])|((([a-h][1-8])\\s*([a-h][1-8])(\\*?))|([a-h][1-8])\\s*([a-h][1-8])(\\*?)\\s*([a-h][1-8])\\s*([a-h][1-8]))$";
 	private final long updateTimer = 1000;
 	private Piece[][] boardSetup;
 	private final int BOARD_FILE = 8;
@@ -250,7 +250,7 @@ public class Board
 		}
 	}
 
-	private void killPiece(String moveBoardPosition)
+	public void killPiece(String moveBoardPosition)
 	{
 		// c7 c5
 		// int initialRank = RANK.indexOf(moveBoardPosition.substring(0,
