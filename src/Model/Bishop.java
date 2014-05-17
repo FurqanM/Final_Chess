@@ -7,5 +7,8 @@ public class Bishop extends Piece
 	{
 		super(isWhite);
 	}
+	
+	//move (x - 1 && y - 1) || (x + 1 && y + 1)
+	//(x - 1 && y + 1) || (x + 1 && y - 1)
 
 }

@@ -102,7 +102,7 @@ public class Board
 
 	public void movePiece(String moveBoardPosition)
 	{
-		
+
 		// c7 c5
 		int initialRank = moveBoardPosition.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
 
@@ -114,6 +114,7 @@ public class Board
 																			// maybe
 																			// *
 
+		
 		this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
 		this.boardSetup[initialFile][initialRank] = null;
 
@@ -170,69 +171,63 @@ public class Board
 	{
 		boolean end = false;
 
-		while (!end)
+		FileInputStream fstream = null;
+		try
 		{
+			fstream = new FileInputStream(new File(filename));
+		}
+		catch (FileNotFoundException e1)
+		{
+			throw new FileNotFoundException("File not found");
+		}
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
-			FileInputStream fstream = null;
-			try
+		String strLine;
+		/*
+		 * Move a single piece on the board (ex: d8 h4 � moves the piece at D8
+		 * to the square at H4, c4 d6* - moves the piece at C4 to D6 and
+		 * captures the piece at D6). Move two pieces in a single turn (ex: e1
+		 * g1 h1 f1 � moves the king from E1 to G1 and moves the rook from H1
+		 * to F1. This is called a �king-side castle�).
+		 */
+		try
+		{
+			while ((strLine = br.readLine()) != null)
 			{
-				fstream = new FileInputStream(new File(filename));
-			}
-			catch (FileNotFoundException e1)
-			{
-				throw new FileNotFoundException("File not found");
-			}
-			BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-
-			String strLine;
-			/*
-			 * Move a single piece on the board (ex: d8 h4 � moves the piece
-			 * at D8 to the square at H4, c4 d6* - moves the piece at C4 to D6
-			 * and captures the piece at D6). Move two pieces in a single turn
-			 * (ex: e1 g1 h1 f1 � moves the king from E1 to G1 and moves the
-			 * rook from H1 to F1. This is called a �king-side castle�).
-			 */
-
-			try
-			{
-				while ((strLine = br.readLine()) != null)
+				if (Pattern.matches(CHESS_PATTERN, strLine))
 				{
-					if (Pattern.matches(CHESS_PATTERN, strLine))
+					// e1 e4
+					// c4 d6*
+					// e1 g1 h1 f1
+					if (strLine.length() == 4)
 					{
-						// e1 e4
-						// c4 d6*
-						// e1 g1 h1 f1
-						if (strLine.length() == 4)
-						{
-							placePiece(strLine);
-						}
-						else if (strLine.length() == 5)
-						{
-							movePiece(strLine);
-							Board.getInstance().draw();
-						}
-						else if (strLine.length() == 6)
-						{
-							killPiece(strLine); // c4 d6*
-							Board.getInstance().draw();
-						}
-						else if (strLine.length() == 10)
-						{
-							// moveTwoPieces();
-						}
+						placePiece(strLine);
+					}
+					else if (strLine.length() == 5)
+					{
+						movePiece(strLine);
+						Board.getInstance().draw();
+					}
+					else if (strLine.length() == 6)
+					{
+						killPiece(strLine); // c4 d6*
+						Board.getInstance().draw();
+					}
+					else if (strLine.length() == 10)
+					{
+						// moveTwoPieces();
+					}
 
-					}
-					else
-					{
-					}
+				}
+				else
+				{
 				}
 			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
 		}
-
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	private void killPiece(String moveBoardPosition)
@@ -259,7 +254,10 @@ public class Board
 
 	}
 
-	public void defaultSetup() // TODO add a create new .txt file and writes all of the default piece arrangements to it and load that txt and append to it after every move
+	public void defaultSetup() // TODO add a create new .txt file and writes all
+								// of the default piece arrangements to it and
+								// load that txt and append to it after every
+								// move
 	{
 		String[] defaultPieceArrangement = new String[32];
 		defaultPieceArrangement[0] = "pda7";
@@ -294,8 +292,8 @@ public class Board
 		defaultPieceArrangement[29] = "blf1";
 		defaultPieceArrangement[30] = "qld1";
 		defaultPieceArrangement[31] = "kle1";
-		
-		for(int i = 0; i < defaultPieceArrangement.length; i++)
+
+		for (int i = 0; i < defaultPieceArrangement.length; i++)
 		{
 			placePiece(defaultPieceArrangement[i]);
 		}

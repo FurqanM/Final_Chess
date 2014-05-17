@@ -8,4 +8,6 @@ public class Queen extends Piece
 		super(isWhite);
 	}
 	
+	//move Rook + Bishop
+	
 }

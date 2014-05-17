@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.Board;
+
 public class Piece
 {
 	protected boolean isWhite;
@@ -7,6 +9,12 @@ public class Piece
 	public Piece(boolean isWhite)
 	{
 		this.isWhite = isWhite;
+	}
+	
+	public void movePiece(String position)
+	{
+		System.out.println("I MOVED BITCHASS!");
+		Board.getInstance().movePiece(position);
 	}
 
 	@Override

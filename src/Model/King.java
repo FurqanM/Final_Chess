@@ -7,5 +7,10 @@ public class King extends Piece
 	{
 		super(isWhite);
 	}
+	
+	//move (y - 1) || (y + 1)
+	//(x + 1) || (x - 1)
+	//or ((x - 1) && (y - 1)) || (x + 1) && (y - 1)
+	//or ((x + 1) && (y + 1)) || ( x - 1) && ( y + 1))
 
 }

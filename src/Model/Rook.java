@@ -8,4 +8,6 @@ public class Rook extends Piece
 		super(isWhite);
 	}
 	
+	//move (min)X to (max)X || (min)Y to (max)Y
+	
 }
