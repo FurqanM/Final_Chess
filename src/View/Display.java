@@ -1,5 +1,6 @@
 package View;
 
+import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -12,58 +13,34 @@ public class Display
 	public static void main(String[] args)
 	{
 		Scanner input = new Scanner(System.in);
-		String boardPosition;
+		String moveCommand;
 		String newPosition;
-		boolean end = false;
 		boolean gameEnd = false;
 
-
-
-		int option = 0;
-
-		while (!end)
+		if (args.length == 1)
 		{
-			input = new Scanner(System.in);
-			System.out.println("Which mode do you want to play?");
-			System.out.println("\n1) Load game from file.\n2) Play new game.");
 			try
-			{
-				
-				option = input.nextInt();
-				end = true;
-			}
-			catch (Exception e)
-			{
-				System.out.println("Bad input, try again.\n");
-			}
-
-			if (option == 1)
 			{
 				Board.getInstance().loadFile(args[0]);
 			}
-			else if (option == 2)
+			catch (FileNotFoundException e)
 			{
-				while(!gameEnd)
+				System.out.println("File not found. Resorting to User Play.");
+				Board.getInstance().defaultSetup();
+				
+				while (!gameEnd)
 				{
 					Board.getInstance().draw();
 
-					System.out.println("Choose the piece you'd like to move example: (A7)");
+					System.out.println("Choose the piece you'd like to move example: (B2 B3)");
 
-					boardPosition = input.nextLine().toLowerCase();
-
-					System.out.println("Choose where to go: (A7)");
-
-					newPosition = input.nextLine().toLowerCase();
-
-					//Board.getInstance().movePiece(boardPosition, newPosition);
-
-					Board.getInstance().draw();
-					//game = true;
+					moveCommand = input.nextLine().toLowerCase();
+					
+					Board.getInstance().movePiece(moveCommand);
+					// gameEnd = true;
 				}
-				
 			}
-
 		}
-
 	}
+
 }
