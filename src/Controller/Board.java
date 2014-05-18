@@ -113,28 +113,28 @@ public class Board
 
 		int newFile = moveBoardPosition.substring(4).trim().charAt(0) - 49; // 5 maybe *
 		
-		if (this.boardSetup[initialFile][initialRank].validateMovement()) //if white 
+		if (this.boardSetup[initialFile][initialRank].validatePieceColor()) //if white 
 		{
-			if((newRank == initialRank)&&(newFile - initialFile == 1)) //a = 0
+			if(this.boardSetup[initialFile][initialRank].validateWhite(moveBoardPosition))
 			{
 				this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
 				this.boardSetup[initialFile][initialRank] = null;
-				System.out.println("The White Pawn moved");
+				System.out.println("A White Piece has moved");
 			}
-			else
-			{}
+			else{}
 			
 		}
-		else
+		else //if black
 		{
-			if((newRank == initialRank)&&(newFile - initialFile == -1)) //a = 0
+			if(this.boardSetup[initialFile][initialRank].validateBlack(moveBoardPosition))
 			{
 				this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
 				this.boardSetup[initialFile][initialRank] = null;
-				System.out.println("The Black Pawn moved");
+				System.out.println("A Black Piece has moved");
 			}
-			else
-			{}
+			else{}
+			
+		
 		}
 		
 

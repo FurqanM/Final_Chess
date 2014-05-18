@@ -2,7 +2,7 @@ package Model;
 
 import Controller.Board;
 
-public class Piece
+public abstract class Piece
 {
 	protected boolean isWhite;
 
@@ -11,11 +11,18 @@ public class Piece
 		this.isWhite = isWhite;
 	}
 	
-	public boolean validateMovement()
+	public abstract boolean validatePieceColor();
+	public abstract boolean validateWhite(String moveBoardPosition);
+	public abstract boolean validateBlack(String moveBoardPosition);
+
+	public boolean isWhite()
 	{
-		System.out.println("This is invoking the Piece classs");
 		return isWhite;
-		
+	}
+
+	public void setWhite(boolean isWhite)
+	{
+		this.isWhite = isWhite;
 	}
 
 	@Override
