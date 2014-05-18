@@ -21,16 +21,19 @@ public class Display
 		{
 			try
 			{
+				Board.getInstance().setUpdateTimer(1000);
 				Board.getInstance().loadFile(args[0]);
 			}
 			catch (FileNotFoundException e)
 			{
+				Board.getInstance().setUpdateTimer(0);
 				System.out.println("File not found. Resorting to User Play.");
 				Board.getInstance().defaultSetup();
 				
+				Board.getInstance().draw();
+				
 				while (!gameEnd)
 				{
-					Board.getInstance().draw();
 
 					System.out.println("Choose the piece you'd like to move example: (B2 B3)");
 					System.out.println(" or (B2 C3*) to capture piece.");

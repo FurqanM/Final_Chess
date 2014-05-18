@@ -33,7 +33,7 @@ public class Board
 	// complete Castling OR
 
 	public static final String CHESS_PATTERN = "^([qkbprn][dl][a-h][1-8])|((([a-h][1-8])\\s*([a-h][1-8])(\\*?))|([a-h][1-8])\\s*([a-h][1-8])(\\*?)\\s*([a-h][1-8])\\s*([a-h][1-8]))$";
-	private final long updateTimer = 1000;
+	private long updateTimer;
 	private Piece[][] boardSetup;
 	private final int BOARD_FILE = 8;
 	private final int BOARD_RANK = 8;
@@ -92,7 +92,7 @@ public class Board
 		System.out.println("================================================");
 		try
 		{
-			Thread.sleep(updateTimer);
+			Thread.sleep(getUpdateTimer());
 		}
 		catch (InterruptedException e)
 		{
@@ -317,6 +317,16 @@ public class Board
 		{
 			placePiece(defaultPieceArrangement[i]);
 		}
+	}
+	
+	public long getUpdateTimer()
+	{
+		return updateTimer;
+	}
+
+	public void setUpdateTimer(long updateTimer)
+	{
+		this.updateTimer = updateTimer;
 	}
 
 }
