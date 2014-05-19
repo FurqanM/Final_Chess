@@ -40,6 +40,8 @@ public class Display
 					System.out.println(" or (E1 G1 H1 F1 ) to castle");
 
 					moveCommand = input.nextLine().toLowerCase();
+					if(moveCommand.length() == 4)
+						System.out.println("Cannot place pieces in the middle of the game. Ignoring command\n");
 					
 					playGame(moveCommand);
 					// gameEnd = true;

@@ -38,7 +38,6 @@ public class Board
 	private final int BOARD_FILE = 8;
 	private final int BOARD_RANK = 8;
 
-
 	private static Board instance = null;
 
 	public static Board getInstance()
@@ -99,49 +98,36 @@ public class Board
 
 	public void movePiece(String moveBoardPosition)
 	{
-
-		
-		// c7 c5
-		int initialRank = moveBoardPosition.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
-
-		int initialFile = moveBoardPosition.substring(1, 2).trim().charAt(0) - 49; // 7
-
-		int newRank = moveBoardPosition.substring(3, 4).trim().toLowerCase().charAt(0) - 97; // c
-
-		int newFile = moveBoardPosition.substring(4).trim().charAt(0) - 49; // 5 maybe *
-		try
+		if(moveBoardPosition.length() == 5)
 		{
-			if (this.boardSetup[initialFile][initialRank].validatePieceColor()) //if white //TODO Don't validate piece color, just move all pieces, except for Pawn = Absolute Value
-			{
-				if(this.boardSetup[initialFile][initialRank].validateWhite(moveBoardPosition))
-				{
-					this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
-					this.boardSetup[initialFile][initialRank] = null;
-					System.out.println("A White Piece has moved");
-				}
-				else{}
-			}
-			else //if black
-			{
-				if(this.boardSetup[initialFile][initialRank].validateBlack(moveBoardPosition))
-				{
-					this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
-					this.boardSetup[initialFile][initialRank] = null;
-					System.out.println("A Black Piece has moved");
-				}
-				else{}
-				
-			
-			}
-		}
-		catch(NullPointerException e)
-		{
-			System.out.println("No piece there to move.");
-		}
-		
+			// c7 c5
+			int initialRank = moveBoardPosition.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
 
-		System.out.println("\t\t\t\t\t\t\t" + " Moves piece from " + moveBoardPosition.substring(0, 2).trim() + " to " + moveBoardPosition.substring(3, 5).trim());
+			int initialFile = moveBoardPosition.substring(1, 2).trim().charAt(0) - 49; // 7
 
+			int newRank = moveBoardPosition.substring(3, 4).trim().toLowerCase().charAt(0) - 97; // c
+
+			// 5 maybe *
+			int newFile = moveBoardPosition.substring(4).trim().charAt(0) - 49;
+			if(this.boardSetup[newFile][newRank] == null)
+			{
+				try
+				{
+					if (this.boardSetup[initialFile][initialRank].validateMovement(moveBoardPosition))
+					{
+						this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
+						this.boardSetup[initialFile][initialRank] = null;
+						System.out.println("\t\t\t\t\t\t\t" + " Moves piece from " + moveBoardPosition.substring(0, 2).trim() + " to " + moveBoardPosition.substring(3, 5).trim());
+					}
+				}
+				catch (NullPointerException e)
+				{
+					System.out.println("No piece there to move.");
+				}
+			}
+			else
+				System.out.println("Already a piece there, unable to move");
+		}
 	}
 
 	public void placePiece(String position)
@@ -231,12 +217,24 @@ public class Board
 					}
 					else if (strLine.length() == 6)
 					{
-						killPiece(strLine); // c4 d6*
+						// c4 d6*
+						killPiece(strLine);
 						Board.getInstance().draw();
 					}
 					else if (strLine.length() == 10)
 					{
 						// moveTwoPieces();
+				        //returns the CastlingType
+						 //Throws IllegalMoveException if castling move is not valid.
+						 
+						 //castling rules:
+						 //The king and the chosen rook are on the player's first rank.
+						 //Neither the king nor the chosen rook have previously moved.
+						 //There are no pieces between the king and the chosen rook.
+						 //The king is not currently in check.
+						 //The king does not pass through a square that is attacked by
+						 //an enemy piece.
+						 //The king does not end up in check. (True of any legal move.)
 					}
 
 				}
@@ -253,32 +251,44 @@ public class Board
 
 	public void killPiece(String moveBoardPosition)
 	{
-		// c7 c5
-		// int initialRank = RANK.indexOf(moveBoardPosition.substring(0,
-		// 1).trim()); // c
-		int initialRank = moveBoardPosition.substring(0, 1).trim().charAt(0) - 97;
-		// int initialFile = FILE.indexOf(moveBoardPosition.substring(1,
-		// 2).trim()); // 7
-		int initialFile = moveBoardPosition.substring(1, 2).trim().charAt(0) - 49;
+		// TODO make a stringBuilder to account for 2 spaces in between 
+		if(moveBoardPosition.length() == 6)
+		{
 
-		// int newRank = RANK.indexOf(moveBoardPosition.substring(3, 4).trim());
-		// // c
-		int newRank = moveBoardPosition.substring(3, 4).trim().charAt(0) - 97;
-		// int newFile = FILE.indexOf(moveBoardPosition.substring(4, 5).trim());
-		// // 5 maybe *
-		int newFile = moveBoardPosition.substring(4, 5).trim().charAt(0) - 49;
+			// c7 c5*
+			int initialRank = moveBoardPosition.substring(0, 1).trim().charAt(0) - 97;
 
-		// this.boardSetup[initnewFile][newRank] = null;
-		this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
-		System.out.println("\t\t\t\t\t\t\t" + moveBoardPosition.substring(0, 2).trim() + " captures piece at " + moveBoardPosition.substring(3, 5).trim());
-		this.boardSetup[initialFile][initialRank] = null;
+			int initialFile = moveBoardPosition.substring(1, 2).trim().charAt(0) - 49;
+
+			// c
+			int newRank = moveBoardPosition.substring(3, 4).trim().charAt(0) - 97;
+
+			// 5*
+			int newFile = moveBoardPosition.substring(4, 5).trim().charAt(0) - 49;
+
+			if(this.boardSetup[newFile][newRank] != null)
+			{
+				this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
+				System.out.println("\t\t\t\t\t\t\t" + moveBoardPosition.substring(0, 2).trim() + " captures piece at " + moveBoardPosition.substring(3, 5).trim());
+				this.boardSetup[initialFile][initialRank] = null;
+			}
+			else
+			{
+				String invalidKill = moveBoardPosition.substring(0, 6);
+				movePiece(invalidKill);
+				System.out.println("Checking verified that there is no piece at " + moveBoardPosition.substring(3, 5).trim() + ", moving piece instead\n");
+			}
+			
+		}
+		else{}
 
 	}
 
-	public void defaultSetup() // TODO add a create new .txt file and writes all
-								// of the default piece arrangements to it and
-								// load that txt and append to it after every
-								// move
+	// TODO add a create new .txt file and writes all
+	// of the default piece arrangements to it and
+	// load that txt and append to it after every
+	// move
+	public void defaultSetup() 
 	{
 		String[] defaultPieceArrangement = new String[32];
 		defaultPieceArrangement[0] = "pda7";
@@ -319,7 +329,7 @@ public class Board
 			placePiece(defaultPieceArrangement[i]);
 		}
 	}
-	
+
 	public long getUpdateTimer()
 	{
 		return updateTimer;

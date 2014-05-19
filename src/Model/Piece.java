@@ -11,9 +11,15 @@ public abstract class Piece
 		this.isWhite = isWhite;
 	}
 	
-	public abstract boolean validatePieceColor();
-	public abstract boolean validateWhite(String moveBoardPosition);
-	public abstract boolean validateBlack(String moveBoardPosition);
+	public abstract boolean validateMovement(String position);
+	
+	public boolean validateColor()
+	{
+		if(isWhite)
+			return true; //is White
+		else
+			return false; //is Black
+	}
 
 	public boolean isWhite()
 	{
