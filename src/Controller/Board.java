@@ -38,7 +38,6 @@ public class Board
 	private final int BOARD_FILE = 8;
 	private final int BOARD_RANK = 8;
 
-	private MoveValidator moveValidator;
 
 	private static Board instance = null;
 
@@ -53,7 +52,6 @@ public class Board
 
 	public Board()
 	{
-		moveValidator = new MoveValidator(this);
 
 		this.boardSetup = new Piece[8][8];
 
@@ -65,7 +63,6 @@ public class Board
 
 	public void draw()
 	{
-		int j = BOARD_FILE;
 		System.out.println("    A   B   C   D   E   F   G   H ");
 		System.out.println("  +---+---+---+---+---+---+---+---+");
 		for (int y = 7; y >= 0; y--)
@@ -112,29 +109,34 @@ public class Board
 		int newRank = moveBoardPosition.substring(3, 4).trim().toLowerCase().charAt(0) - 97; // c
 
 		int newFile = moveBoardPosition.substring(4).trim().charAt(0) - 49; // 5 maybe *
-		
-		if (this.boardSetup[initialFile][initialRank].validatePieceColor()) //if white 
+		try
 		{
-			if(this.boardSetup[initialFile][initialRank].validateWhite(moveBoardPosition))
+			if (this.boardSetup[initialFile][initialRank].validatePieceColor()) //if white //TODO Don't validate piece color, just move all pieces, except for Pawn = Absolute Value
 			{
-				this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
-				this.boardSetup[initialFile][initialRank] = null;
-				System.out.println("A White Piece has moved");
+				if(this.boardSetup[initialFile][initialRank].validateWhite(moveBoardPosition))
+				{
+					this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
+					this.boardSetup[initialFile][initialRank] = null;
+					System.out.println("A White Piece has moved");
+				}
+				else{}
 			}
-			else{}
+			else //if black
+			{
+				if(this.boardSetup[initialFile][initialRank].validateBlack(moveBoardPosition))
+				{
+					this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
+					this.boardSetup[initialFile][initialRank] = null;
+					System.out.println("A Black Piece has moved");
+				}
+				else{}
+				
 			
+			}
 		}
-		else //if black
+		catch(NullPointerException e)
 		{
-			if(this.boardSetup[initialFile][initialRank].validateBlack(moveBoardPosition))
-			{
-				this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
-				this.boardSetup[initialFile][initialRank] = null;
-				System.out.println("A Black Piece has moved");
-			}
-			else{}
-			
-		
+			System.out.println("No piece there to move.");
 		}
 		
 
@@ -189,7 +191,6 @@ public class Board
 
 	public void loadFile(String filename) throws FileNotFoundException
 	{
-		boolean end = false;
 
 		FileInputStream fstream = null;
 		try
