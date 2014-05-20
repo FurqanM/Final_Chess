@@ -20,24 +20,21 @@ public class Bishop extends Piece
 
 		// a = 0
 		//white
-		if ((((initialFile + 1) == newFile && (initialRank + 1) == newRank) || ((initialFile + 1) == newFile && (initialRank - 1) == newRank)) || (((initialFile - 1) == newFile && (initialRank - 1) == newRank) || ((initialFile - 1) == newFile && (initialRank + 1) == newRank)))
+		//if ((((initialFile + 1) == newFile && (initialRank + 1) == newRank) || ((initialFile + 1) == newFile && (initialRank - 1) == newRank)) || (((initialFile - 1) == newFile && (initialRank - 1) == newRank) || ((initialFile - 1) == newFile && (initialRank + 1) == newRank)))
+		
+		String undatedPosition = (position.substring(3, 4).trim().toLowerCase() + position.substring(4).trim()); //c5
+		
+		char[] charSequence = {(char) ((newRank + 1) + 97) , (char) ((newFile + 1) + 49)}; // d6
+		
+		String charString = String.copyValueOf(charSequence); // d6
+		
+		String updatedPosition = undatedPosition + " " + charString;
+		
+		if(updatedPosition.matches("(([a-h][1-8])\\s*([a-h][1-8]))"))
 		{
-			String undatedPosition = (position.substring(3, 4).trim().toLowerCase() + position.substring(4).trim()); //c5
-			
-			char[] charSequence = {(char) ((newRank + 1) + 97) , (char) ((newFile + 1) + 49)}; // d6
-			
-			String charString = String.copyValueOf(charSequence); // d6
-			
-			String updatedPosition = undatedPosition + " " + charString;
-			
-			if(updatedPosition.matches("(([a-h][1-8])\\s*([a-h][1-8]))"))
-			{
-				validateMovement(updatedPosition);
-				System.out.println("Moved a Bishop");
-				return true;
-			}
-			else
-			{}
+			for(int i = 0; i < 8; )
+			System.out.println("Moved a Bishop");
+			return true;
 		}
 		else
 		{

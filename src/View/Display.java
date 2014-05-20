@@ -53,7 +53,7 @@ public class Display
 	
 	public static void playGame(String moveCommand)
 	{
-		if (Pattern.matches(Board.CHESS_PATTERN, moveCommand))
+		if (Pattern.matches(Board.getInstance().getCHESS_PATTERN(), moveCommand))
 		{
 			// e1 e4
 			// c4 d6*

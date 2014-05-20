@@ -32,7 +32,22 @@ public class Board
 	// ^([qkbprn][dl][a-h][1-8])|((([a-h][1-8])\s*([a-h][1-8])(\*?))|([a-h][1-8])\s*([a-h][1-8])(\*?)\s*([a-h][1-8])\s*([a-h][1-8]))$
 	// complete Castling OR
 
-	public static final String CHESS_PATTERN = "^([qkbprn][dl][a-h][1-8])|((([a-h][1-8])\\s*([a-h][1-8])(\\*?))|([a-h][1-8])\\s*([a-h][1-8])(\\*?)\\s*([a-h][1-8])\\s*([a-h][1-8]))$";
+	public final String CHESS_PATTERN = "^([qkbprn][dl][a-h][1-8])|((([a-h][1-8])\\s*([a-h][1-8])(\\*?))|([a-h][1-8])\\s*([a-h][1-8])(\\*?)\\s*([a-h][1-8])\\s*([a-h][1-8]))$";
+	public String getCHESS_PATTERN()
+	{
+		return CHESS_PATTERN;
+	}
+
+	public int getBOARD_FILE()
+	{
+		return BOARD_FILE;
+	}
+
+	public int getBOARD_RANK()
+	{
+		return BOARD_RANK;
+	}
+
 	private long updateTimer;
 	private Piece[][] boardSetup;
 	private final int BOARD_FILE = 8;
@@ -94,6 +109,35 @@ public class Board
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean checkInBetween(String position)
+	{
+		// c7 c5
+		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
+		int initialFile = position.substring(1, 2).trim().charAt(0) - 49; // 7
+		int newRank = position.substring(3, 4).trim().toLowerCase().charAt(0) - 97; // c
+		// 5 maybe *
+		int newFile = position.substring(4).trim().charAt(0) - 49;
+		
+		int numberOfSquaresFile = Math.abs(newFile - initialFile);
+		int numberOfSquaresRank = Math.abs(newRank - initialRank);
+		
+		int greaterSquare = 0;
+		
+		if(initialFile < newFile)
+			greaterSquare = newFile;
+		else 
+			greaterSquare = initialFile;
+		
+		for(int j = greaterSquare; j < greaterSquare - numberOfSquaresFile; j--)
+		{
+			if(this.boardSetup[j][newRank] != null)
+				return false;
+			else
+				return true;
+		}
+		return false;	
 	}
 
 	public void movePiece(String moveBoardPosition)
@@ -314,7 +358,8 @@ public class Board
 		defaultPieceArrangement[20] = "ple2";
 		defaultPieceArrangement[21] = "plf2";
 		defaultPieceArrangement[22] = "plg2";
-		defaultPieceArrangement[23] = "plh2";
+		defaultPieceArrangement[23] = "plg3";
+		//defaultPieceArrangement[23] = "plh2";
 		defaultPieceArrangement[24] = "rla1";
 		defaultPieceArrangement[25] = "rlh1";
 		defaultPieceArrangement[26] = "nlb1";
