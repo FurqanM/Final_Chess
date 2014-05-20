@@ -24,19 +24,24 @@ public class Bishop extends Piece
 		{
 			String undatedPosition = (position.substring(3, 4).trim().toLowerCase() + position.substring(4).trim()); //c5
 			
-			char[] charSequence = {(char) ((newRank + 1) + 97) , (char) ((newFile + 1) + 97)}; // d6
+			char[] charSequence = {(char) ((newRank + 1) + 97) , (char) ((newFile + 1) + 49)}; // d6
 			
 			String charString = String.copyValueOf(charSequence); // d6
 			
 			String updatedPosition = undatedPosition + " " + charString;
 			
-			validateMovement(updatedPosition);
-			System.out.println("Moved a Bishop");
-			return true;
+			if(updatedPosition.matches("(([a-h][1-8])\\s*([a-h][1-8]))"))
+			{
+				validateMovement(updatedPosition);
+				System.out.println("Moved a Bishop");
+				return true;
+			}
+			else
+			{}
 		}
 		else
 		{
-			//System.out.println("Not a valid movement, ignoring command.");
+			System.out.println("Not a valid movement, ignoring command.");
 			return false;
 		}
 
