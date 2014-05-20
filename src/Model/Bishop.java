@@ -36,12 +36,9 @@ public class Bishop extends Piece
 			System.out.println("Moved a Bishop");
 			return true;
 		}
-		else
-		{
-			System.out.println("Not a valid movement, ignoring command.");
-			return false;
-		}
-
+	
+		System.out.println("Not a valid movement, ignoring command.");
+		return false;
 	}
 
 	// move (x - 1 && y - 1) || (x + 1 && y + 1)
