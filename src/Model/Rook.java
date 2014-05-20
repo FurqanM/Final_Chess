@@ -24,17 +24,34 @@ public class Rook extends Piece
 		int numberOfSquaresRank = Math.abs(newRank - initialRank);
 		
 		
+		for(int i = initialFile; i < newFile + 1; i++)
+			if(i == newFile && initialRank == newRank)
+			{
+				System.out.println("Moved Bishop up");
+				return true;
+			}
 		
-		if(numberOfSquaresFile != 0)
-		{
-			
-			
-		}
+		for(int i = initialFile; i > newFile - 1; i--)
+			if(i == newFile && initialRank == newRank)
+			{
+				System.out.println("Moved Bishop down");
+				return true;
+			}
 		
-		else if(numberOfSquaresRank != 0)
-		{
-			
-		}
+		for(int i = initialRank; i < newRank + 1; i++)
+			if(i == newRank && initialFile == newFile)
+			{
+				System.out.println("Moved Bishop right");
+				return true;
+			}
+		
+		for(int i = initialRank; i > newRank - 1; i--)
+			if(i == newRank && initialFile == newFile)
+			{
+				System.out.println("Moved Bishop left");
+				return true;
+			}
+		
 				
 		System.out.println("Not a valid movement, ignoring command.");
 		return false;
