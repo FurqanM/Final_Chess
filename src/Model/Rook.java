@@ -9,6 +9,9 @@ public class Rook extends Piece
 	{
 		super(isWhite);
 	}
+	
+
+	
 
 	@Override
 	public boolean validateMovement(String position)
@@ -20,37 +23,36 @@ public class Rook extends Piece
 		// 5 maybe *
 		int newFile = position.substring(4).trim().charAt(0) - 49;
 		
-		int numberOfSquaresFile = Math.abs(newFile - initialFile);
-		int numberOfSquaresRank = Math.abs(newRank - initialRank);
 		
 		
 		for(int i = initialFile; i < newFile + 1; i++)
 			if(i == newFile && initialRank == newRank)
 			{
-				System.out.println("Moved Bishop up");
+				System.out.println("Moved Rook up");
 				return true;
 			}
 		
 		for(int i = initialFile; i > newFile - 1; i--)
 			if(i == newFile && initialRank == newRank)
 			{
-				System.out.println("Moved Bishop down");
+				System.out.println("Moved Rook down");
 				return true;
 			}
 		
 		for(int i = initialRank; i < newRank + 1; i++)
 			if(i == newRank && initialFile == newFile)
 			{
-				System.out.println("Moved Bishop right");
+				System.out.println("Moved Rook right");
 				return true;
 			}
 		
 		for(int i = initialRank; i > newRank - 1; i--)
 			if(i == newRank && initialFile == newFile)
 			{
-				System.out.println("Moved Bishop left");
+				System.out.println("Moved Rook left");
 				return true;
 			}
+		
 		
 				
 		System.out.println("Not a valid movement, ignoring command.");
