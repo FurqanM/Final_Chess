@@ -53,9 +53,6 @@ public class Bishop extends Piece
 		
 		int north = initialFile;
 		int east = initialRank;
-		int south = initialFile;
-		int west = initialRank;
-		
 		
 		
 
@@ -80,13 +77,12 @@ public class Bishop extends Piece
 		//or false if invalid
 		north = initialFile;
 		east = initialRank;
-		south = initialFile;
-		west = initialRank;
+		
 		for(int i = 0; i < movement; i++)
 		{
-			south--;
-			west--;
-			if(south == newFile && west == newRank)
+			north--;
+			east--;
+			if(north == newFile && east == newRank)
 			{
 				System.out.println("Moved a Bishop south-west");
 				return true;
@@ -94,14 +90,12 @@ public class Bishop extends Piece
 		}
 		north = initialFile;
 		east = initialRank;
-		south = initialFile;
-		west = initialRank;
 		
 		for(int i = 0; i < movement; i++)
 		{
 			north++;
-			west--;
-			if(north == newFile && west == newRank)
+			east--;
+			if(north == newFile && east == newRank)
 			{
 				System.out.println("Moved a Bishop north-west");
 				return true;
@@ -110,14 +104,12 @@ public class Bishop extends Piece
 		
 		north = initialFile;
 		east = initialRank;
-		south = initialFile;
-		west = initialRank;
 		
 		for(int i = 0; i < movement; i++)
 		{
-			south--;
+			north--;
 			east++;
-			if(north == newFile && west == newRank)
+			if(north == newFile && east == newRank)
 			{
 				System.out.println("Moved a Bishop south-east");
 				return true;
