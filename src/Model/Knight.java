@@ -26,81 +26,51 @@ public class Knight extends Piece
 
 		
 		//movement logic for moving up 2 right 1
-		north += 2;
-		east++;
-		if(newFile == north && newRank == east) //TODO WHY DIDN'T THIS WORK BEFORE!
+		if(newFile == north+2 && newRank == east+1)
 		{
 			System.out.println("Moved a Knight up 2 right 1");
 			return true;
 		}
 		
 		//movement logic for moving up 2 and left 1
-		north = initialFile;
-		east = initialRank;
-		north += 2;
-		east--;
-		if(newFile == north && newRank == east)
+		else if(newFile == north+2 && newRank == east-1)
 		{
 			System.out.println("Moved a Knight up 2 left 1");
 			return true;
 		}
 		//movement logic for moving down 2 right 1
-		north = initialFile;
-		east = initialRank;
-		north -= 2;
-		east++;
-		if(newFile == north && newRank == east)
+		else if(newFile == north-2 && newRank == east+1)
 		{
 			System.out.println("Moved a Knight down 2 right 1");
 			return true;
 		}
 		//movement down 2 left 1
-		north = initialFile;
-		east = initialRank;
-		north -= 2;
-		east --;
-		if(newFile == north && newRank == east)
+		else if(newFile == north-2 && newRank == east-1)
 		{
 			System.out.println("Moved a Knight down 2 left 1");
 			return true;
 		}
 		
 		//movement for right 2 up 1
-		north = initialFile;
-		east = initialRank;
-		east += 2;
-		north++;
-		if(newRank == east && newFile == north)
+		else if(newRank == east+2 && newFile == north+1)
 		{
 			System.out.println("Moved a Knight right 2 up 1");
 			return true;
 		}
 		//movement for right 2 down 1
-		north = initialFile;
-		east = initialRank;
-		east += 2;
-		north--;
-		if(newRank == east && newFile == north)
+		else if(newRank == east+2 && newFile == north-1)
 		{
 			System.out.println("Moved a Knight right 2 down 1");
 			return true;
 		}
 		//movement for left 2 up 1
-		north = initialFile;
-		east = initialRank;
-		east -= 2;
-		north++;
-		if(newRank == east && newFile == north)
+		else if(newRank == east-2 && newFile == north+1)
 		{
 			System.out.println("Moved a Knight left 2 up 1");
 			return true;
 		}
 		//movement for left 2 down 1
-		north = initialFile;
-		east = initialRank;
-		east -= 2;
-		north--;
-		if(newRank == east && newFile == north)
+		else if(newRank == east-2 && newFile == north-1)
 		{
 			System.out.println("Moved a Knight left 2 up 1");
 			return true;
