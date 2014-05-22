@@ -33,6 +33,7 @@ public class Board
 	// complete Castling OR
 
 	public final String CHESS_PATTERN = "^([qkbprn][dl][a-h][1-8])|((([a-h][1-8])\\s*([a-h][1-8])(\\*?))|([a-h][1-8])\\s*([a-h][1-8])(\\*?)\\s*([a-h][1-8])\\s*([a-h][1-8]))$";
+
 	public String getCHESS_PATTERN()
 	{
 		return CHESS_PATTERN;
@@ -110,8 +111,8 @@ public class Board
 			e.printStackTrace();
 		}
 	}
-	
-	public boolean validateObjects(String position)
+
+	public boolean checkInBetween(String position)
 	{
 		// c7 c5
 		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
@@ -119,39 +120,35 @@ public class Board
 		int newRank = position.substring(3, 4).trim().toLowerCase().charAt(0) - 97; // c
 		// 5 maybe *
 		int newFile = position.substring(4).trim().charAt(0) - 49;
-		
+
 		int diffFile = Math.abs(newFile - initialFile); //difference of squares in between newFile and initialFile
-		int diffRank = Math.abs(newRank - initialRank); //difference of squares in between newRank and initialRank
-		
+		//int diffRank = Math.abs(newRank - initialRank); //difference of squares in between newRank and initialRank
+
 		int greaterSquare = 0;
 		int smallerSquare = 0;
-		
-		if(initialFile < newFile)
+
+		if (initialFile < newFile)
 		{
 			greaterSquare = newFile;
 			smallerSquare = initialFile;
 		}
-			
-		
-		else 
+		else
 		{
 			greaterSquare = initialFile;
 			smallerSquare = newFile;
 		}
-		
-		for(int j = greaterSquare; j < greaterSquare - diffFile; j--)
+
+		for (int j = greaterSquare + 1; j > (greaterSquare - diffFile); j--)
 		{
-			if(this.boardSetup[j][newRank] != null)
-				return false;
-			else
-				return true;
+			if (this.boardSetup[j][newRank] == null) // if there is an empty space here
+				return true; //true means empty space
 		}
-		return false;	
+		return false; // piece is there
 	}
 
 	public void movePiece(String moveBoardPosition)
 	{
-		if(moveBoardPosition.length() == 5)
+		if (moveBoardPosition.length() == 5)
 		{
 			// c7 c5
 			int initialRank = moveBoardPosition.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
@@ -162,15 +159,20 @@ public class Board
 
 			// 5 maybe *
 			int newFile = moveBoardPosition.substring(4).trim().charAt(0) - 49;
-			if(this.boardSetup[newFile][newRank] == null)
+			if (this.boardSetup[newFile][newRank] == null)
 			{
 				try
 				{
 					if (this.boardSetup[initialFile][initialRank].validateMovement(moveBoardPosition))
 					{
-						this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
-						this.boardSetup[initialFile][initialRank] = null;
-						System.out.println("\t\t\t\t\t\t\t" + " Moves piece from " + moveBoardPosition.substring(0, 2).trim() + " to " + moveBoardPosition.substring(3, 5).trim());
+						if (checkInBetween(moveBoardPosition))
+						{
+							this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
+							this.boardSetup[initialFile][initialRank] = null;
+							System.out.println("\t\t\t\t\t\t\t" + " Moves piece from " + moveBoardPosition.substring(0, 2).trim() + " to " + moveBoardPosition.substring(3, 5).trim());
+						}
+						else
+							System.out.println("A piece is blocking the path. Ignoring command");
 					}
 				}
 				catch (NullPointerException e)
@@ -244,11 +246,8 @@ public class Board
 
 		String strLine;
 		/*
-		 * Move a single piece on the board (ex: d8 h4 - moves the piece at D8
-		 * to the square at H4, c4 d6* - moves the piece at C4 to D6 and
-		 * captures the piece at D6). Move two pieces in a single turn (ex: e1
-		 * g1 h1 f1 � moves the king from E1 to G1 and moves the rook from H1
-		 * to F1. This is called a - king-side castle).
+		 * Move a single piece on the board (ex: d8 h4 - moves the piece at D8 to the square at H4, c4 d6* - moves the piece at C4 to D6 and captures the piece at D6). Move two pieces in a single turn
+		 * (ex: e1 g1 h1 f1 � moves the king from E1 to G1 and moves the rook from H1 to F1. This is called a - king-side castle).
 		 */
 		try
 		{
@@ -277,17 +276,17 @@ public class Board
 					else if (strLine.length() == 10)
 					{
 						// moveTwoPieces();
-				        //returns the CastlingType
-						 //Throws IllegalMoveException if castling move is not valid.
-						 
-						 //castling rules:
-						 //The king and the chosen rook are on the player's first rank.
-						 //Neither the king nor the chosen rook have previously moved.
-						 //There are no pieces between the king and the chosen rook.
-						 //The king is not currently in check.
-						 //The king does not pass through a square that is attacked by
-						 //an enemy piece.
-						 //The king does not end up in check. (True of any legal move.)
+						//returns the CastlingType
+						//Throws IllegalMoveException if castling move is not valid.
+
+						//castling rules:
+						//The king and the chosen rook are on the player's first rank.
+						//Neither the king nor the chosen rook have previously moved.
+						//There are no pieces between the king and the chosen rook.
+						//The king is not currently in check.
+						//The king does not pass through a square that is attacked by
+						//an enemy piece.
+						//The king does not end up in check. (True of any legal move.)
 					}
 
 				}
@@ -305,7 +304,7 @@ public class Board
 	public void killPiece(String moveBoardPosition)
 	{
 		// TODO make a stringBuilder to account for 2 spaces in between 
-		if(moveBoardPosition.length() == 6)
+		if (moveBoardPosition.length() == 6)
 		{
 
 			// c7 c5*
@@ -319,7 +318,7 @@ public class Board
 			// 5*
 			int newFile = moveBoardPosition.substring(4, 5).trim().charAt(0) - 49;
 
-			if(this.boardSetup[newFile][newRank] != null)
+			if (this.boardSetup[newFile][newRank] != null)
 			{
 				this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
 				System.out.println("\t\t\t\t\t\t\t" + moveBoardPosition.substring(0, 2).trim() + " captures piece at " + moveBoardPosition.substring(3, 5).trim());
@@ -331,9 +330,11 @@ public class Board
 				movePiece(invalidKill);
 				System.out.println("Checking verified that there is no piece at " + moveBoardPosition.substring(3, 5).trim() + ", moving piece instead\n");
 			}
-			
+
 		}
-		else{}
+		else
+		{
+		}
 
 	}
 
@@ -341,7 +342,7 @@ public class Board
 	// of the default piece arrangements to it and
 	// load that txt and append to it after every
 	// move
-	public void defaultSetup() 
+	public void defaultSetup()
 	{
 		String[] defaultPieceArrangement = new String[32];
 		defaultPieceArrangement[0] = "pda7";
@@ -362,8 +363,7 @@ public class Board
 		defaultPieceArrangement[15] = "kde8";
 		defaultPieceArrangement[16] = "pla2";
 		defaultPieceArrangement[17] = "plb2";
-		//defaultPieceArrangement[18] = "plc2";
-		defaultPieceArrangement[18] = "nle5";
+		defaultPieceArrangement[18] = "plc2";
 		defaultPieceArrangement[19] = "pld2";
 		defaultPieceArrangement[20] = "ple2";
 		defaultPieceArrangement[21] = "plf2";
