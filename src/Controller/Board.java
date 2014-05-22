@@ -367,8 +367,7 @@ public class Board
 		defaultPieceArrangement[20] = "ple2";
 		defaultPieceArrangement[21] = "plf2";
 		defaultPieceArrangement[22] = "plg2";
-		defaultPieceArrangement[23] = "plg3";
-		//defaultPieceArrangement[23] = "plh2";
+		defaultPieceArrangement[23] = "plh2";
 		defaultPieceArrangement[24] = "rla1";
 		defaultPieceArrangement[25] = "rlh1";
 		defaultPieceArrangement[26] = "nlb1";
