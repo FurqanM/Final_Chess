@@ -8,6 +8,82 @@ public class Knight extends Piece
 		super(isWhite);
 	}
 	
+	
+	
+	@Override
+	public boolean validateMovement(String position)
+	{
+		// c7 c5
+		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
+		int initialFile = position.substring(1, 2).trim().charAt(0) - 49; // 7
+		int newRank = position.substring(3, 4).trim().toLowerCase().charAt(0) - 97; // c
+		// 5 maybe *
+		int newFile = position.substring(4).trim().charAt(0) - 49;
+
+		
+		int north = initialFile;
+		int east = initialRank;
+
+		
+		//movement logic for moving up 2 right 1
+		if(initialRank == north + 2 && initialFile == east++)
+		{
+			System.out.println("Moved a Knight up 2 right 1");
+			return true;
+		}
+		//movement logic for moving up 2 and left 1
+		else if(initialRank == north + 2 && initialFile == east--)
+		{
+			System.out.println("Moved a Knight up 2 left 1");
+			return true;
+		}
+		//movement logic for moving down 2 right 1
+		else if(initialRank == north - 2 && initialFile == east++)
+		{
+			System.out.println("Moved a Knight down 2 right 1");
+			return true;
+		}
+		//movement down 2 left 1
+		else if(initialRank == north - 2 && initialFile == east--)
+		{
+			System.out.println("Moved a Knight down 2 left 1");
+			return true;
+		}
+		
+		//movement for right 2 up 1
+		if(initialFile == east + 2 && initialRank == north++)
+		{
+			System.out.println("Moved a Knight right 2 up 1");
+			return true;
+		}
+		//movement for right 2 down 1
+		else if(initialFile == east + 2 && initialRank == north--)
+		{
+			System.out.println("Moved a Knight right 2 down 1");
+			return true;
+		}
+		//movement for left 2 up 1
+		else if(initialFile == east - 2 && initialRank == north++)
+		{
+			System.out.println("Moved a Knight left 2 up 1");
+			return true;
+		}
+		//movement for left 2 down 1
+		else if(initialFile == east - 2 && initialRank == north--)
+		{
+			System.out.println("Moved a Knight left 2 up 1");
+			return true;
+		}
+		else
+		{
+			System.out.println("Invalid movement, ignoring command");
+			return false;
+		}
+	}
+	
+	
+	
+	
 	/*
 	//vertical
 	(y + 2) && (x + 1)

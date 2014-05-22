@@ -19,9 +19,6 @@ public class King extends Piece
 		int newRank = position.substring(3, 4).trim().toLowerCase().charAt(0) - 97; // c
 		// 5 maybe *
 		int newFile = position.substring(4).trim().charAt(0) - 49;
-		
-		
-		int movement = Math.abs(newFile - initialFile);
 
 		
 		int north = initialFile;
