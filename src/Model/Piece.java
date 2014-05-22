@@ -12,6 +12,7 @@ public abstract class Piece
 	}
 	
 	public abstract boolean validateMovement(String position);
+	//public abstract boolean validateObjects(String position);
 	
 	public boolean validateColor()
 	{

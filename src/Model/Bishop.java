@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.Board;
+
 public class Bishop extends Piece
 {
 
@@ -62,13 +64,17 @@ public class Bishop extends Piece
 		//or false if invalid
 		for(int i = 0; i < movement; i++)
 		{
-			north++;
-			east++;
-			if(north == newFile && east == newRank)
+			if(Board.getInstance().validateObjects(position)) // if returns true : no objects in between movement, can then validate strict movement and move piece
 			{
-				System.out.println("Moved a Bishop north-east");
-				return true;
+				north++;
+				east++;
+				if(north == newFile && east == newRank)
+				{
+					System.out.println("Moved a Bishop north-east");
+					return true;
+				}
 			}
+			
 		}
 		
 		//Takes the position that is larger and smaller between the 2 points and increments i by the difference

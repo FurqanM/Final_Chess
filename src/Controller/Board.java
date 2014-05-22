@@ -111,7 +111,7 @@ public class Board
 		}
 	}
 	
-	public boolean checkInBetween(String position)
+	public boolean validateObjects(String position)
 	{
 		// c7 c5
 		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
@@ -120,17 +120,26 @@ public class Board
 		// 5 maybe *
 		int newFile = position.substring(4).trim().charAt(0) - 49;
 		
-		int numberOfSquaresFile = Math.abs(newFile - initialFile);
-		int numberOfSquaresRank = Math.abs(newRank - initialRank);
+		int diffFile = Math.abs(newFile - initialFile); //difference of squares in between newFile and initialFile
+		int diffRank = Math.abs(newRank - initialRank); //difference of squares in between newRank and initialRank
 		
 		int greaterSquare = 0;
+		int smallerSquare = 0;
 		
 		if(initialFile < newFile)
+		{
 			greaterSquare = newFile;
-		else 
-			greaterSquare = initialFile;
+			smallerSquare = initialFile;
+		}
+			
 		
-		for(int j = greaterSquare; j < greaterSquare - numberOfSquaresFile; j--)
+		else 
+		{
+			greaterSquare = initialFile;
+			smallerSquare = newFile;
+		}
+		
+		for(int j = greaterSquare; j < greaterSquare - diffFile; j--)
 		{
 			if(this.boardSetup[j][newRank] != null)
 				return false;
