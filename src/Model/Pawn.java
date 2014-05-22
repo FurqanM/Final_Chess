@@ -1,7 +1,5 @@
 package Model;
 
-import Controller.Board;
-
 public class Pawn extends Piece
 {
 
