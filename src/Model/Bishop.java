@@ -64,8 +64,8 @@ public class Bishop extends Piece
 		//or false if invalid
 		for(int i = 0; i < movement; i++)
 		{
-			if(Board.getInstance().validateObjects(position)) // if returns true : no objects in between movement, can then validate strict movement and move piece
-			{
+			//TODO if(Board.getInstance().validateObjects(position)) // if returns true : no objects in between movement, can then validate strict movement and move piece
+			//{
 				north++;
 				east++;
 				if(north == newFile && east == newRank)
@@ -73,7 +73,7 @@ public class Bishop extends Piece
 					System.out.println("Moved a Bishop north-east");
 					return true;
 				}
-			}
+			//}
 			
 		}
 		

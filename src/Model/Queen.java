@@ -95,8 +95,8 @@ public class Queen extends Piece
 
 			for (int i = 0; i < movement; i++)
 			{
-				if (Board.getInstance().validateObjects(position)) // if returns true : no objects in between movement, can then validate strict movement and move piece
-				{
+				//TODO if (Board.getInstance().validateObjects(position)) // if returns true : no objects in between movement, can then validate strict movement and move piece
+				//{
 					north++;
 					east++;
 					if (north == newFile && east == newRank)
@@ -104,7 +104,7 @@ public class Queen extends Piece
 						System.out.println("Moved a Queen north-east");
 						return true;
 					}
-				}
+				//}
 
 			}
 

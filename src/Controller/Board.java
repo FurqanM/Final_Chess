@@ -362,7 +362,8 @@ public class Board
 		defaultPieceArrangement[15] = "kde8";
 		defaultPieceArrangement[16] = "pla2";
 		defaultPieceArrangement[17] = "plb2";
-		defaultPieceArrangement[18] = "plc2";
+		//defaultPieceArrangement[18] = "plc2";
+		defaultPieceArrangement[18] = "nle5";
 		defaultPieceArrangement[19] = "pld2";
 		defaultPieceArrangement[20] = "ple2";
 		defaultPieceArrangement[21] = "plf2";

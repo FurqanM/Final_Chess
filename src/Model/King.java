@@ -12,7 +12,6 @@ public class King extends Piece
 	public boolean validateMovement(String position)
 	{
 
-
 		// c7 c5
 		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
 		int initialFile = position.substring(1, 2).trim().charAt(0) - 49; // 7
@@ -49,7 +48,7 @@ public class King extends Piece
 		}
 		
 		//Movement logic for movement in NE SE SW NW
-		if(initialFile == north++ && initialRank == east++)
+		else if(initialFile == north++ && initialRank == east++)
 		{
 			System.out.println("Moved a King north east");
 			return true;
