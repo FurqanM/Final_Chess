@@ -115,7 +115,7 @@ public class Board
 	public boolean checkInBetween(String position)
 	{
 		//TODO DO THE CHECKING WHILE THE PIECE IS MOVING
-		
+
 		// c7 c5
 		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
 		int initialFile = position.substring(1, 2).trim().charAt(0) - 49; // 7
@@ -129,13 +129,12 @@ public class Board
 		int movement = Math.abs(newFile - initialFile);
 		int north = initialFile;
 		int east = initialRank;
-		
+
 		int greaterY = 0;
 		int smallerY = 0;
-		
+
 		int greaterX = 0;
 		int smallerX = 0;
-		
 
 		if (initialFile < newFile)
 		{
@@ -147,8 +146,8 @@ public class Board
 			greaterY = initialFile;
 			smallerY = newFile;
 		}
-		
-		if(initialRank < newRank)
+
+		if (initialRank < newRank)
 		{
 			greaterX = newRank;
 			smallerX = initialRank;
@@ -158,51 +157,47 @@ public class Board
 			greaterX = initialRank;
 			smallerX = newRank;
 		}
-		
-		
-		
-		
-//		for (int i = initialFile; i < newFile + 1; i++)
-//			if (i == newFile && initialRank == newRank)
-//			{
-//				System.out.println("Moved Queen up");
-//				return true;
-//			}
-		
-//		if (initialFile == newFile || initialRank == newRank)
-//		{
-//			return moveStraight(position);
-//		}
-		
-		
-		if(initialFile == newFile || initialRank == newRank)
+
+		//		for (int i = initialFile; i < newFile + 1; i++)
+		//			if (i == newFile && initialRank == newRank)
+		//			{
+		//				System.out.println("Moved Queen up");
+		//				return true;
+		//			}
+
+		//		if (initialFile == newFile || initialRank == newRank)
+		//		{
+		//			return moveStraight(position);
+		//		}
+
+		if (initialFile == newFile || initialRank == newRank)
 		{
 			//Moving right or left
-			if(initialFile == newFile) //on the same X value
+			if (initialFile == newFile) //on the same X value
 			{
-				for(int i = greaterX - 1; i > smallerX; i--) //-1 to account for 0 base numeric system
+				for (int i = greaterX - 1; i > smallerX; i--) //-1 to account for 0 base numeric system
 				{
-					if(this.boardSetup[newFile][i] != null) //if there is a piece here
+					if (this.boardSetup[newFile][i] != null) //if there is a piece here
 					{
 						System.out.println("Piece is in the path of movement.");
 						return false; //false means there is a piece here     
 					}
-					
+
 				}
 				return true; //piece not there
 			}
-			
+
 			//Moving Up or Down
-			else if(initialRank == newRank) //on the same Y value
+			else if (initialRank == newRank) //on the same Y value
 			{
-				for(int i = greaterY - 1; i > smallerY; i--) //-1 to account for 0 base numeric system
+				for (int i = greaterY - 1; i > smallerY; i--) //-1 to account for 0 base numeric system
 				{
-					if(this.boardSetup[i][newRank] != null) //if there is a piece here
+					if (this.boardSetup[i][newRank] != null) //if there is a piece here
 					{
 						System.out.println("Piece is in the path of movement.");
 						return false; //false means there is a piece here     
 					}
-					
+
 				}
 				return true; //piece not there
 			}
@@ -214,27 +209,60 @@ public class Board
 			{
 				north++;
 				east++;
-				if(this.boardSetup[north][east] != null)
+				if (this.boardSetup[north][east] != null)
 				{
 					System.out.println("Piece is in the path of movement");
 					return false;
 				}
 
 			}
-			return true;
+
+			north = initialFile;
+			east = initialRank;
+			// moving South west
+			for (int i = 0; i < movement; i++)
+			{
+				north--;
+				east--;
+
+				if (this.boardSetup[north][east] != null)
+				{
+					System.out.println("Piece is in the path of movement");
+					return false;
+				}
+			}
+
+			north = initialFile;
+			east = initialRank;
+			//moving north west
+			for (int i = 0; i < movement; i++)
+			{
+				north++;
+				east--;
+				if (this.boardSetup[north][east] != null)
+				{
+					System.out.println("Piece is in the path of movement");
+					return false;
+				}
+			}
+
+			north = initialFile;
+			east = initialRank;
+			//moving south east
+			for (int i = 0; i < movement; i++)
+			{
+				north--;
+				east++;
+				if (this.boardSetup[north][east] != null)
+				{
+					System.out.println("Piece is in the path of movement");
+					return false;
+				}
+
+				return true;
+			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		return false;
 	}
 
@@ -452,15 +480,15 @@ public class Board
 		defaultPieceArrangement[14] = "qdd8";
 		defaultPieceArrangement[15] = "kde8";
 		defaultPieceArrangement[16] = "pla2";
-		
+
 		//defaultPieceArrangement[17] = "plb2";
 		defaultPieceArrangement[17] = "plg4";
-		
+
 		defaultPieceArrangement[18] = "plc2";
-		
+
 		//defaultPieceArrangement[19] = "pld2";
 		defaultPieceArrangement[19] = "plc4";
-		
+
 		defaultPieceArrangement[20] = "ple2";
 		defaultPieceArrangement[21] = "plf2";
 		defaultPieceArrangement[22] = "plg2";
@@ -471,10 +499,10 @@ public class Board
 		defaultPieceArrangement[27] = "nlg1";
 		defaultPieceArrangement[28] = "blc1";
 		defaultPieceArrangement[29] = "blf1";
-		
+
 		//defaultPieceArrangement[30] = "qld1";
 		defaultPieceArrangement[30] = "qle4";
-		
+
 		defaultPieceArrangement[31] = "kle1";
 
 		for (int i = 0; i < defaultPieceArrangement.length; i++)

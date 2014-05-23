@@ -35,7 +35,7 @@ public abstract class Piece
 			east++;
 			if (north == newFile && east == newRank)
 			{
-				System.out.println("Moved a Queen north-east");
+				System.out.println("Moved a Piece north-east");
 				return true;
 			}
 
@@ -52,9 +52,10 @@ public abstract class Piece
 		{
 			north--;
 			east--;
+			
 			if (north == newFile && east == newRank)
 			{
-				System.out.println("Moved a Queen south-west");
+				System.out.println("Moved a Piece south-west");
 				return true;
 			}
 		}
@@ -67,7 +68,7 @@ public abstract class Piece
 			east--;
 			if (north == newFile && east == newRank)
 			{
-				System.out.println("Moved a Queen north-west");
+				System.out.println("Moved a Piece north-west");
 				return true;
 			}
 		}
@@ -81,7 +82,7 @@ public abstract class Piece
 			east++;
 			if (north == newFile && east == newRank)
 			{
-				System.out.println("Moved a Queen south-east");
+				System.out.println("Moved a Piece south-east");
 				return true;
 			}
 		}
@@ -116,32 +117,32 @@ public abstract class Piece
 
 		north = initialFile;
 		east = initialRank;
-
+		//TODO ask Professor Halladay for a getBoardSetup[][] to use for checking for pieces in the movement path
 		for (int i = initialFile; i < newFile + 1; i++)
 			if (i == newFile && initialRank == newRank)
 			{
-				System.out.println("Moved Queen up");
+				System.out.println("Moved Piece up");
 				return true;
 			}
 
 		for (int i = initialFile; i > newFile - 1; i--)
 			if (i == newFile && initialRank == newRank)
 			{
-				System.out.println("Moved Queen down");
+				System.out.println("Moved Piece down");
 				return true;
 			}
 
 		for (int i = initialRank; i < newRank + 1; i++)
 			if (i == newRank && initialFile == newFile)
 			{
-				System.out.println("Moved Queen right");
+				System.out.println("Moved Piece right");
 				return true;
 			}
 
 		for (int i = initialRank; i > newRank - 1; i--)
 			if (i == newRank && initialFile == newFile)
 			{
-				System.out.println("Moved Queen left");
+				System.out.println("Moved Piece left");
 				return true;
 			}
 
