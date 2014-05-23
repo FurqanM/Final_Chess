@@ -116,8 +116,7 @@ public class Board
 
 	public void toggleGameState()
 	{
-		if(isWhiteTurn) //if it is white's turn
-			this.setWhiteTurn(!this.isWhiteTurn());
+		this.setWhiteTurn(!this.isWhiteTurn());
 	}
 //	public boolean checkInBetween(String position)
 //	{
