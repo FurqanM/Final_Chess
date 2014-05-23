@@ -10,12 +10,12 @@ public abstract class Piece
 	{
 		this.isWhite = isWhite;
 	}
-	
+
 	public abstract boolean validateMovement(String position);
-	
+
 	public boolean moveCross(String position)
 	{
-		
+
 		// c7 c5
 		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
 		int initialFile = position.substring(1, 2).trim().charAt(0) - 49; // 7
@@ -23,17 +23,24 @@ public abstract class Piece
 		// 5 maybe *
 		int newFile = position.substring(4).trim().charAt(0) - 49;
 
+		final int END_BOARD = 8;
+		final int BEGIN_BOARD = -1;
+
 		int movement = Math.abs(newFile - initialFile);
-	
+
 		int north = initialFile;
 		int east = initialRank;
-
 
 		for (int i = 0; i < movement; i++)
 		{
 			north++;
 			east++;
-			if (north == newFile && east == newRank)
+			if (Board.getInstance().getBoardSetup()[north][east] != null)
+			{
+				System.out.println("Piece is in the path movement.");
+				return false;
+			}
+			else if (north == newFile && east == newRank)
 			{
 				System.out.println("Moved a Piece north-east");
 				return true;
@@ -52,12 +59,20 @@ public abstract class Piece
 		{
 			north--;
 			east--;
-			
-			if (north == newFile && east == newRank)
+			if ((north > BEGIN_BOARD && east > BEGIN_BOARD) && (north < END_BOARD && east < END_BOARD))
 			{
-				System.out.println("Moved a Piece south-west");
-				return true;
+				if (Board.getInstance().getBoardSetup()[north][east] != null)
+				{
+					System.out.println("Piece is in the path movement.");
+					return false;
+				}
+				else if (north == newFile && east == newRank)
+				{
+					System.out.println("Moved a Piece south-west");
+					return true;
+				}
 			}
+
 		}
 		north = initialFile;
 		east = initialRank;
@@ -66,10 +81,18 @@ public abstract class Piece
 		{
 			north++;
 			east--;
-			if (north == newFile && east == newRank)
+			if ((north > BEGIN_BOARD && east > BEGIN_BOARD) && (north < END_BOARD && east < END_BOARD))
 			{
-				System.out.println("Moved a Piece north-west");
-				return true;
+				if (Board.getInstance().getBoardSetup()[north][east] != null)
+				{
+					System.out.println("Piece is in the path movement.");
+					return false;
+				}
+				else if (north == newFile && east == newRank)
+				{
+					System.out.println("Moved a Piece north-west");
+					return true;
+				}
 			}
 		}
 
@@ -80,17 +103,25 @@ public abstract class Piece
 		{
 			north--;
 			east++;
-			if (north == newFile && east == newRank)
+			if ((north > BEGIN_BOARD && east > BEGIN_BOARD) && (north < END_BOARD && east < END_BOARD))
 			{
-				System.out.println("Moved a Piece south-east");
-				return true;
+				if (Board.getInstance().getBoardSetup()[north][east] != null)
+				{
+					System.out.println("Piece is in the path movement.");
+					return false;
+				}
+				else if (north == newFile && east == newRank)
+				{
+					System.out.println("Moved a Piece south-east");
+					return true;
+				}
 			}
 		}
 
 		System.out.println("Not a valid movement, ignoring command.");
 		return false;
 	}
-	
+
 	public boolean moveStraight(String position)
 	{
 		// c7 c5
@@ -101,10 +132,9 @@ public abstract class Piece
 		int newFile = position.substring(4).trim().charAt(0) - 49;
 
 		int movement = Math.abs(newFile - initialFile);
-	
+
 		int north = initialFile;
 		int east = initialRank;
-	
 
 		// c7 c5
 		initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
@@ -117,43 +147,56 @@ public abstract class Piece
 
 		north = initialFile;
 		east = initialRank;
-		//TODO ask Professor Halladay for a getBoardSetup[][] to use for checking for pieces in the movement path
+
 		for (int i = initialFile; i < newFile + 1; i++)
+		{
 			if (i == newFile && initialRank == newRank)
 			{
 				System.out.println("Moved Piece up");
 				return true;
 			}
+		}
 
 		for (int i = initialFile; i > newFile - 1; i--)
+		{
 			if (i == newFile && initialRank == newRank)
 			{
 				System.out.println("Moved Piece down");
 				return true;
 			}
+		}
 
 		for (int i = initialRank; i < newRank + 1; i++)
+		{
+//			if (Board.getInstance().getBoardSetup()[north][east] != null) TODO
+//			{
+//				System.out.println("Piece is in the path movement.");
+//				return false;
+//			}
 			if (i == newRank && initialFile == newFile)
 			{
 				System.out.println("Moved Piece right");
 				return true;
 			}
+		}
 
 		for (int i = initialRank; i > newRank - 1; i--)
+		{
 			if (i == newRank && initialFile == newFile)
 			{
 				System.out.println("Moved Piece left");
 				return true;
 			}
+		}
 
 		System.out.println("Not a valid movement, ignoring command.");
 		return false;
-		
+
 	}
-	
+
 	public boolean validateColor()
 	{
-		if(isWhite)
+		if (isWhite)
 			return true; //is White
 		else
 			return false; //is Black

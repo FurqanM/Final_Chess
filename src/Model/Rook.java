@@ -13,7 +13,7 @@ public class Rook extends Piece
 	@Override
 	public boolean validateMovement(String position)
 	{
-		return moveCross(position);
+		return moveStraight(position);
 	}
 
 //	@Override
