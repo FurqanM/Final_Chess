@@ -62,14 +62,15 @@ public abstract class Piece
 		{
 			north--;
 			east--;
-			if (Board.getInstance().getBoardSetup()[north][east] != null)
-			{
-				System.out.println("Piece is in the path movement.");
-				return false;
-			}
-			else if (north == newFile && east == newRank)
+
+			if (north == newFile && east == newRank)
 			{
 				System.out.println("Moved a Piece south-west");
+				if (Board.getInstance().getBoardSetup()[north][east] != null)
+				{
+					System.out.println("Piece is in the path movement.");
+					return false;
+				}
 				return true;
 			}
 
@@ -81,14 +82,15 @@ public abstract class Piece
 		{
 			north++;
 			east--;
-			if (Board.getInstance().getBoardSetup()[north][east] != null)
-			{
-				System.out.println("Piece is in the path movement.");
-				return false;
-			}
+
 			if (north == newFile && east == newRank)
 			{
 				System.out.println("Moved a Piece north-west");
+				if (Board.getInstance().getBoardSetup()[north][east] != null)
+				{
+					System.out.println("Piece is in the path movement.");
+					return false;
+				}
 				return true;
 			}
 
@@ -101,14 +103,14 @@ public abstract class Piece
 		{
 			north--;
 			east++;
-			if (Board.getInstance().getBoardSetup()[north][east] != null)
-			{
-				System.out.println("Piece is in the path movement.");
-				return false;
-			}
-			else if (north == newFile && east == newRank)
+			if (north == newFile && east == newRank)
 			{
 				System.out.println("Moved a Piece south-east");
+				if (Board.getInstance().getBoardSetup()[north][east] != null)
+				{
+					System.out.println("Piece is in the path movement.");
+					return false;
+				}
 				return true;
 			}
 
@@ -146,46 +148,67 @@ public abstract class Piece
 
 		for (int i = initialFile; i < newFile + 1; i++)
 		{
+			north++;
 			if (i == newFile && initialRank == newRank)
 			{
 				System.out.println("Moved Piece up");
-				return true;
+				if (Board.getInstance().getBoardSetup()[north][east] != null)
+				{
+					return true;
+				}
 			}
 		}
+
+		north = initialFile;
+		east = initialRank;
 
 		for (int i = initialFile; i > newFile - 1; i--)
 		{
+			north--;
 			if (i == newFile && initialRank == newRank)
 			{
 				System.out.println("Moved Piece down");
-				return true;
+				if (Board.getInstance().getBoardSetup()[north][east] != null)
+				{
+					return true;
+				}
 			}
 		}
+
+		north = initialFile;
+		east = initialRank;
 
 		for (int i = initialRank; i < newRank + 1; i++)
 		{
-//			if (Board.getInstance().getBoardSetup()[north][east] != null) TODO
-//			{
-//				System.out.println("Piece is in the path movement.");
-//				return false;
-//			}
+			east++;
 			if (i == newRank && initialFile == newFile)
 			{
+
 				System.out.println("Moved Piece right");
-				return true;
+				if (Board.getInstance().getBoardSetup()[north][east] != null)
+				{
+					return true;
+				}
 			}
 		}
+
+		north = initialFile;
+		east = initialRank;
 
 		for (int i = initialRank; i > newRank - 1; i--)
 		{
+			east--;
 			if (i == newRank && initialFile == newFile)
 			{
 				System.out.println("Moved Piece left");
-				return true;
+				if (Board.getInstance().getBoardSetup()[north][east] != null)
+				{
+					return true;
+				}
 			}
 		}
 
-		System.out.println("Not a valid movement, ignoring command.");
+		System.out.println("Not a valid movement or piece blocking path, ignoring command.");
 		return false;
 
 	}
