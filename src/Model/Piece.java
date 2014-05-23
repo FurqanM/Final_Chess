@@ -31,9 +31,75 @@ public abstract class Piece
 		int north = initialFile;
 		int east = initialRank;
 
+		//Takes the position that is larger and smaller between the 2 points and increments i by the difference
+		//of the amount and then while it is iterating it is decrementing south and west
+		//until it matches the matched position the user wants to go and then returns true if a valid move
+		//or false if invalid
+
+		north = initialFile;
+		east = initialRank;
+		for (int i = 0; i < movement; i++) //north east movement
+		{
+			north++;
+			east++;
+			if (north == newFile && east == newRank)
+			{
+				System.out.println("Moved a Piece north-east");
+				if (Board.getInstance().getBoardSetup()[north][east] != null)
+				{
+					System.out.println("Piece is in the path movement.");
+					return false;
+				}
+				return true;
+			}
+
+		}
+
+		north = initialFile;
+		east = initialRank;
+
+		for (int i = 0; i < movement; i++)
+		{
+			north--;
+			east--;
+			if (Board.getInstance().getBoardSetup()[north][east] != null)
+			{
+				System.out.println("Piece is in the path movement.");
+				return false;
+			}
+			else if (north == newFile && east == newRank)
+			{
+				System.out.println("Moved a Piece south-west");
+				return true;
+			}
+
+		}
+		north = initialFile;
+		east = initialRank;
+
 		for (int i = 0; i < movement; i++)
 		{
 			north++;
+			east--;
+			if (Board.getInstance().getBoardSetup()[north][east] != null)
+			{
+				System.out.println("Piece is in the path movement.");
+				return false;
+			}
+			if (north == newFile && east == newRank)
+			{
+				System.out.println("Moved a Piece north-west");
+				return true;
+			}
+
+		}
+
+		north = initialFile;
+		east = initialRank;
+
+		for (int i = 0; i < movement; i++)
+		{
+			north--;
 			east++;
 			if (Board.getInstance().getBoardSetup()[north][east] != null)
 			{
@@ -42,80 +108,10 @@ public abstract class Piece
 			}
 			else if (north == newFile && east == newRank)
 			{
-				System.out.println("Moved a Piece north-east");
+				System.out.println("Moved a Piece south-east");
 				return true;
 			}
 
-		}
-
-		//Takes the position that is larger and smaller between the 2 points and increments i by the difference
-		//of the amount and then while it is iterating it is decrementing south and west
-		//until it matches the matched position the user wants to go and then returns true if a valid move
-		//or false if invalid
-		north = initialFile;
-		east = initialRank;
-
-		for (int i = 0; i < movement; i++)
-		{
-			north--;
-			east--;
-			if ((north > BEGIN_BOARD && east > BEGIN_BOARD) && (north < END_BOARD && east < END_BOARD))
-			{
-				if (Board.getInstance().getBoardSetup()[north][east] != null)
-				{
-					System.out.println("Piece is in the path movement.");
-					return false;
-				}
-				else if (north == newFile && east == newRank)
-				{
-					System.out.println("Moved a Piece south-west");
-					return true;
-				}
-			}
-
-		}
-		north = initialFile;
-		east = initialRank;
-
-		for (int i = 0; i < movement; i++)
-		{
-			north++;
-			east--;
-			if ((north > BEGIN_BOARD && east > BEGIN_BOARD) && (north < END_BOARD && east < END_BOARD))
-			{
-				if (Board.getInstance().getBoardSetup()[north][east] != null)
-				{
-					System.out.println("Piece is in the path movement.");
-					return false;
-				}
-				else if (north == newFile && east == newRank)
-				{
-					System.out.println("Moved a Piece north-west");
-					return true;
-				}
-			}
-		}
-
-		north = initialFile;
-		east = initialRank;
-
-		for (int i = 0; i < movement; i++)
-		{
-			north--;
-			east++;
-			if ((north > BEGIN_BOARD && east > BEGIN_BOARD) && (north < END_BOARD && east < END_BOARD))
-			{
-				if (Board.getInstance().getBoardSetup()[north][east] != null)
-				{
-					System.out.println("Piece is in the path movement.");
-					return false;
-				}
-				else if (north == newFile && east == newRank)
-				{
-					System.out.println("Moved a Piece south-east");
-					return true;
-				}
-			}
 		}
 
 		System.out.println("Not a valid movement, ignoring command.");
