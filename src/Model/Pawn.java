@@ -2,6 +2,11 @@ package Model;
 
 import Controller.Board;
 
+/*
+ * This class will be responsible for this piece movement and overriding its methods to move and behave like how it should.
+ * All of the handling and checking for the movement is done within this class (or Super class if validateMove method is invoked polymorphically.
+ */
+
 public class Pawn extends Piece
 {
 
@@ -33,7 +38,7 @@ public class Pawn extends Piece
 			{
 				if ((newRank == initialRank) && (newFile == initialFile + 2))
 				{
-					System.out.println("Moved a White Pawn up 2");
+					System.out.println("Moved a White Pawn up 2"); //TODO set a boolean flag setting that the pawn has moved for White and Black
 					return true;
 				}
 			}

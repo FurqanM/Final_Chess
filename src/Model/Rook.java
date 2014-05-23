@@ -2,6 +2,12 @@ package Model;
 
 import Controller.Board;
 
+
+/*
+ * This class will be responsible for this piece movement and overriding its methods to move and behave like how it should.
+ * All of the handling and checking for the movement is done within this class (or Super class if validateMove method is invoked polymorphically.
+ */
+
 public class Rook extends Piece
 {
 
