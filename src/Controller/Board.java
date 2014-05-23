@@ -121,29 +121,76 @@ public class Board
 		// 5 maybe *
 		int newFile = position.substring(4).trim().charAt(0) - 49;
 
-		int diffFile = Math.abs(newFile - initialFile); //difference of squares in between newFile and initialFile
-		//int diffRank = Math.abs(newRank - initialRank); //difference of squares in between newRank and initialRank
+		int diffFile = Math.abs((newFile) - (initialFile)); //difference of squares in between newFile and initialFile
+		int diffRank = Math.abs((newRank) - (initialRank)); //difference of squares in between newRank and initialRank
 
-		int greaterSquare = 0;
-		int smallerSquare = 0;
+		int greaterY = 0;
+		int smallerY = 0;
+		
+		int greaterX = 0;
+		int smallerX = 0;
+		
 
 		if (initialFile < newFile)
 		{
-			greaterSquare = newFile;
-			smallerSquare = initialFile;
+			greaterY = newFile;
+			smallerY = initialFile;
 		}
 		else
 		{
-			greaterSquare = initialFile;
-			smallerSquare = newFile;
+			greaterY = initialFile;
+			smallerY = newFile;
 		}
-
-		for (int j = greaterSquare + 1; j > (greaterSquare - diffFile); j--)
+		
+		if(initialRank < newRank)
 		{
-			if (this.boardSetup[j][newRank] == null) // if there is an empty space here
-				return true; //true means empty space
+			greaterX = newRank;
+			smallerX = initialRank;
 		}
-		return false; // piece is there
+		else
+		{
+			greaterX = initialRank;
+			smallerX = newRank;
+		}
+		
+		
+		
+		
+		//Moving right
+		if(initialFile == newFile) //on the same X value
+		{
+			for(int i = greaterX - 1; i > smallerX; i--)
+			{
+				if(this.boardSetup[newFile][i] != null) //if there is a piece here
+				{
+					System.out.println("Piece is in the path of movement.");
+					return false; //false means there is a piece here     
+				}
+				
+			}
+			return true; //piece not there
+		}
+		
+		
+		
+		//moving Left
+		if(initialFile == newFile)
+		{
+			for(int i = greaterX; i < (greaterX - diffRank); i++)
+			{
+				if(this.boardSetup[newFile][i] != null) //if there is a piece here
+				{
+					System.out.println("Piece is in the path of movement.");
+					return false; //false means there is a piece here
+				}
+				
+			}
+			return true; //piece not there
+		}
+		
+		
+		
+		return false;
 	}
 
 	public void movePiece(String moveBoardPosition)
@@ -171,8 +218,6 @@ public class Board
 							this.boardSetup[initialFile][initialRank] = null;
 							System.out.println("\t\t\t\t\t\t\t" + " Moves piece from " + moveBoardPosition.substring(0, 2).trim() + " to " + moveBoardPosition.substring(3, 5).trim());
 						}
-						else
-							System.out.println("A piece is blocking the path. Ignoring command");
 					}
 				}
 				catch (NullPointerException e)
@@ -362,9 +407,15 @@ public class Board
 		defaultPieceArrangement[14] = "qdd8";
 		defaultPieceArrangement[15] = "kde8";
 		defaultPieceArrangement[16] = "pla2";
-		defaultPieceArrangement[17] = "plb2";
+		
+		//defaultPieceArrangement[17] = "plb2";
+		defaultPieceArrangement[17] = "plg4";
+		
 		defaultPieceArrangement[18] = "plc2";
-		defaultPieceArrangement[19] = "pld2";
+		
+		//defaultPieceArrangement[19] = "pld2";
+		defaultPieceArrangement[19] = "plc4";
+		
 		defaultPieceArrangement[20] = "ple2";
 		defaultPieceArrangement[21] = "plf2";
 		defaultPieceArrangement[22] = "plg2";
@@ -375,7 +426,10 @@ public class Board
 		defaultPieceArrangement[27] = "nlg1";
 		defaultPieceArrangement[28] = "blc1";
 		defaultPieceArrangement[29] = "blf1";
-		defaultPieceArrangement[30] = "qld1";
+		
+		//defaultPieceArrangement[30] = "qld1";
+		defaultPieceArrangement[30] = "qle4";
+		
 		defaultPieceArrangement[31] = "kle1";
 
 		for (int i = 0; i < defaultPieceArrangement.length; i++)
