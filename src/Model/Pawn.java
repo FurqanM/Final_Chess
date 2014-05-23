@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.Board;
+
 public class Pawn extends Piece
 {
 
@@ -27,6 +29,15 @@ public class Pawn extends Piece
 				System.out.println("Moved a White Pawn");
 				return true;
 			}
+			else if(initialFile == 1)
+			{
+				if ((newRank == initialRank) && (newFile == initialFile + 2))
+				{
+					System.out.println("Moved a White Pawn up 2");
+					return true;
+				}
+			}
+				
 			else
 			{
 				System.out.println("Not a valid movement, ignoring command.");
@@ -42,6 +53,14 @@ public class Pawn extends Piece
 				System.out.println("Moved a Black Pawn");
 				return true;
 			}
+			else if(initialFile == 6)
+			{
+				if ((newRank == initialRank) && (newFile == initialFile - 2))
+				{
+					System.out.println("Moved a White Pawn up 2");
+					return true;
+				}
+			}
 			else
 			{
 				System.out.println("Not a valid movement, ignoring command.");
@@ -49,6 +68,7 @@ public class Pawn extends Piece
 			}
 
 		}
+		return false;
 
 	}
 

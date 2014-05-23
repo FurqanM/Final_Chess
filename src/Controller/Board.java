@@ -120,7 +120,7 @@ public class Board
 	}
 //	public boolean checkInBetween(String position)
 //	{
-//		//TODO DO THE CHECKING WHILE THE PIECE IS MOVING
+//		
 //
 //		// c7 c5
 //		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
@@ -530,15 +530,9 @@ public class Board
 		defaultPieceArrangement[14] = "qdd8";
 		defaultPieceArrangement[15] = "kde8";
 		defaultPieceArrangement[16] = "pla2";
-
-		//defaultPieceArrangement[17] = "plb2";
-		defaultPieceArrangement[17] = "plg4";
-
+		defaultPieceArrangement[17] = "plb2";
 		defaultPieceArrangement[18] = "plc2";
-
-		//defaultPieceArrangement[19] = "pld2";
-		defaultPieceArrangement[19] = "plc4";
-
+		defaultPieceArrangement[19] = "pld2";
 		defaultPieceArrangement[20] = "ple2";
 		defaultPieceArrangement[21] = "plf2";
 		defaultPieceArrangement[22] = "plg2";
@@ -549,10 +543,7 @@ public class Board
 		defaultPieceArrangement[27] = "nlg1";
 		defaultPieceArrangement[28] = "blc1";
 		defaultPieceArrangement[29] = "blf1";
-
-		//defaultPieceArrangement[30] = "qld1";
-		defaultPieceArrangement[30] = "qle4";
-
+		defaultPieceArrangement[30] = "qld1";
 		defaultPieceArrangement[31] = "kle1";
 
 		for (int i = 0; i < defaultPieceArrangement.length; i++)
