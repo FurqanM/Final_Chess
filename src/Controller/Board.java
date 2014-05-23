@@ -114,6 +114,8 @@ public class Board
 
 	public boolean checkInBetween(String position)
 	{
+		//TODO DO THE CHECKING WHILE THE PIECE IS MOVING
+		
 		// c7 c5
 		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
 		int initialFile = position.substring(1, 2).trim().charAt(0) - 49; // 7
@@ -124,6 +126,10 @@ public class Board
 		int diffFile = Math.abs((newFile) - (initialFile)); //difference of squares in between newFile and initialFile
 		int diffRank = Math.abs((newRank) - (initialRank)); //difference of squares in between newRank and initialRank
 
+		int movement = Math.abs(newFile - initialFile);
+		int north = initialFile;
+		int east = initialRank;
+		
 		int greaterY = 0;
 		int smallerY = 0;
 		
@@ -156,37 +162,76 @@ public class Board
 		
 		
 		
-		//Moving right
-		if(initialFile == newFile) //on the same X value
+//		for (int i = initialFile; i < newFile + 1; i++)
+//			if (i == newFile && initialRank == newRank)
+//			{
+//				System.out.println("Moved Queen up");
+//				return true;
+//			}
+		
+//		if (initialFile == newFile || initialRank == newRank)
+//		{
+//			return moveStraight(position);
+//		}
+		
+		
+		if(initialFile == newFile || initialRank == newRank)
 		{
-			for(int i = greaterX - 1; i > smallerX; i--)
+			//Moving right or left
+			if(initialFile == newFile) //on the same X value
 			{
-				if(this.boardSetup[newFile][i] != null) //if there is a piece here
+				for(int i = greaterX - 1; i > smallerX; i--) //-1 to account for 0 base numeric system
 				{
-					System.out.println("Piece is in the path of movement.");
-					return false; //false means there is a piece here     
+					if(this.boardSetup[newFile][i] != null) //if there is a piece here
+					{
+						System.out.println("Piece is in the path of movement.");
+						return false; //false means there is a piece here     
+					}
+					
 				}
-				
+				return true; //piece not there
 			}
-			return true; //piece not there
+			
+			//Moving Up or Down
+			else if(initialRank == newRank) //on the same Y value
+			{
+				for(int i = greaterY - 1; i > smallerY; i--) //-1 to account for 0 base numeric system
+				{
+					if(this.boardSetup[i][newRank] != null) //if there is a piece here
+					{
+						System.out.println("Piece is in the path of movement.");
+						return false; //false means there is a piece here     
+					}
+					
+				}
+				return true; //piece not there
+			}
+		}
+		else
+		{
+			//moving North east
+			for (int i = 0; i < movement; i++)
+			{
+				north++;
+				east++;
+				if(this.boardSetup[north][east] != null)
+				{
+					System.out.println("Piece is in the path of movement");
+					return false;
+				}
+
+			}
+			return true;
 		}
 		
 		
 		
-		//moving Left
-		if(initialFile == newFile)
-		{
-			for(int i = greaterX; i < (greaterX - diffRank); i++)
-			{
-				if(this.boardSetup[newFile][i] != null) //if there is a piece here
-				{
-					System.out.println("Piece is in the path of movement.");
-					return false; //false means there is a piece here
-				}
-				
-			}
-			return true; //piece not there
-		}
+		
+		
+		
+		
+		
+		
 		
 		
 		
