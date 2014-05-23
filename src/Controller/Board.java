@@ -31,6 +31,7 @@ public class Board
 	// ^(([a-h][1-8])\\s*([a-h][1-8])(\\*?))|([qkbprn][dl][a-h][1-8])$
 	// ^([qkbprn][dl][a-h][1-8])|((([a-h][1-8])\s*([a-h][1-8])(\*?))|([a-h][1-8])\s*([a-h][1-8])(\*?)\s*([a-h][1-8])\s*([a-h][1-8]))$
 	// complete Castling OR
+	
 
 	public final String CHESS_PATTERN = "^([qkbprn][dl][a-h][1-8])|((([a-h][1-8])\\s*([a-h][1-8])(\\*?))|([a-h][1-8])\\s*([a-h][1-8])(\\*?)\\s*([a-h][1-8])\\s*([a-h][1-8]))$";
 
@@ -53,6 +54,7 @@ public class Board
 	private Piece[][] boardSetup;
 	private final int BOARD_FILE = 8;
 	private final int BOARD_RANK = 8;
+	private boolean isWhiteTurn = true;
 
 	private static Board instance = null;
 
@@ -112,6 +114,11 @@ public class Board
 		}
 	}
 
+	public void toggleGameState()
+	{
+		if(isWhiteTurn) //if it is white's turn
+			this.setWhiteTurn(!this.isWhiteTurn());
+	}
 //	public boolean checkInBetween(String position)
 //	{
 //		//TODO DO THE CHECKING WHILE THE PIECE IS MOVING
@@ -311,9 +318,19 @@ public class Board
 				{
 					if (this.boardSetup[initialFile][initialRank].validateMovement(moveBoardPosition))
 					{
-						this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
-						this.boardSetup[initialFile][initialRank] = null;
-						System.out.println("\t\t\t\t\t\t\t" + " Moves piece from " + moveBoardPosition.substring(0, 2).trim() + " to " + moveBoardPosition.substring(3, 5).trim());
+						
+						if((this.boardSetup[initialFile][initialRank].isWhite() && this.isWhiteTurn())   ||   (!this.boardSetup[initialFile][initialRank].isWhite() && !this.isWhiteTurn()))
+						{
+							toggleGameState();
+							this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
+							this.boardSetup[initialFile][initialRank] = null;
+							System.out.println("\t\t\t\t\t\t\t" + " Moves piece from " + moveBoardPosition.substring(0, 2).trim() + " to " + moveBoardPosition.substring(3, 5).trim());
+						}
+						else
+						{
+							System.out.println("Nice try! It's not your turn!");
+						}
+						
 					
 					}
 				}
@@ -478,6 +495,16 @@ public class Board
 		{
 		}
 
+	}
+
+	public boolean isWhiteTurn()
+	{
+		return isWhiteTurn;
+	}
+
+	public void setWhiteTurn(boolean isWhiteTurn)
+	{
+		this.isWhiteTurn = isWhiteTurn;
 	}
 
 	// TODO add a create new .txt file and writes all

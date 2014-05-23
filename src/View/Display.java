@@ -38,6 +38,7 @@ public class Display
 					System.out.println("Choose the piece you'd like to move example: (B2 B3)");
 					System.out.println(" or (B2 C3*) to capture piece.");
 					System.out.println(" or (E1 G1 H1 F1 ) to castle");
+					System.out.println("It is " + ((Board.getInstance().isWhiteTurn()) ? "Light's " : "Dark's ") + "turn");
 
 					moveCommand = input.nextLine().toLowerCase();
 					if(moveCommand.length() == 4)
