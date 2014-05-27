@@ -38,32 +38,28 @@ public abstract class Piece
 		//until it matches the matched position the user wants to go and then returns true if a valid move
 		//or false if invalid
 
-		north = initialFile;
-		east = initialRank;
-		for (int i = 0; i < movement; i++) //north east movement
-		{
-			north++;
-			east++;
-			if (north == newFile && east == newRank)
-			{
-				System.out.println("Moved a Piece north-east");
-				if (Board.getInstance().getBoardSetup()[north][east] != null)
-				{
-					System.out.println("Piece is in the path movement.");
-					return false;
-				}
-				return true;
-			}
 
-		}
+		if (hasValidMove(initialRank, initialFile, newRank, newFile, movement, 1, 1) ||
+			hasValidMove(initialRank, initialFile, newRank, newFile, movement, -1, -1) ||
+			hasValidMove(initialRank, initialFile, newRank, newFile, movement, 1, -1) ||
+			hasValidMove(initialRank, initialFile, newRank, newFile, movement, -1, 1))
+			return true;
 
+		System.out.println("Not a valid movement, ignoring command.");
+		return false;
+	}
+
+	private boolean hasValidMove(int initialRank, int initialFile, int newRank, int newFile, int movement, int verticalMovement, int horzMovement)
+	{
+		int north;
+		int east;
 		north = initialFile;
 		east = initialRank;
 
 		for (int i = 0; i < movement; i++)
 		{
-			north--;
-			east--;
+			north += verticalMovement;
+			east += horzMovement;
 
 			if (north == newFile && east == newRank)
 			{
@@ -77,49 +73,8 @@ public abstract class Piece
 			}
 
 		}
-		north = initialFile;
-		east = initialRank;
-
-		for (int i = 0; i < movement; i++)
-		{
-			north++;
-			east--;
-
-			if (north == newFile && east == newRank)
-			{
-				System.out.println("Moved a Piece north-west");
-				if (Board.getInstance().getBoardSetup()[north][east] != null)
-				{
-					System.out.println("Piece is in the path movement.");
-					return false;
-				}
-				return true;
-			}
-
-		}
-
-		north = initialFile;
-		east = initialRank;
-
-		for (int i = 0; i < movement; i++)
-		{
-			north--;
-			east++;
-			if (north == newFile && east == newRank)
-			{
-				System.out.println("Moved a Piece south-east");
-				if (Board.getInstance().getBoardSetup()[north][east] != null)
-				{
-					System.out.println("Piece is in the path movement.");
-					return false;
-				}
-				return true;
-			}
-
-		}
-
-		System.out.println("Not a valid movement, ignoring command.");
-		return false;
+		
+		return true;
 	}
 
 	//Movement across method takes care of moving cross for rook and the queen
@@ -139,7 +94,7 @@ public abstract class Piece
 		int east = initialRank;
 
 		// c7 c5
-		initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
+		initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 'a'; // c
 		initialFile = position.substring(1, 2).trim().charAt(0) - 49; // 7
 		newRank = position.substring(3, 4).trim().toLowerCase().charAt(0) - 97; // c
 		// 5 maybe *
@@ -218,7 +173,7 @@ public abstract class Piece
 	}
 
 	// validating the color for turn taking, is white or is black
-	public boolean validateColor()
+	public boolean validateColor() //?
 	{
 		if (isWhite)
 			return true; //is White
@@ -242,7 +197,7 @@ public abstract class Piece
 	{
 		String name = "" + this.getClass().getCanonicalName();
 
-		return (this.isWhite == true) ? name.substring(6, 7).toUpperCase() : name.substring(6, 7).toLowerCase();
+		return (this.isWhite) ? name.substring(6, 7).toUpperCase() : name.substring(6, 7).toLowerCase();
 	}
 
 }

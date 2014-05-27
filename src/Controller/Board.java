@@ -55,6 +55,8 @@ public class Board
 	private final int BOARD_FILE = 8;
 	private final int BOARD_RANK = 8;
 	private boolean isWhiteTurn = true;
+	private String lightKingPosition;
+	private String darkKingPosition;
 
 	private static Board instance = null;
 
@@ -137,13 +139,17 @@ public class Board
 
 			// 5 maybe *
 			int newFile = moveBoardPosition.substring(4).trim().charAt(0) - 49;
-			if (this.boardSetup[newFile][newRank] == null)
+			
+//if(!this.boardSetup[newFile][newRank].isWhite() && !this.boardSetup[newFile][newRank] == getKingPosition())
+			
+			if (this.boardSetup[newFile][newRank] == null) //if there is no piece at this location
 			{
 				try
 				{
 					if (this.boardSetup[initialFile][initialRank].validateMovement(moveBoardPosition))
 					{
-						
+						//if the piece at initialFile and initialRank is white and if it's white's turn then allow the player to move
+						//or if the piece at that position is black and if it's black's turn then allow the player to move
 						if((this.boardSetup[initialFile][initialRank].isWhite() && this.isWhiteTurn())   ||   (!this.boardSetup[initialFile][initialRank].isWhite() && !this.isWhiteTurn()))
 						{
 							toggleGameState();
@@ -176,7 +182,7 @@ public class Board
 		String piece = position.substring(0, 2).trim().toLowerCase(); // pl
 
 		int initialRank = position.substring(2, 3).trim().toLowerCase().charAt(0) - 97; // e
-		int initialFile = position.substring(3).trim().charAt(0) - 49; // 4
+		int initialFile = position.substring(3).trim().toLowerCase().charAt(0) - 49; // 4
 
 		boolean isWhite = (piece.substring(1, 2).toLowerCase().equals("l"));
 
@@ -185,23 +191,22 @@ public class Board
 		{
 		case "q":
 			newPiece = new Queen(isWhite);
-
 			break;
 		case "k":
 			newPiece = new King(isWhite);
-
+			if(newPiece.isWhite())
+				this.setLightKingPosition(position.substring(2, 3).trim().toLowerCase() + position.substring(3).trim().toLowerCase()); //this is setting the position of the LightKing to track
+			else
+				this.setDarkKingPosition(position.substring(2, 3).trim().toLowerCase() + position.substring(3).trim().toLowerCase()); //this is setting the position of the DarkKing to track
 			break;
 		case "r":
 			newPiece = new Rook(isWhite);
-
 			break;
 		case "b":
 			newPiece = new Bishop(isWhite);
-
 			break;
 		case "p":
 			newPiece = new Pawn(isWhite);
-
 			break;
 		case "n":
 			newPiece = new Knight(isWhite);
@@ -384,6 +389,26 @@ public class Board
 		{
 			placePiece(defaultPieceArrangement[i]);
 		}
+	}
+
+	public String getDarkKingPosition()
+	{
+		return darkKingPosition;
+	}
+
+	public void setDarkKingPosition(String darkKingPosition)
+	{
+		this.darkKingPosition = darkKingPosition;
+	}
+
+	public String getLightKingPosition()
+	{
+		return lightKingPosition;
+	}
+
+	public void setLightKingPosition(String lightKingPosition)
+	{
+		this.lightKingPosition = lightKingPosition;
 	}
 
 	public long getUpdateTimer()
