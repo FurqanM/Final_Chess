@@ -13,6 +13,8 @@ public abstract class Piece
 
 	public abstract boolean validateMovement(String position);
 
+	//Movement across method takes care of moving cross for bishops and the queen
+	//the movement method is invoked polymorphically for each class
 	public boolean moveCross(String position)
 	{
 
@@ -120,6 +122,8 @@ public abstract class Piece
 		return false;
 	}
 
+	//Movement across method takes care of moving cross for rook and the queen
+	//the movement method is invoked polymorphically for each class
 	public boolean moveStraight(String position)
 	{
 		// c7 c5
@@ -213,6 +217,7 @@ public abstract class Piece
 
 	}
 
+	// validating the color for turn taking, is white or is black
 	public boolean validateColor()
 	{
 		if (isWhite)
@@ -231,6 +236,7 @@ public abstract class Piece
 		this.isWhite = isWhite;
 	}
 
+	//This method overrides the toString to concatonate the piece name to the display to print out what piece it is
 	@Override
 	public String toString()
 	{

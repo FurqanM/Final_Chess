@@ -118,180 +118,6 @@ public class Board
 	{
 		this.setWhiteTurn(!this.isWhiteTurn());
 	}
-//	public boolean checkInBetween(String position)
-//	{
-//		
-//
-//		// c7 c5
-//		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
-//		int initialFile = position.substring(1, 2).trim().charAt(0) - 49; // 7
-//		int newRank = position.substring(3, 4).trim().toLowerCase().charAt(0) - 97; // c
-//		// 5 maybe *
-//		int newFile = position.substring(4).trim().charAt(0) - 49;
-//
-//		int diffFile = Math.abs((newFile) - (initialFile)); //difference of squares in between newFile and initialFile
-//		int diffRank = Math.abs((newRank) - (initialRank)); //difference of squares in between newRank and initialRank
-//
-//		final int END_BOARD = 8;
-//		final int BEGIN_BOARD = -1;
-//
-//		int movement = Math.abs(newFile - initialFile);
-//		int north = initialFile;
-//		int east = initialRank;
-//
-//		int greaterY = 0;
-//		int smallerY = 0;
-//
-//		int greaterX = 0;
-//		int smallerX = 0;
-//
-//		if (initialFile < newFile)
-//		{
-//			greaterY = newFile;
-//			smallerY = initialFile;
-//		}
-//		else
-//		{
-//			greaterY = initialFile;
-//			smallerY = newFile;
-//		}
-//
-//		if (initialRank < newRank)
-//		{
-//			greaterX = newRank;
-//			smallerX = initialRank;
-//		}
-//		else
-//		{
-//			greaterX = initialRank;
-//			smallerX = newRank;
-//		}
-//
-//		//		for (int i = initialFile; i < newFile + 1; i++)
-//		//			if (i == newFile && initialRank == newRank)
-//		//			{
-//		//				System.out.println("Moved Queen up");
-//		//				return true;
-//		//			}
-//
-//		//		if (initialFile == newFile || initialRank == newRank)
-//		//		{
-//		//			return moveStraight(position);
-//		//		}
-//
-//		if (initialFile == newFile || initialRank == newRank)
-//		{
-//			//Moving right or left
-//			if (initialFile == newFile) //on the same X value
-//			{
-//				for (int i = greaterX - 1; i > smallerX; i--) //-1 to account for 0 base numeric system
-//				{
-//					if (this.boardSetup[newFile][i] != null) //if there is a piece here
-//					{
-//						System.out.println("Piece is in the path of movement.");
-//						return false; //false means there is a piece here     
-//					}
-//
-//				}
-//				return true; //piece not there
-//			}
-//
-//			//Moving Up or Down
-//			else if (initialRank == newRank) //on the same Y value
-//			{
-//				for (int i = greaterY - 1; i > smallerY; i--) //-1 to account for 0 base numeric system
-//				{
-//					if (this.boardSetup[i][newRank] != null) //if there is a piece here
-//					{
-//						System.out.println("Piece is in the path of movement.");
-//						return false; //false means there is a piece here     
-//					}
-//
-//				}
-//				return true; //piece not there
-//			}
-//		}
-//		else
-//		{
-//			north = initialFile;
-//			east = initialRank;
-//			//moving North east
-//			for (int i = 0; i < movement; i++)
-//			{
-//				north++;
-//				east++;
-//				if ((north > BEGIN_BOARD && east > BEGIN_BOARD) && (north < END_BOARD && east < END_BOARD))
-//				{
-//					if (this.boardSetup[north][east] != null)
-//					{
-//						System.out.println("Piece is in the path of movement");
-//						return false;
-//					}
-//				}
-//			}
-//
-//			north = initialFile;
-//			east = initialRank;
-//			// moving South west
-//
-//			for (int i = 0; i < movement; i++)
-//			{
-//				north--;
-//				east--;
-//				if ((north > BEGIN_BOARD && east > BEGIN_BOARD) && (north < END_BOARD && east < END_BOARD))
-//				{
-//						if (this.boardSetup[north][east] != null)
-//						{
-//							System.out.println("Piece is in the path of movement");
-//							return false;
-//						}
-//					
-//
-//				}
-//			}
-//
-//			north = initialFile;
-//			east = initialRank;
-//			//moving north west
-//
-//			for (int i = 0; i < movement; i++)
-//			{
-//				north++;
-//				east--;
-//				if ((north > BEGIN_BOARD && east > BEGIN_BOARD) && (north < END_BOARD && east < END_BOARD))
-//				{
-//					if (this.boardSetup[north][east] != null)
-//					{
-//						System.out.println("Piece is in the path of movement");
-//						return false;
-//					}
-//				}
-//			}
-//
-//			north = initialFile;
-//			east = initialRank;
-//			//moving south east
-//
-//			for (int i = 0; i < movement; i++)
-//			{
-//				north--;
-//				east++;
-//				if ((north > BEGIN_BOARD && east > BEGIN_BOARD) && (north < END_BOARD && east < END_BOARD))
-//				{
-//					if (this.boardSetup[north][east] != null)
-//					{
-//						System.out.println("Piece is in the path of movement");
-//						return false;
-//					}
-//
-//				}
-//			}
-//
-//			return true;
-//		}
-//		return false;
-//
-//	}
 
 	public Piece[][] getBoardSetup()
 	{
@@ -437,7 +263,7 @@ public class Board
 						//returns the CastlingType
 						//Throws IllegalMoveException if castling move is not valid.
 
-						//castling rules:
+						//castling rules: TODO
 						//The king and the chosen rook are on the player's first rank.
 						//Neither the king nor the chosen rook have previously moved.
 						//There are no pieces between the king and the chosen rook.
@@ -457,11 +283,14 @@ public class Board
 		{
 			e.printStackTrace();
 		}
+		
+		this.draw();
 	}
 
 	public void killPiece(String moveBoardPosition)
 	{
-		// TODO make a stringBuilder to account for 2 spaces in between 
+		// TODO make a stringBuilder to account for 2 spaces in between
+		// or fix regex to not allow spaces
 		if (moveBoardPosition.length() == 6)
 		{
 
