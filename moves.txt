@@ -30,9 +30,7 @@ blc1
 blf1
 qld1
 kle1
-e2 e3
-f7 f6
-e3 e4
-f6 f5
-f5 g5
-e4 f5*
+d2 d3
+d7 d5
+c1 e3
+g8 h6

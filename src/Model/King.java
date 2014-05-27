@@ -8,6 +8,8 @@ package Model;
 
 public class King extends Piece
 {
+	
+	boolean inCheck = false;
 
 	public King(boolean isWhite)
 	{
@@ -81,6 +83,16 @@ public class King extends Piece
 		}
 
 		
+	}
+
+	public boolean isInCheck()
+	{
+		return inCheck;
+	}
+
+	public void setInCheck(boolean inCheck)
+	{
+		this.inCheck = inCheck;
 	}
 	
 	

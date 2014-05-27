@@ -1,7 +1,5 @@
 package Model;
 
-import Controller.Board;
-
 
 /*
  * This class will be responsible for this piece movement and overriding its methods to move and behave like how it should.

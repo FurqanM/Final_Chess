@@ -354,10 +354,10 @@ public class Board
 		defaultPieceArrangement[9] = "rdh8";
 		defaultPieceArrangement[10] = "ndb8";
 		defaultPieceArrangement[11] = "ndg8";
-		defaultPieceArrangement[12] = "bdc8";
+		//defaultPieceArrangement[12] = "bdc8";
 		defaultPieceArrangement[13] = "bdf8";
 		defaultPieceArrangement[14] = "qdd8";
-		defaultPieceArrangement[15] = "kde8";
+		//defaultPieceArrangement[15] = "kde8";
 		defaultPieceArrangement[16] = "pla2";
 		defaultPieceArrangement[17] = "plb2";
 		defaultPieceArrangement[18] = "plc2";
@@ -372,8 +372,13 @@ public class Board
 		defaultPieceArrangement[27] = "nlg1";
 		defaultPieceArrangement[28] = "blc1";
 		defaultPieceArrangement[29] = "blf1";
-		defaultPieceArrangement[30] = "qld1";
-		defaultPieceArrangement[31] = "kle1";
+		//defaultPieceArrangement[30] = "qld1";
+		//defaultPieceArrangement[31] = "kle1";
+		
+		defaultPieceArrangement[12] = "bdh6";
+		defaultPieceArrangement[15] = "klf4";
+		defaultPieceArrangement[30] = "kde6";
+		defaultPieceArrangement[31] = "qla5";
 
 		for (int i = 0; i < defaultPieceArrangement.length; i++)
 		{
