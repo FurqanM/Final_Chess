@@ -1,14 +1,13 @@
 package Model;
 
-
 /*
- * This class will be responsible for this piece movement and overriding its methods to move and behave like how it should.
- * All of the handling and checking for the movement is done within this class (or Super class if validateMove method is invoked polymorphically.
+ * This class will be responsible for this piece movement and overriding its methods to move and behave like how it should. All of the handling and checking for the movement is done within this class
+ * (or Super class if validateMove method is invoked polymorphically.
  */
 
 public class King extends Piece
 {
-	
+
 	boolean inCheck = false;
 
 	public King(boolean isWhite)
@@ -27,53 +26,25 @@ public class King extends Piece
 		// 5 maybe *
 		int newFile = position.substring(4).trim().charAt(0) - 49;
 
-		
-		int north = initialFile;
-		int east = initialRank;
+		if (hasValidMove(initialRank, initialFile, newRank, newFile, 1, 0) || hasValidMove(initialRank, initialFile, newRank, newFile, -1, 0) || hasValidMove(initialRank, initialFile, newRank, newFile, 0, 1) || hasValidMove(initialRank, initialFile, newRank, newFile, 0, -1) || hasValidMove(initialRank, initialFile, newRank, newFile, 1, 1) || hasValidMove(initialRank, initialFile, newRank, newFile, -1, -1) || hasValidMove(initialRank, initialFile, newRank, newFile, 1, -1) || hasValidMove(initialRank, initialFile, newRank, newFile, -1, 1))
+			return true;
+		else
+			return false;
 
-		
-		//movement logic for moving in N E S W
-		if(initialRank == newRank && initialFile == north++)
+	}
+
+	private boolean hasValidMove(int initialRank, int initialFile, int newRank, int newFile, int vertMovement, int horizMovement)
+	{
+		int north;
+		int east;
+		north = initialFile;
+		east = initialRank;
+		north += vertMovement;
+		east += horizMovement;
+
+		if (newRank == east && newFile == north++)
 		{
-			System.out.println("Moved a King up");
-			return true;
-		}
-		
-		else if(initialRank == newRank && initialFile == north--)
-		{
-			System.out.println("Moved a King down");
-			return true;
-		}
-		else if(initialFile == newFile && initialRank == east++)
-		{
-			System.out.println("Moved a King right");
-			return true;
-		}
-		else if(initialFile == newFile && initialRank == east--)
-		{
-			System.out.println("Moved a King left");
-			return true;
-		}
-		
-		//Movement logic for movement in NE SE SW NW
-		else if(initialFile == north++ && initialRank == east++)
-		{
-			System.out.println("Moved a King north east");
-			return true;
-		}
-		else if(initialFile == north-- && initialRank == east++)
-		{
-			System.out.println("Moved a King south east");
-			return true;
-		}
-		else if(initialFile == north-- && initialRank == east--)
-		{
-			System.out.println("Moved a King south west");
-			return true;
-		}
-		else if(initialFile == north++ && initialRank == east--)
-		{
-			System.out.println("Moved a King north west");
+			System.out.println("Moved a King");
 			return true;
 		}
 		else
@@ -81,8 +52,6 @@ public class King extends Piece
 			System.out.println("Invalid movement, ignoring command");
 			return false;
 		}
-
-		
 	}
 
 	public boolean isInCheck()
@@ -94,9 +63,7 @@ public class King extends Piece
 	{
 		this.inCheck = inCheck;
 	}
-	
-	
-	
+
 	//move (y - 1) || (y + 1)
 	//(x + 1) || (x - 1)
 	//or ((x - 1) && (y - 1)) || (x + 1) && (y - 1)
