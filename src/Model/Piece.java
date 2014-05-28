@@ -39,6 +39,7 @@ public abstract class Piece
 			return true;
 		
 
+		System.out.println("Piece is in the path movement.");
 		System.out.println("Not a valid movement, ignoring command.");
 		return false;
 	}
@@ -57,9 +58,8 @@ public abstract class Piece
 
 			if ((north > -1 && north < 8) && (east > -1) && (north < 8)) //if the move is in the boundaries of the board
 			{
-				if (Board.getInstance().getPieceAt(north, east) != null)
+				if (Board.getInstance().getPieceAt(north, east) != null) //if there is a piece here
 				{
-					System.out.println("Piece is in the path movement.");
 					return false;
 				}
 				else if (north == newFile && east == newRank)
@@ -67,9 +67,6 @@ public abstract class Piece
 					System.out.println("Moved a Piece");
 					return true;
 				}
-			}
-			else
-			{
 			}
 
 		}
@@ -92,7 +89,7 @@ public abstract class Piece
 
 		int movement = 0;
 		int movementVert = Math.abs(newFile - initialFile);
-		int movementHoriz = Math.abs(newRank - newRank);
+		int movementHoriz = Math.abs(newRank - initialRank);
 
 		//if the movement of the piece on the X-axis is the same then that means that it moved
 		//along the Y-axis or else it moved along the X-axis

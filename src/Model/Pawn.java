@@ -35,7 +35,9 @@ public class Pawn extends Piece
 			else if (hasValidMove(initialRank, initialFile, newRank, newFile, 1, 0) || //light movement
 			hasValidMove(initialRank, initialFile, newRank, newFile, 1, 1) || //if piece to north east kill it
 			hasValidMove(initialRank, initialFile, newRank, newFile, 1, -1)) //if piece to north west kill it
+			{
 				return true;
+			}
 		}
 		else
 		{
@@ -60,7 +62,7 @@ public class Pawn extends Piece
 		
 		north += verticalMovement;
 		//if the Pawn is in the starting position of the board, then allow it to move up twice
-		if (newFile == north)
+		if (newFile == north && (Board.getInstance().getPieceAt(newFile, newRank) == null))
 		{
 			//if the x-axis is the same, if the new Y position is equal to the initial Y position + 2 then it moved up twice
 			System.out.println("Moved a Pawn twice"); //TODO set a boolean flag setting that the pawn has moved for White and Black
@@ -81,7 +83,7 @@ public class Pawn extends Piece
 		north += verticalMovement;
 		east += horizontalMovement;
 
-		if(Math.abs(verticalMovement - horizontalMovement) == 0 || Math.abs(verticalMovement - horizontalMovement) == 2)
+		if(Math.abs(verticalMovement - horizontalMovement) == 0 || Math.abs(verticalMovement - horizontalMovement) == 2) //if the pawn is not moving diagnol then check for a piece
 		{
 			if (((newFile == north && newRank == east) ||(newFile == north && newFile == east)) && 
 					Board.getInstance().getPieceAt(newFile, newRank) != null) //if moving cross and if there is a piece there
@@ -96,7 +98,6 @@ public class Pawn extends Piece
 			return true;
 		}
 
-		System.out.println("Not a valid movement, ignoring command.");
 		return false;
 	}
 

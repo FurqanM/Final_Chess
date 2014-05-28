@@ -150,7 +150,10 @@ public class Board
 						//or if the piece at that position is black and if it's black's turn then allow the player to move
 						if ((this.boardSetup[initialFile][initialRank].isWhite() && this.isWhiteTurn()) || (!this.boardSetup[initialFile][initialRank].isWhite() && !this.isWhiteTurn()))
 						{
-							//checkForCheck(initialFile, initialRank, newFile, newRank, kingString);
+//							if(checkForCheck(initialFile, initialRank, newFile, newRank, kingString))
+//							{
+//								System.out.println("King is in check");
+//							}
 							toggleGameState();
 							this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
 							this.boardSetup[initialFile][initialRank] = null;
