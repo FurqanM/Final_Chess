@@ -56,7 +56,7 @@ public abstract class Piece
 
 			if (north == newFile && east == newRank)
 			{
-				System.out.println("Moved a Piece south-west");
+				System.out.println("Moved a Piece");
 				//if (Board.getInstance().getBoardSetup()[north][east] != null)
 				if(Board.getInstance().getPieceAt(north, east) != null)
 				{
