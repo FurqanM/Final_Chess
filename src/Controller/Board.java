@@ -292,8 +292,6 @@ public class Board
 
 	public void killPiece(String moveBoardPosition)
 	{
-		// TODO make a stringBuilder to account for 2 spaces in between
-		// or fix regex to not allow spaces
 		if (moveBoardPosition.length() == 6)
 		{
 

@@ -3,8 +3,8 @@ package Model;
 import Controller.Board;
 
 /*
- * This class will be responsible for this piece movement and overriding its methods to move and behave like how it should.
- * All of the handling and checking for the movement is done within this class (or Super class if validateMove method is invoked polymorphically.
+ * This class will be responsible for this piece movement and overriding its methods to move and behave like how it should. All of the handling and checking for the movement is done within this class
+ * (or Super class if validateMove method is invoked polymorphically.
  */
 
 public class Pawn extends Piece
@@ -30,13 +30,20 @@ public class Pawn extends Piece
 		{
 			// a = 0 white
 			//if the x-axis is the same, if the new Y position is equal to the initial Y position + 1 then it moved up once
-			if ((newRank == initialRank) && (newFile == initialFile + 1)) 
+			if ((newRank == initialRank) && (newFile == initialFile + 1))
 			{
 				System.out.println("Moved a White Pawn");
 				return true;
 			}
+			else if((newFile == initialFile + 1 && newRank == initialRank + 1) || 
+					(newFile == initialFile + 1 && newFile == initialRank - 1))
+			{
+				if(Board.getInstance().getPieceAt(newFile, newRank) != null) //if moving cross and if there is a piece there
+					return true;
+			}
+			
 			//if the Pawn is in the starting position of the board, then allow it to move up twice
-			else if(initialFile == 1)
+			else if (initialFile == 1)
 			{
 				//if the x-axis is the same, if the new Y position is equal to the initial Y position + 2 then it moved up twice
 				if ((newRank == initialRank) && (newFile == initialFile + 2))
@@ -45,23 +52,25 @@ public class Pawn extends Piece
 					return true;
 				}
 			}
-				
-			else
-			{
-				System.out.println("Not a valid movement, ignoring command.");
-				return false;
-			}
+			System.out.println("Not a valid movement, ignoring command.");
+			return false;
 
 		}
 		else
 		{
 			// a = 0 black
-			if ((newRank == initialRank) && (newFile - initialFile == -1))
+			if ((newRank == initialRank) && (newFile == initialFile - 1))
 			{
 				System.out.println("Moved a Black Pawn");
 				return true;
 			}
-			else if(initialFile == 6)
+			else if((newRank == initialRank - 1 && newFile == initialFile + 1) || 
+					(newRank == initialRank - 1 && newFile == initialFile - 1))
+			{
+				if(Board.getInstance().getPieceAt(newFile, newRank) != null) //if moving cross and if there is a piece there
+					return true;
+			}
+			else if (initialFile == 6)
 			{
 				if ((newRank == initialRank) && (newFile == initialFile - 2))
 				{
@@ -69,18 +78,12 @@ public class Pawn extends Piece
 					return true;
 				}
 			}
-			else
-			{
-				System.out.println("Not a valid movement, ignoring command.");
-				return false;
-			}
+			System.out.println("Not a valid movement, ignoring command.");
+			return false;
 
 		}
-		return false;
 
 	}
-
-
 
 	// move y - 1 black Pawn
 	// or ((x - 1) && (y - 1)) || ((x + 1) && (y - 1))
