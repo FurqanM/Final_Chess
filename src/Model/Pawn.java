@@ -81,17 +81,19 @@ public class Pawn extends Piece
 		north += verticalMovement;
 		east += horizontalMovement;
 
+		if(Math.abs(verticalMovement - horizontalMovement) == 0 || Math.abs(verticalMovement - horizontalMovement) == 2)
+		{
+			if (((newFile == north && newRank == east) ||(newFile == north && newFile == east)) && 
+					Board.getInstance().getPieceAt(newFile, newRank) != null) //if moving cross and if there is a piece there
+				return true;
+		}
+		
 		// a = 0 white
 		//if the x-axis is the same, if the new Y position is equal to the initial Y position + 1 then it moved up once
-		if ((newRank == east) && (newFile == north))
+		else if ((newRank == east) && (newFile == north))
 		{
 			System.out.println("Moved a White Pawn");
 			return true;
-		}
-		else if ((newFile == north && newRank == east) || (newFile == north && newFile == east))
-		{
-			if (Board.getInstance().getPieceAt(newFile, newRank) != null) //if moving cross and if there is a piece there
-				return true;
 		}
 
 		System.out.println("Not a valid movement, ignoring command.");

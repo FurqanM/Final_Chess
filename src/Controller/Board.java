@@ -306,7 +306,7 @@ public class Board
 			// 5*
 			int newFile = moveBoardPosition.substring(4, 5).trim().charAt(0) - '1';
 
-			if (this.boardSetup[newFile][newRank] != null)
+			if (this.boardSetup[newFile][newRank] != null) //there is a piece here
 			{
 				if (this.boardSetup[initialFile][initialRank].validateMovement(moveBoardPosition))
 				{
