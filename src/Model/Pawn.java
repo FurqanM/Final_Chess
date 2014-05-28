@@ -28,61 +28,74 @@ public class Pawn extends Piece
 
 		if (isWhite)
 		{
-			// a = 0 white
-			//if the x-axis is the same, if the new Y position is equal to the initial Y position + 1 then it moved up once
-			if ((newRank == initialRank) && (newFile == initialFile + 1))
-			{
-				System.out.println("Moved a White Pawn");
-				return true;
-			}
-			else if((newFile == initialFile + 1 && newRank == initialRank + 1) || 
-					(newFile == initialFile + 1 && newFile == initialRank - 1))
-			{
-				if(Board.getInstance().getPieceAt(newFile, newRank) != null) //if moving cross and if there is a piece there
-					return true;
-			}
-			
-			//if the Pawn is in the starting position of the board, then allow it to move up twice
-			else if (initialFile == 1)
-			{
-				//if the x-axis is the same, if the new Y position is equal to the initial Y position + 2 then it moved up twice
-				if ((newRank == initialRank) && (newFile == initialFile + 2))
-				{
-					System.out.println("Moved a White Pawn up 2"); //TODO set a boolean flag setting that the pawn has moved for White and Black
-					return true;
-				}
-			}
-			System.out.println("Not a valid movement, ignoring command.");
-			return false;
 
+			if(moveTwice(initialRank, initialFile, newRank, newFile, 2) && (initialFile == 1)) // if the white pawn is where it is supposed to be to move twice
+				return true;
+
+			else if (hasValidMove(initialRank, initialFile, newRank, newFile, 1, 0) || //light movement
+			hasValidMove(initialRank, initialFile, newRank, newFile, 1, 1) || //if piece to north east kill it
+			hasValidMove(initialRank, initialFile, newRank, newFile, 1, -1)) //if piece to north west kill it
+				return true;
 		}
 		else
 		{
-			// a = 0 black
-			if ((newRank == initialRank) && (newFile == initialFile - 1))
-			{
-				System.out.println("Moved a Black Pawn");
+			
+			if(moveTwice(initialRank, initialFile, newRank, newFile, -2) && (initialFile == 6)) // if the white pawn is where it is supposed to be to move twice
 				return true;
-			}
-			else if((newRank == initialRank - 1 && newFile == initialFile + 1) || 
-					(newRank == initialRank - 1 && newFile == initialFile - 1))
-			{
-				if(Board.getInstance().getPieceAt(newFile, newRank) != null) //if moving cross and if there is a piece there
-					return true;
-			}
-			else if (initialFile == 6)
-			{
-				if ((newRank == initialRank) && (newFile == initialFile - 2))
-				{
-					System.out.println("Moved a White Pawn up 2");
-					return true;
-				}
-			}
-			System.out.println("Not a valid movement, ignoring command.");
-			return false;
-
+			
+			else if (hasValidMove(initialRank, initialFile, newRank, newFile, -1, 0) || //dark movement
+			hasValidMove(initialRank, initialFile, newRank, newFile, -1, -1) || //if piece to south west then kill it
+			hasValidMove(initialRank, initialFile, newRank, newFile, -1, 1)) //if piece to south east then kill it
+				return true;
 		}
 
+		System.out.println("Not a valid movement, ignoring command.");
+		return false;
+
+	}
+
+	private boolean moveTwice(int initialRank, int initialFile, int newRank, int newFile, int verticalMovement)
+	{
+		int north = initialFile;
+		
+		north += verticalMovement;
+		//if the Pawn is in the starting position of the board, then allow it to move up twice
+		if (newFile == north)
+		{
+			//if the x-axis is the same, if the new Y position is equal to the initial Y position + 2 then it moved up twice
+			System.out.println("Moved a Pawn twice"); //TODO set a boolean flag setting that the pawn has moved for White and Black
+			return true;
+
+		}
+		return false;
+	}
+
+	private boolean hasValidMove(int initialRank, int initialFile, int newRank, int newFile, int verticalMovement, int horizontalMovement)
+	{
+
+		int north;
+		int east;
+		north = initialFile;
+		east = initialRank;
+
+		north += verticalMovement;
+		east += horizontalMovement;
+
+		// a = 0 white
+		//if the x-axis is the same, if the new Y position is equal to the initial Y position + 1 then it moved up once
+		if ((newRank == east) && (newFile == north))
+		{
+			System.out.println("Moved a White Pawn");
+			return true;
+		}
+		else if ((newFile == north && newRank == east) || (newFile == north && newFile == east))
+		{
+			if (Board.getInstance().getPieceAt(newFile, newRank) != null) //if moving cross and if there is a piece there
+				return true;
+		}
+
+		System.out.println("Not a valid movement, ignoring command.");
+		return false;
 	}
 
 	// move y - 1 black Pawn
