@@ -31,7 +31,6 @@ public class Board
 	// ^(([a-h][1-8])\\s*([a-h][1-8])(\\*?))|([qkbprn][dl][a-h][1-8])$
 	// ^([qkbprn][dl][a-h][1-8])|((([a-h][1-8])\s*([a-h][1-8])(\*?))|([a-h][1-8])\s*([a-h][1-8])(\*?)\s*([a-h][1-8])\s*([a-h][1-8]))$
 	// complete Castling OR
-	
 
 	public final String CHESS_PATTERN = "^([qkbprn][dl][a-h][1-8])|((([a-h][1-8])\\s*([a-h][1-8])(\\*?))|([a-h][1-8])\\s*([a-h][1-8])(\\*?)\\s*([a-h][1-8])\\s*([a-h][1-8]))$";
 
@@ -139,9 +138,9 @@ public class Board
 
 			// 5 maybe *
 			int newFile = moveBoardPosition.substring(4).trim().charAt(0) - 49;
-			
-//if(!this.boardSetup[newFile][newRank].isWhite() && !this.boardSetup[newFile][newRank] == getKingPosition())
-			
+
+			//if(!this.boardSetup[newFile][newRank].isWhite() && !this.boardSetup[newFile][newRank] == getKingPosition())
+
 			if (this.boardSetup[newFile][newRank] == null) //if there is no piece at this location
 			{
 				try
@@ -150,7 +149,7 @@ public class Board
 					{
 						//if the piece at initialFile and initialRank is white and if it's white's turn then allow the player to move
 						//or if the piece at that position is black and if it's black's turn then allow the player to move
-						if((this.boardSetup[initialFile][initialRank].isWhite() && this.isWhiteTurn())   ||   (!this.boardSetup[initialFile][initialRank].isWhite() && !this.isWhiteTurn()))
+						if ((this.boardSetup[initialFile][initialRank].isWhite() && this.isWhiteTurn()) || (!this.boardSetup[initialFile][initialRank].isWhite() && !this.isWhiteTurn()))
 						{
 							toggleGameState();
 							this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
@@ -161,8 +160,7 @@ public class Board
 						{
 							System.out.println("Nice try! It's not your turn!");
 						}
-						
-					
+
 					}
 				}
 				catch (NullPointerException e)
@@ -194,7 +192,7 @@ public class Board
 			break;
 		case "k":
 			newPiece = new King(isWhite);
-			if(newPiece.isWhite())
+			if (newPiece.isWhite())
 				this.setLightKingPosition(position.substring(2, 3).trim().toLowerCase() + position.substring(3).trim().toLowerCase()); //this is setting the position of the LightKing to track
 			else
 				this.setDarkKingPosition(position.substring(2, 3).trim().toLowerCase() + position.substring(3).trim().toLowerCase()); //this is setting the position of the DarkKing to track
@@ -288,7 +286,7 @@ public class Board
 		{
 			e.printStackTrace();
 		}
-		
+
 		this.draw();
 	}
 
@@ -379,7 +377,7 @@ public class Board
 		defaultPieceArrangement[29] = "blf1";
 		//defaultPieceArrangement[30] = "qld1";
 		//defaultPieceArrangement[31] = "kle1";
-		
+
 		defaultPieceArrangement[12] = "bdh6";
 		defaultPieceArrangement[15] = "klf4";
 		defaultPieceArrangement[30] = "kde6";
