@@ -123,7 +123,7 @@ public abstract class Piece
 		this.isWhite = isWhite;
 	}
 
-	//This method overrides the toString to concatonate the piece name to the display to print out what piece it is
+	//This method overrides the toString to concatenate the piece name to the display to print out what piece it is
 	@Override
 	public String toString()
 	{

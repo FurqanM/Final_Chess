@@ -126,16 +126,17 @@ public class Board
 		if (moveBoardPosition.length() == 5)
 		{
 			// c7 c5
-			int initialRank = moveBoardPosition.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
+			int initialRank = moveBoardPosition.substring(0, 1).trim().toLowerCase().charAt(0) - 'a'; // c
 
-			int initialFile = moveBoardPosition.substring(1, 2).trim().charAt(0) - 49; // 7
+			int initialFile = moveBoardPosition.substring(1, 2).trim().charAt(0) - '1'; // 7
 
-			int newRank = moveBoardPosition.substring(3, 4).trim().toLowerCase().charAt(0) - 97; // c
+			int newRank = moveBoardPosition.substring(3, 4).trim().toLowerCase().charAt(0) - 'a'; // c
 
 			// 5 maybe *
-			int newFile = moveBoardPosition.substring(4).trim().charAt(0) - 49;
+			int newFile = moveBoardPosition.substring(4).trim().charAt(0) - '1';
 
-			//if(!this.boardSetup[newFile][newRank].isWhite() && !this.boardSetup[newFile][newRank] == getKingPosition())
+			//concatenated King position
+			String kingString = (this.isWhiteTurn()) ? moveBoardPosition.substring(0, 3).trim().toLowerCase() + " " + this.getDarkKingPosition() : moveBoardPosition.substring(0, 3).trim().toLowerCase() + " " + this.getLightKingPosition();
 
 			if (this.boardSetup[newFile][newRank] == null) //if there is no piece at this location
 			{
@@ -147,6 +148,7 @@ public class Board
 						//or if the piece at that position is black and if it's black's turn then allow the player to move
 						if ((this.boardSetup[initialFile][initialRank].isWhite() && this.isWhiteTurn()) || (!this.boardSetup[initialFile][initialRank].isWhite() && !this.isWhiteTurn()))
 						{
+							checkForCheck(initialFile, initialRank, newFile, newRank, kingString);
 							toggleGameState();
 							this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
 							this.boardSetup[initialFile][initialRank] = null;
@@ -408,8 +410,16 @@ public class Board
 	public Piece getPieceAt(int file, int rank)
 	{
 		return this.boardSetup[file][rank];
-		
 	}
+	
+	private boolean checkForCheck(int initialFile, int initialRank, int newFile, int newRank, String kingPosition)
+	{
+		if (this.boardSetup[initialFile][initialRank].validateMovement(kingPosition))
+			return true;
+		
+		return false;
+		
+	}	
 
 	public long getUpdateTimer()
 	{
