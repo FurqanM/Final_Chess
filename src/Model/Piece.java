@@ -32,11 +32,12 @@ public abstract class Piece
 		//until it matches the matched position the user wants to go and then returns true if a valid move
 		//or false if invalid
 
-		if (hasValidMove(initialRank, initialFile, newRank, newFile, movement, 1, 1) || 
-				hasValidMove(initialRank, initialFile, newRank, newFile, movement, -1, -1) || 
-				hasValidMove(initialRank, initialFile, newRank, newFile, movement, 1, -1) || 
-				hasValidMove(initialRank, initialFile, newRank, newFile, movement, -1, 1))
+		if (hasValidMove(initialRank, initialFile, newRank, newFile, movement, 1, 1) || //moving north east
+				hasValidMove(initialRank, initialFile, newRank, newFile, movement, -1, -1) || //moving south west
+				hasValidMove(initialRank, initialFile, newRank, newFile, movement, 1, -1) ||  //north west
+				hasValidMove(initialRank, initialFile, newRank, newFile, movement, -1, 1)) //south east
 			return true;
+		
 
 		System.out.println("Not a valid movement, ignoring command.");
 		return false;
@@ -49,26 +50,32 @@ public abstract class Piece
 		north = initialFile;
 		east = initialRank;
 
-		for (int i = 0; i < movement; i++)
+		for (int i = 0; i <= movement; i++)
 		{
 			north += verticalMovement;
 			east += horzMovement;
 
-			if (north == newFile && east == newRank)
+			if ((north > -1 && north < 8) && (east > -1) && (north < 8)) //if the move is in the boundaries of the board
 			{
-				System.out.println("Moved a Piece");
-				//if (Board.getInstance().getBoardSetup()[north][east] != null)
-				if(Board.getInstance().getPieceAt(north, east) != null)
+				if (Board.getInstance().getPieceAt(north, east) != null)
 				{
 					System.out.println("Piece is in the path movement.");
 					return false;
 				}
-				return true;
+				else if (north == newFile && east == newRank)
+				{
+					System.out.println("Moved a Piece");
+					//if (Board.getInstance().getBoardSetup()[north][east] != null)
+					return true;
+				}
+			}
+			else
+			{
 			}
 
 		}
 
-		return true;
+		return false;
 	}
 
 	//Movement across method takes care of moving cross for rook and the queen
@@ -84,15 +91,23 @@ public abstract class Piece
 		// 5 maybe *
 		int newFile = position.substring(4).trim().charAt(0) - '1';
 
-		int movement = Math.abs(newFile - initialFile);
+		int movement = 0;
+		int movementVert = Math.abs(newFile - initialFile);
+		int movementHoriz = Math.abs(newRank - newRank);
 
-		movement = Math.abs(newFile - initialFile);
+		//if the movement of the piece on the X-axis is the same then that means that it moved
+		//along the Y-axis or else it moved along the X-axis
+		if(newFile == initialFile)
+			movement = movementHoriz;
+		else
+			movement = movementVert;
 
 		if (hasValidMove(initialRank, initialFile, newRank, newFile, movement, 1, 0) || //up
 		hasValidMove(initialRank, initialFile, newRank, newFile, movement, -1, 0) || //down
 		hasValidMove(initialRank, initialFile, newRank, newFile, movement, 0, 1) || //right
 		hasValidMove(initialRank, initialFile, newRank, newFile, movement, 0, -1)) //left
 			return true;
+		
 
 		System.out.println("Not a valid movement or piece blocking path, ignoring command.");
 		return false;
