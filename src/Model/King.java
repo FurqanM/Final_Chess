@@ -26,7 +26,14 @@ public class King extends Piece
 		// 5 maybe *
 		int newFile = position.substring(4).trim().charAt(0) - 49;
 
-		if (hasValidMove(initialRank, initialFile, newRank, newFile, 1, 0) || hasValidMove(initialRank, initialFile, newRank, newFile, -1, 0) || hasValidMove(initialRank, initialFile, newRank, newFile, 0, 1) || hasValidMove(initialRank, initialFile, newRank, newFile, 0, -1) || hasValidMove(initialRank, initialFile, newRank, newFile, 1, 1) || hasValidMove(initialRank, initialFile, newRank, newFile, -1, -1) || hasValidMove(initialRank, initialFile, newRank, newFile, 1, -1) || hasValidMove(initialRank, initialFile, newRank, newFile, -1, 1))
+		if (hasValidMove(initialRank, initialFile, newRank, newFile, 1, 0) || //move up
+		hasValidMove(initialRank, initialFile, newRank, newFile, -1, 0) || //move down
+		hasValidMove(initialRank, initialFile, newRank, newFile, 0, 1) || //move right
+		hasValidMove(initialRank, initialFile, newRank, newFile, 0, -1) || //move left
+		hasValidMove(initialRank, initialFile, newRank, newFile, 1, 1) || //move north east
+		hasValidMove(initialRank, initialFile, newRank, newFile, -1, -1) || //move south west
+		hasValidMove(initialRank, initialFile, newRank, newFile, 1, -1) || //move north west
+		hasValidMove(initialRank, initialFile, newRank, newFile, -1, 1)) //move south east
 			return true;
 		else
 			return false;
@@ -42,7 +49,7 @@ public class King extends Piece
 		north += vertMovement;
 		east += horizMovement;
 
-		if (newRank == east && newFile == north++)
+		if (newRank == east && newFile == north)
 		{
 			System.out.println("Moved a King");
 			return true;
