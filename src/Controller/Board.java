@@ -120,11 +120,6 @@ public class Board
 		this.setWhiteTurn(!this.isWhiteTurn());
 	}
 
-	public Piece[][] getBoardSetup()
-	{
-		return boardSetup;
-	}
-
 	public void movePiece(String moveBoardPosition)
 	{
 		if (moveBoardPosition.length() == 5)
@@ -407,6 +402,12 @@ public class Board
 	public void setLightKingPosition(String lightKingPosition)
 	{
 		this.lightKingPosition = lightKingPosition;
+	}
+	
+	public Piece getPieceAt(int file, int rank)
+	{
+		return this.boardSetup[file][rank];
+		
 	}
 
 	public long getUpdateTimer()
