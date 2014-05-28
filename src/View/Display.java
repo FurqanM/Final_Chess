@@ -14,7 +14,6 @@ public class Display
 	{
 		Scanner input = new Scanner(System.in);
 		String moveCommand = null;
-		String newPosition;
 		boolean gameEnd = false;
 
 		if (args.length == 1)

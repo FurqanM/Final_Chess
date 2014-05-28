@@ -105,6 +105,7 @@ public class Board
 		}
 		System.out.println("    A   B   C   D   E   F   G   H ");
 		System.out.println("================================================");
+		
 		try
 		{
 			Thread.sleep(getUpdateTimer());

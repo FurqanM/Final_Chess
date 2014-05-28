@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.Board;
+
 /*
  * This class will be responsible for this piece movement and overriding its methods to move and behave like how it should. All of the handling and checking for the movement is done within this class
  * (or Super class if validateMove method is invoked polymorphically.
@@ -34,7 +36,14 @@ public class King extends Piece
 		hasValidMove(initialRank, initialFile, newRank, newFile, -1, -1) || //move south west
 		hasValidMove(initialRank, initialFile, newRank, newFile, 1, -1) || //move north west
 		hasValidMove(initialRank, initialFile, newRank, newFile, -1, 1)) //move south east
+		{
+			if(this.isWhite())
+				Board.getInstance().setLightKingPosition(position);
+			else
+				Board.getInstance().setDarkKingPosition(position);
 			return true;
+		}
+			
 		else
 			return false;
 
