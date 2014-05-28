@@ -20,22 +20,25 @@ public class Pawn extends Piece
 	{
 
 		// c7 c5
-		int initialRank = moveBoardPosition.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
-		int initialFile = moveBoardPosition.substring(1, 2).trim().charAt(0) - 49; // 7
-		int newRank = moveBoardPosition.substring(3, 4).trim().toLowerCase().charAt(0) - 97; // c
+		int initialRank = moveBoardPosition.substring(0, 1).trim().toLowerCase().charAt(0) - 'a'; // c
+		int initialFile = moveBoardPosition.substring(1, 2).trim().charAt(0) - '1'; // 7
+		int newRank = moveBoardPosition.substring(3, 4).trim().toLowerCase().charAt(0) - 'a'; // c
 		// 5 maybe *
-		int newFile = moveBoardPosition.substring(4).trim().charAt(0) - 49;
+		int newFile = moveBoardPosition.substring(4).trim().charAt(0) - '1';
 
 		if (isWhite)
 		{
 			// a = 0 white
-			if ((newRank == initialRank) && (newFile - initialFile == 1))
+			//if the x-axis is the same, if the new Y position is equal to the initial Y position + 1 then it moved up once
+			if ((newRank == initialRank) && (newFile == initialFile + 1)) 
 			{
 				System.out.println("Moved a White Pawn");
 				return true;
 			}
+			//if the Pawn is in the starting position of the board, then allow it to move up twice
 			else if(initialFile == 1)
 			{
+				//if the x-axis is the same, if the new Y position is equal to the initial Y position + 2 then it moved up twice
 				if ((newRank == initialRank) && (newFile == initialFile + 2))
 				{
 					System.out.println("Moved a White Pawn up 2"); //TODO set a boolean flag setting that the pawn has moved for White and Black

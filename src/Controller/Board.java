@@ -105,7 +105,7 @@ public class Board
 		}
 		System.out.println("    A   B   C   D   E   F   G   H ");
 		System.out.println("================================================");
-		
+
 		try
 		{
 			Thread.sleep(getUpdateTimer());
@@ -136,7 +136,9 @@ public class Board
 			int newFile = moveBoardPosition.substring(4).trim().charAt(0) - '1';
 
 			//concatenated King position
-			String kingString = (this.isWhiteTurn()) ? moveBoardPosition.substring(0, 3).trim().toLowerCase() + " " + this.getDarkKingPosition() : moveBoardPosition.substring(0, 3).trim().toLowerCase() + " " + this.getLightKingPosition();
+			String kingString = (this.isWhiteTurn())
+					? moveBoardPosition.substring(0, 3).trim().toLowerCase() + " " + this.getDarkKingPosition()
+					: moveBoardPosition.substring(0, 3).trim().toLowerCase() + " " + this.getLightKingPosition();
 
 			if (this.boardSetup[newFile][newRank] == null) //if there is no piece at this location
 			{
@@ -148,7 +150,7 @@ public class Board
 						//or if the piece at that position is black and if it's black's turn then allow the player to move
 						if ((this.boardSetup[initialFile][initialRank].isWhite() && this.isWhiteTurn()) || (!this.boardSetup[initialFile][initialRank].isWhite() && !this.isWhiteTurn()))
 						{
-							checkForCheck(initialFile, initialRank, newFile, newRank, kingString);
+							//checkForCheck(initialFile, initialRank, newFile, newRank, kingString);
 							toggleGameState();
 							this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
 							this.boardSetup[initialFile][initialRank] = null;
@@ -296,32 +298,37 @@ public class Board
 		{
 
 			// c7 c5*
-			int initialRank = moveBoardPosition.substring(0, 1).trim().charAt(0) - 97;
+			int initialRank = moveBoardPosition.substring(0, 1).trim().charAt(0) - 'a';
 
-			int initialFile = moveBoardPosition.substring(1, 2).trim().charAt(0) - 49;
+			int initialFile = moveBoardPosition.substring(1, 2).trim().charAt(0) - '1';
 
 			// c
-			int newRank = moveBoardPosition.substring(3, 4).trim().charAt(0) - 97;
+			int newRank = moveBoardPosition.substring(3, 4).trim().charAt(0) - 'a';
 
 			// 5*
-			int newFile = moveBoardPosition.substring(4, 5).trim().charAt(0) - 49;
+			int newFile = moveBoardPosition.substring(4, 5).trim().charAt(0) - '1';
 
 			if (this.boardSetup[newFile][newRank] != null)
 			{
-				this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
-				System.out.println("\t\t\t\t\t\t\t" + moveBoardPosition.substring(0, 2).trim() + " captures piece at " + moveBoardPosition.substring(3, 5).trim());
-				this.boardSetup[initialFile][initialRank] = null;
-			}
-			else
-			{
-				String invalidKill = moveBoardPosition.substring(0, 6);
-				movePiece(invalidKill);
-				System.out.println("Checking verified that there is no piece at " + moveBoardPosition.substring(3, 5).trim() + ", moving piece instead\n");
+				if (this.boardSetup[initialFile][initialRank].validateMovement(moveBoardPosition))
+				{
+					//if the piece at initialFile and initialRank is white and if it's white's turn then allow the player to move
+					//or if the piece at that position is black and if it's black's turn then allow the player to move
+					if ((this.boardSetup[initialFile][initialRank].isWhite() && this.isWhiteTurn()) || (!this.boardSetup[initialFile][initialRank].isWhite() && !this.isWhiteTurn()))
+					{
+						this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
+						System.out.println("\t\t\t\t\t\t\t" + moveBoardPosition.substring(0, 2).trim() + " captures piece at " + moveBoardPosition.substring(3, 5).trim());
+						this.boardSetup[initialFile][initialRank] = null;
+					}
+				}
 			}
 
 		}
 		else
 		{
+			String invalidKill = moveBoardPosition.substring(0, 6);
+			movePiece(invalidKill);
+			System.out.println("Checking verified that there is no piece at " + moveBoardPosition.substring(3, 5).trim() + ", moving piece instead\n");
 		}
 
 	}
@@ -406,20 +413,20 @@ public class Board
 	{
 		this.lightKingPosition = lightKingPosition;
 	}
-	
+
 	public Piece getPieceAt(int file, int rank)
 	{
 		return this.boardSetup[file][rank];
 	}
-	
+
 	private boolean checkForCheck(int initialFile, int initialRank, int newFile, int newRank, String kingPosition)
 	{
 		if (this.boardSetup[initialFile][initialRank].validateMovement(kingPosition))
 			return true;
-		
+
 		return false;
-		
-	}	
+
+	}
 
 	public long getUpdateTimer()
 	{
