@@ -39,8 +39,7 @@ public abstract class Piece
 			return true;
 		
 
-		System.out.println("Piece is in the path movement.");
-		System.out.println("Not a valid movement, ignoring command.");
+		System.out.println("Not a valid movement or piece blocking path, ignoring command.");
 		return false;
 	}
 
@@ -67,7 +66,7 @@ public abstract class Piece
 					}
 					else
 					{
-						System.out.println("Can't kill your own piece traitor!");
+						//System.out.println("Can't kill your own piece traitor!");
 						return false;
 					}
 						

@@ -137,8 +137,8 @@ public class Board
 
 			//concatenated King position
 			String kingString = (this.isWhiteTurn())
-					? moveBoardPosition.substring(0, 3).trim().toLowerCase() + " " + this.getDarkKingPosition()
-					: moveBoardPosition.substring(0, 3).trim().toLowerCase() + " " + this.getLightKingPosition();
+					? moveBoardPosition.substring(3, 5).trim().toLowerCase() + " " + this.getDarkKingPosition() //newFile and newRank
+					: moveBoardPosition.substring(3, 5).trim().toLowerCase() + " " + this.getLightKingPosition(); //newFile and newRank
 
 			if (this.boardSetup[newFile][newRank] == null) //if there is no piece at this location
 			{
@@ -150,10 +150,12 @@ public class Board
 						//or if the piece at that position is black and if it's black's turn then allow the player to move
 						if ((this.boardSetup[initialFile][initialRank].isWhite() && this.isWhiteTurn()) || (!this.boardSetup[initialFile][initialRank].isWhite() && !this.isWhiteTurn()))
 						{
-//							if(checkForCheck(initialFile, initialRank, newFile, newRank, kingString))
-//							{
-//								System.out.println("King is in check");
-//							}
+							if (checkForCheck(initialFile, initialRank, newFile, newRank, kingString))
+							{
+								System.out.println(((this.isWhiteTurn())
+										? "Dark King"
+										: "Light King") + " is in check");
+							}
 							toggleGameState();
 							this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
 							this.boardSetup[initialFile][initialRank] = null;
@@ -317,6 +319,7 @@ public class Board
 					//or if the piece at that position is black and if it's black's turn then allow the player to move
 					if ((this.boardSetup[initialFile][initialRank].isWhite() && this.isWhiteTurn()) || (!this.boardSetup[initialFile][initialRank].isWhite() && !this.isWhiteTurn()))
 					{
+						toggleGameState();
 						this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
 						System.out.println("\t\t\t\t\t\t\t" + moveBoardPosition.substring(0, 2).trim() + " captures piece at " + moveBoardPosition.substring(3, 5).trim());
 						this.boardSetup[initialFile][initialRank] = null;
@@ -350,44 +353,15 @@ public class Board
 	// move
 	public void defaultSetup()
 	{
-		String[] defaultPieceArrangement = new String[32];
-		defaultPieceArrangement[0] = "pda7";
-		defaultPieceArrangement[1] = "pdb7";
-		defaultPieceArrangement[2] = "pdc7";
-		defaultPieceArrangement[3] = "pdd7";
-		defaultPieceArrangement[4] = "pde7";
-		defaultPieceArrangement[5] = "pdf7";
-		defaultPieceArrangement[6] = "pdg7";
-		defaultPieceArrangement[7] = "pdh7";
-		defaultPieceArrangement[8] = "rda8";
-		defaultPieceArrangement[9] = "rdh8";
-		defaultPieceArrangement[10] = "ndb8";
-		defaultPieceArrangement[11] = "ndg8";
-		//defaultPieceArrangement[12] = "bdc8";
-		defaultPieceArrangement[13] = "bdf8";
-		defaultPieceArrangement[14] = "qdd8";
-		//defaultPieceArrangement[15] = "kde8";
-		defaultPieceArrangement[16] = "pla2";
-		defaultPieceArrangement[17] = "plb2";
-		defaultPieceArrangement[18] = "plc2";
-		defaultPieceArrangement[19] = "pld2";
-		defaultPieceArrangement[20] = "ple2";
-		defaultPieceArrangement[21] = "plf2";
-		defaultPieceArrangement[22] = "plg2";
-		defaultPieceArrangement[23] = "plh2";
-		defaultPieceArrangement[24] = "rla1";
-		defaultPieceArrangement[25] = "rlh1";
-		defaultPieceArrangement[26] = "nlb1";
-		defaultPieceArrangement[27] = "nlg1";
-		defaultPieceArrangement[28] = "blc1";
-		defaultPieceArrangement[29] = "blf1";
-		//defaultPieceArrangement[30] = "qld1";
-		//defaultPieceArrangement[31] = "kle1";
-
-		defaultPieceArrangement[12] = "bdh6";
-		defaultPieceArrangement[15] = "klf4";
-		defaultPieceArrangement[30] = "kde6";
-		defaultPieceArrangement[31] = "qla5";
+		String[] defaultPieceArrangement =
+		{ "pda7", "pdb7", "pdc7", "pdd7", "pde7", "pdf7", "pdg7", "pdh7", "rda8", "rdh8", "ndb8", "ndg8",
+				// "bdc8"
+		"bdf8", //"qdd8",
+		// "kde8"
+		"pla2", "plb2", "plc2", "pld2", "ple2", "plf2", "plg2", "plh2", "rla1", "rlh1", "nlb1", "nlg1", "blc1", "blf1",
+				// "qld1"
+				// "kle1"
+		"rdh6", "kle4", "kde6", "rla5", };
 
 		for (int i = 0; i < defaultPieceArrangement.length; i++)
 		{
