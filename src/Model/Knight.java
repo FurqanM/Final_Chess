@@ -31,61 +31,40 @@ public class Knight extends Piece
 		int east = initialRank;
 
 		
+		if(hasValidMove(initialFile, initialRank, newRank, newFile, 2, 1) || //up 2 right 1
+				hasValidMove(initialFile, initialRank, newRank, newFile, -2, 1) || //down 2 right 1
+				hasValidMove(initialFile, initialRank, newRank, newFile, 2, -1) || //up 2 left 1
+				hasValidMove(initialFile, initialRank, newRank, newFile, -2, -1) || //down 2 left 1
+				hasValidMove(initialFile, initialRank, newRank, newFile, 1, 2) || // right 2 up 1
+				hasValidMove(initialFile, initialRank, newRank, newFile, -1, 2) || //right 2 down 1
+				hasValidMove(initialFile, initialRank, newRank, newFile, 1, -2) || //left 2 up 1
+				hasValidMove(initialFile, initialRank, newRank, newFile, -1, -2) // left 2 down 1
+				)
+				return true;
+		
+		
+		return false;
+	}
+
+
+
+	private boolean hasValidMove(int initialFile, int initialRank, int newRank, int newFile, int verticalMovement, int horizontalMovement)
+	{
+		
+		int north = initialFile;
+		int east = initialRank;
+		
+		north += verticalMovement;
+		east += horizontalMovement;
+		
 		//movement logic for moving up 2 right 1
-		if(newFile == north+2 && newRank == east+1)
+		if(newFile == north && newRank == east)
 		{
-			System.out.println("Moved a Knight up 2 right 1");
+			System.out.println("Moved a Knight");
 			return true;
 		}
 		
-		//movement logic for moving up 2 and left 1
-		else if(newFile == north+2 && newRank == east-1)
-		{
-			System.out.println("Moved a Knight up 2 left 1");
-			return true;
-		}
-		//movement logic for moving down 2 right 1
-		else if(newFile == north-2 && newRank == east+1)
-		{
-			System.out.println("Moved a Knight down 2 right 1");
-			return true;
-		}
-		//movement down 2 left 1
-		else if(newFile == north-2 && newRank == east-1)
-		{
-			System.out.println("Moved a Knight down 2 left 1");
-			return true;
-		}
-		
-		//movement for right 2 up 1
-		else if(newRank == east+2 && newFile == north+1)
-		{
-			System.out.println("Moved a Knight right 2 up 1");
-			return true;
-		}
-		//movement for right 2 down 1
-		else if(newRank == east+2 && newFile == north-1)
-		{
-			System.out.println("Moved a Knight right 2 down 1");
-			return true;
-		}
-		//movement for left 2 up 1
-		else if(newRank == east-2 && newFile == north+1)
-		{
-			System.out.println("Moved a Knight left 2 up 1");
-			return true;
-		}
-		//movement for left 2 down 1
-		else if(newRank == east-2 && newFile == north-1)
-		{
-			System.out.println("Moved a Knight left 2 up 1");
-			return true;
-		}
-		else
-		{
-			System.out.println("Invalid movement, ignoring command");
-			return false;
-		}
+		return false;
 	}
 	
 	
