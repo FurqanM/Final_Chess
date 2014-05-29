@@ -272,29 +272,36 @@ public class Board
 						{
 							int previousFile = 0;
 							int previousRank = 0;
-							if (checkForCheck(initialFile, initialRank, newFile, newRank, kingString))
-							{
-								tp.getPieceArray().add(this.boardSetup[initialFile][initialRank]);
-								previousFile = initialFile;
-								previousRank = initialRank;
-								System.out.println(((this.isWhiteTurn())
-										? "Dark King"
-										: "Light King") + " is in check");
-							}
-							else
-							{
-								tp.getPieceArray().remove(this.boardSetup[previousFile][previousRank]);
-								System.out.println(this.getPieceAt(previousFile, previousRank) + " is no longer holding King in check");
-							}
+//							if (checkForCheck(initialFile, initialRank, newFile, newRank, kingString))
+//							{
+//								tp.getPieceArray().add(this.boardSetup[initialFile][initialRank]);
+//								previousFile = initialFile;
+//								previousRank = initialRank;
+//								System.out.println(((this.isWhiteTurn())
+//										? "Dark King"
+//										: "Light King") + " is in check");
+//							}
+//							else
+//							{
+//								tp.getPieceArray().remove(this.boardSetup[previousFile][previousRank]);
+//								System.out.println(this.getPieceAt(previousFile, previousRank) + " is no longer holding King in check");
+//							}
+							
+//							for(int i = 0; i < BOARD_FILE; i++)
+//								for(int j = 0; j < BOARD_RANK; j++)
+//								{
+//									this.getPieceAt(i, j).validateMovement();
+//								}
+							
 							toggleGameState();
 							this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
 							this.boardSetup[initialFile][initialRank] = null;
 							System.out.println("\t\t\t\t\t\t\t" + " Moves piece from " + moveBoardPosition.substring(0, 2).trim() + " to " + moveBoardPosition.substring(3, 5).trim());
 							
-							for(int i = 0; i < tp.getPieceArray().size(); i++)
-							{
-								System.out.println(tp.getPieceArray().get(i));
-							}
+//							for(int i = 0; i < tp.getPieceArray().size(); i++)
+//							{
+//								System.out.println(tp.getPieceArray().get(i));
+//							}
 						}
 						else
 						{
