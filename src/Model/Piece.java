@@ -56,12 +56,22 @@ public abstract class Piece
 			north += verticalMovement;
 			east += horzMovement;
 
-			if ((north > -1 && north < 8) && (east > -1) && (north < 8)) //if the move is in the boundaries of the board
+			if ((north > -1 && north < 8) && (east > -1) && (east < 8)) //if the move is in the boundaries of the board
 			{
 				if (Board.getInstance().getPieceAt(north, east) != null) //if there is a piece here
 				{
-					System.out.println("Killed a piece");
-					return true; // TODO work on a kill function for pieces
+					if(((Board.getInstance().getPieceAt(north, east).isWhite() != this.isWhite())) && (newFile == north && newRank == east))
+					{
+						System.out.println("Killed a piece");
+						return true;
+					}
+					else
+					{
+						System.out.println("Can't kill your own piece traitor!");
+						return false;
+					}
+						
+					
 				}
 				else if ((north == newFile && east == newRank) && Board.getInstance().getPieceAt(north, east) == null)
 				{
