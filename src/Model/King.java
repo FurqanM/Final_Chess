@@ -65,7 +65,7 @@ public class King extends Piece
 		}
 		else
 		{
-			System.out.println("Invalid movement, ignoring command");
+			//System.out.println("Invalid movement, ignoring command");
 			return false;
 		}
 	}

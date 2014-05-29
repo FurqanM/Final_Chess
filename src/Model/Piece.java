@@ -1,10 +1,12 @@
 package Model;
 
 import Controller.Board;
+import Controller.TeamPlayer;
 
 public abstract class Piece
 {
 	protected boolean isWhite;
+	TeamPlayer tp = new TeamPlayer();
 
 	public Piece(boolean isWhite)
 	{
@@ -36,10 +38,14 @@ public abstract class Piece
 				hasValidMove(initialRank, initialFile, newRank, newFile, movement, -1, -1) || //moving south west
 				hasValidMove(initialRank, initialFile, newRank, newFile, movement, 1, -1) ||  //north west
 				hasValidMove(initialRank, initialFile, newRank, newFile, movement, -1, 1)) //south east
+		{
+			tp.getPieceArray().add(Board.getInstance().getPieceAt(initialFile, initialRank)); //adding pieces with a valid move to the ArrayList
 			return true;
+		}
+			
 		
 
-		System.out.println("Not a valid movement or piece blocking path, ignoring command.");
+		//System.out.println("Not a valid movement or piece blocking path, ignoring command.");
 		return false;
 	}
 
@@ -112,10 +118,13 @@ public abstract class Piece
 		hasValidMove(initialRank, initialFile, newRank, newFile, movement, -1, 0) || //down
 		hasValidMove(initialRank, initialFile, newRank, newFile, movement, 0, 1) || //right
 		hasValidMove(initialRank, initialFile, newRank, newFile, movement, 0, -1)) //left
+		{
+			tp.getPieceArray().add(Board.getInstance().getPieceAt(initialFile, initialRank)); //adding pieces with a valid move to the ArrayList
 			return true;
+		}
 		
 
-		System.out.println("Not a valid movement or piece blocking path, ignoring command.");
+		//System.out.println("Not a valid movement or piece blocking path, ignoring command.");
 		return false;
 
 	}

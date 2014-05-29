@@ -6,8 +6,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import Controller.TeamPlayer;
 import Model.Bishop;
 import Model.King;
 import Model.Knight;
@@ -53,9 +55,10 @@ public class Board
 	private Piece[][] boardSetup;
 	private final int BOARD_FILE = 8;
 	private final int BOARD_RANK = 8;
-	private boolean isWhiteTurn = true;
+	private boolean isWhiteTurn = false;
 	private String lightKingPosition;
 	private String darkKingPosition;
+	TeamPlayer tp = new TeamPlayer();
 
 	private static Board instance = null;
 
@@ -141,9 +144,9 @@ public class Board
 		case "k":
 			newPiece = new King(isWhite);
 			if (newPiece.isWhite())
-				this.setLightKingPosition(position.substring(2, 3).trim().toLowerCase() + position.substring(3).trim().toLowerCase()); //this is setting the position of the LightKing to track
+				this.setLightKingPosition(position.substring(2, 3).trim().toLowerCase() + position.substring(3, 4).trim().toLowerCase()); //this is setting the position of the LightKing to track
 			else
-				this.setDarkKingPosition(position.substring(2, 3).trim().toLowerCase() + position.substring(3).trim().toLowerCase()); //this is setting the position of the DarkKing to track
+				this.setDarkKingPosition(position.substring(2, 3).trim().toLowerCase() + position.substring(3, 4).trim().toLowerCase()); //this is setting the position of the DarkKing to track
 			break;
 		case "r":
 			newPiece = new Rook(isWhite);
@@ -269,10 +272,18 @@ public class Board
 						{
 							if (checkForCheck(initialFile, initialRank, newFile, newRank, kingString))
 							{
+								tp.getPieceArray().add(this.boardSetup[initialFile][initialRank]);
 								System.out.println(((this.isWhiteTurn())
 										? "Dark King"
 										: "Light King") + " is in check");
 							}
+//							else
+//							{
+//								for(int i = 0; i < tp.getPieceArray().size(); i++)
+//								{
+//									tp.getPieceArray().get(i).;
+//								}
+//							}
 							toggleGameState();
 							this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
 							this.boardSetup[initialFile][initialRank] = null;

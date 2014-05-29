@@ -51,7 +51,7 @@ public class Pawn extends Piece
 				return true;
 		}
 
-		System.out.println("Not a valid movement, ignoring command.");
+		
 		return false;
 
 	}
