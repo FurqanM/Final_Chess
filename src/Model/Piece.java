@@ -58,9 +58,10 @@ public abstract class Piece
 
 			if ((north > -1 && north < 8) && (east > -1) && (north < 8)) //if the move is in the boundaries of the board
 			{
-				if (Board.getInstance().getPieceAt(north, east) != null) //if there is a piece here
+				if (Board.getInstance().getPieceAt(north, east) != null && !this.isWhite()) //if there is a piece here
 				{
-					return false;
+					System.out.println("Killed a piece");
+					return true; // TODO work on a kill function for pieces
 				}
 				else if (north == newFile && east == newRank)
 				{
