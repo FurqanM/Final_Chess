@@ -39,7 +39,6 @@ public abstract class Piece
 				hasValidMove(initialRank, initialFile, newRank, newFile, movement, 1, -1) ||  //north west
 				hasValidMove(initialRank, initialFile, newRank, newFile, movement, -1, 1)) //south east
 		{
-			tp.getPieceArray().add(Board.getInstance().getPieceAt(initialFile, initialRank)); //adding pieces with a valid move to the ArrayList
 			return true;
 		}
 			
@@ -67,7 +66,7 @@ public abstract class Piece
 				{
 					if(((Board.getInstance().getPieceAt(north, east).isWhite() != this.isWhite())) && (newFile == north && newRank == east))
 					{
-						System.out.println("Killed a piece");
+						//System.out.println("Killed a piece");
 						return true;
 					}
 					else
@@ -119,7 +118,6 @@ public abstract class Piece
 		hasValidMove(initialRank, initialFile, newRank, newFile, movement, 0, 1) || //right
 		hasValidMove(initialRank, initialFile, newRank, newFile, movement, 0, -1)) //left
 		{
-			tp.getPieceArray().add(Board.getInstance().getPieceAt(initialFile, initialRank)); //adding pieces with a valid move to the ArrayList
 			return true;
 		}
 		

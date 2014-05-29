@@ -1,5 +1,7 @@
 package Model;
 
+import Controller.Board;
+
 
 /*
  * This class will be responsible for this piece movement and overriding its methods to move and behave like how it should.
@@ -27,10 +29,6 @@ public class Knight extends Piece
 		int newFile = position.substring(4).trim().charAt(0) - 49;
 
 		
-		int north = initialFile;
-		int east = initialRank;
-
-		
 		if(hasValidMove(initialFile, initialRank, newRank, newFile, 2, 1) || //up 2 right 1
 				hasValidMove(initialFile, initialRank, newRank, newFile, -2, 1) || //down 2 right 1
 				hasValidMove(initialFile, initialRank, newRank, newFile, 2, -1) || //up 2 left 1
@@ -40,7 +38,10 @@ public class Knight extends Piece
 				hasValidMove(initialFile, initialRank, newRank, newFile, 1, -2) || //left 2 up 1
 				hasValidMove(initialFile, initialRank, newRank, newFile, -1, -2) // left 2 down 1
 				)
-				return true;
+		{	
+			return true;
+		}
+				
 		
 		
 		return false;

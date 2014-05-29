@@ -31,7 +31,6 @@ public class Pawn extends Piece
 
 			if(moveTwice(initialRank, initialFile, newRank, newFile, 2) && (initialFile == 1)) // if the white pawn is where it is supposed to be to move twice
 			{
-				tp.getPieceArray().add(Board.getInstance().getPieceAt(initialFile, initialRank)); //adding pieces with a valid move to the ArrayList
 				return true;
 			}
 				
@@ -40,7 +39,6 @@ public class Pawn extends Piece
 			hasValidMove(initialRank, initialFile, newRank, newFile, 1, 1) || //if piece to north east kill it
 			hasValidMove(initialRank, initialFile, newRank, newFile, 1, -1)) //if piece to north west kill it
 			{
-				tp.getPieceArray().add(Board.getInstance().getPieceAt(initialFile, initialRank)); //adding pieces with a valid move to the ArrayList
 				return true;
 			}
 		}
@@ -49,7 +47,6 @@ public class Pawn extends Piece
 			
 			if(moveTwice(initialRank, initialFile, newRank, newFile, -2) && (initialFile == 6)) // if the white pawn is where it is supposed to be to move twice
 			{
-				tp.getPieceArray().add(Board.getInstance().getPieceAt(initialFile, initialRank)); //adding pieces with a valid move to the ArrayList
 				return true;
 			}
 				
@@ -58,7 +55,6 @@ public class Pawn extends Piece
 			hasValidMove(initialRank, initialFile, newRank, newFile, -1, -1) || //if piece to south west then kill it
 			hasValidMove(initialRank, initialFile, newRank, newFile, -1, 1)) //if piece to south east then kill it
 			{
-				tp.getPieceArray().add(Board.getInstance().getPieceAt(initialFile, initialRank)); //adding pieces with a valid move to the ArrayList
 				return true;
 			}
 				
@@ -79,7 +75,6 @@ public class Pawn extends Piece
 		{
 			//if the x-axis is the same, if the new Y position is equal to the initial Y position + 2 then it moved up twice
 			System.out.println("Moved a Pawn twice"); //TODO set a boolean flag setting that the pawn has moved for White and Black
-			tp.getPieceArray().add(Board.getInstance().getPieceAt(initialFile, initialRank)); //adding pieces with a valid move to the ArrayList
 			return true;
 
 		}
@@ -102,7 +97,6 @@ public class Pawn extends Piece
 			if (((newFile == north && newRank == east) ||(newFile == north && newFile == east)) && 
 					Board.getInstance().getPieceAt(newFile, newRank) != null) //if moving cross and if there is a piece there
 			{
-				tp.getPieceArray().add(Board.getInstance().getPieceAt(initialFile, initialRank)); //adding pieces with a valid move to the ArrayList
 				return true;
 			}
 				
@@ -113,7 +107,6 @@ public class Pawn extends Piece
 		else if ((newRank == east) && (newFile == north))
 		{
 			System.out.println("Moved a White Pawn");
-			tp.getPieceArray().add(Board.getInstance().getPieceAt(initialFile, initialRank)); //adding pieces with a valid move to the ArrayList
 			return true;
 		}
 

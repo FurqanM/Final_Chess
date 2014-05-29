@@ -55,7 +55,7 @@ public class Board
 	private Piece[][] boardSetup;
 	private final int BOARD_FILE = 8;
 	private final int BOARD_RANK = 8;
-	private boolean isWhiteTurn = false;
+	private boolean isWhiteTurn = true; //who's turn is it
 	private String lightKingPosition;
 	private String darkKingPosition;
 	TeamPlayer tp = new TeamPlayer();
@@ -270,24 +270,31 @@ public class Board
 						//or if the piece at that position is black and if it's black's turn then allow the player to move
 						if ((this.boardSetup[initialFile][initialRank].isWhite() && this.isWhiteTurn()) || (!this.boardSetup[initialFile][initialRank].isWhite() && !this.isWhiteTurn()))
 						{
+							int previousFile = 0;
+							int previousRank = 0;
 							if (checkForCheck(initialFile, initialRank, newFile, newRank, kingString))
 							{
 								tp.getPieceArray().add(this.boardSetup[initialFile][initialRank]);
+								previousFile = initialFile;
+								previousRank = initialRank;
 								System.out.println(((this.isWhiteTurn())
 										? "Dark King"
 										: "Light King") + " is in check");
 							}
-//							else
-//							{
-//								for(int i = 0; i < tp.getPieceArray().size(); i++)
-//								{
-//									tp.getPieceArray().get(i).;
-//								}
-//							}
+							else
+							{
+								tp.getPieceArray().remove(this.boardSetup[previousFile][previousRank]);
+								System.out.println(this.getPieceAt(previousFile, previousRank) + " is no longer holding King in check");
+							}
 							toggleGameState();
 							this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
 							this.boardSetup[initialFile][initialRank] = null;
 							System.out.println("\t\t\t\t\t\t\t" + " Moves piece from " + moveBoardPosition.substring(0, 2).trim() + " to " + moveBoardPosition.substring(3, 5).trim());
+							
+							for(int i = 0; i < tp.getPieceArray().size(); i++)
+							{
+								System.out.println(tp.getPieceArray().get(i));
+							}
 						}
 						else
 						{
