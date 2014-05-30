@@ -11,31 +11,27 @@ public abstract class Piece
 		this.isWhite = isWhite;
 	}
 
-	public abstract boolean validateMovement(String position);
+	public abstract boolean validateMovement(Position position);
 
 	//Movement across method takes care of moving cross for bishops and the queen
 	//the movement method is invoked polymorphically for each class
-	public boolean moveCross(String position)
+	public boolean moveCross(Position position)
 	{
 
 		// c7 c5
-		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 'a'; // c
-		int initialFile = position.substring(1, 2).trim().charAt(0) - '1'; // 7
-		int newRank = position.substring(3, 4).trim().toLowerCase().charAt(0) - 'a'; // c
-		// 5 maybe *
-		int newFile = position.substring(4).trim().charAt(0) - '1';
 
-		int movement = Math.abs(newFile - initialFile);
+
+		int movement = Math.abs(position.getNewFile() - position.getInitialFile());
 
 		//Takes the position that is larger and smaller between the 2 points and increments i by the difference
 		//of the amount and then while it is iterating it is decrementing south and west
 		//until it matches the matched position the user wants to go and then returns true if a valid move
 		//or false if invalid
 
-		if (hasValidMove(initialRank, initialFile, newRank, newFile, movement, 1, 1) || //moving north east
-				hasValidMove(initialRank, initialFile, newRank, newFile, movement, -1, -1) || //moving south west
-				hasValidMove(initialRank, initialFile, newRank, newFile, movement, 1, -1) ||  //north west
-				hasValidMove(initialRank, initialFile, newRank, newFile, movement, -1, 1)) //south east
+		if (hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), movement, 1, 1) || //moving north east
+				hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), movement, -1, -1) || //moving south west
+				hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), movement, 1, -1) ||  //north west
+				hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), movement, -1, 1)) //south east
 		{
 			return true;
 		}

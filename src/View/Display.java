@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import Controller.Board;
 import Model.Piece;
+import Model.Position;
 
 public class Display
 {
@@ -28,59 +29,38 @@ public class Display
 				Board.getInstance().setUpdateTimer(0);
 				System.out.println("File not found. Resorting to User Play.");
 				Board.getInstance().defaultSetup();
-				
+
 				Board.getInstance().draw();
-				
+
 				while (!gameEnd)
 				{
 
 					System.out.println("Choose the piece you'd like to move example: (B2 B3)");
 					System.out.println(" or (B2 C3*) to capture piece.");
 					System.out.println(" or (E1 G1 H1 F1 ) to castle");
-					System.out.println("It is " + ((Board.getInstance().isWhiteTurn()) ? "Light's " : "Dark's ") + "turn");
+					System.out.println("It is " + ((Board.getInstance().isWhiteTurn())
+							? "Light's "
+							: "Dark's ") + "turn");
 
 					moveCommand = input.nextLine().toLowerCase();
-					if(moveCommand.length() == 4)
-						System.out.println("Cannot place pieces in the middle of the game. Ignoring command\n");
 					
-					playGame(moveCommand);
+					Position position = new Position(moveCommand);
+					
+					playGame(position);
 					// gameEnd = true;
 				}
 			}
 		}
 	}
-	
-	
-	public static void playGame(String moveCommand)
-	{
-		if (Pattern.matches(Board.getInstance().getCHESS_PATTERN(), moveCommand))
-		{
-			// e1 e4
-			// c4 d6*
-			// e1 g1 h1 f1
-			if (moveCommand.length() == 4)
-			{
-				Board.getInstance().placePiece(moveCommand);
-			}
-			else if (moveCommand.length() == 5)
-			{
-				Board.getInstance().movePiece(moveCommand);
-				Board.getInstance().draw();
-			}
-			else if (moveCommand.length() == 6)
-			{
-				Board.getInstance().killPiece(moveCommand); // c4 d6*
-				Board.getInstance().draw();
-			}
-			else if (moveCommand.length() == 10)
-			{
-				// moveTwoPieces();
-			}
 
-		}
-		else
-		{
-		}
+	public static void playGame(Position moveCommand)
+	{
+		// e1 e4
+		// c4 d6*
+		// e1 g1 h1 f1
+
+		Board.getInstance().placePiece(moveCommand);
+
 	}
 
 }

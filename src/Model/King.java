@@ -18,15 +18,10 @@ public class King extends Piece
 	}
 
 	@Override
-	public boolean validateMovement(String position)
+	public boolean validateMovement(Position position)
 	{
 
 		// c7 c5
-		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 'a'; // c
-		int initialFile = position.substring(1, 2).trim().charAt(0) - '1'; // 7
-		int newRank = position.substring(3, 4).trim().toLowerCase().charAt(0) - 'a'; // c
-		// 5 maybe *
-		int newFile = position.substring(4).trim().charAt(0) - '1';
 
 //		if(Board.getInstance().isWhiteTurn() &&
 //				(Board.getInstance().getLightKingPosition().equals(position.substring(3, 4).trim().toLowerCase().charAt(0) - 'a' + position.substring(4).trim().charAt(0) - '1'))
@@ -38,14 +33,14 @@ public class King extends Piece
 //				)
 //			return false;
 		
-			if (hasValidMove(initialRank, initialFile, newRank, newFile, 1, 0) || //move up
-					hasValidMove(initialRank, initialFile, newRank, newFile, -1, 0) || //move down
-					hasValidMove(initialRank, initialFile, newRank, newFile, 0, 1) || //move right
-					hasValidMove(initialRank, initialFile, newRank, newFile, 0, -1) || //move left
-					hasValidMove(initialRank, initialFile, newRank, newFile, 1, 1) || //move north east
-					hasValidMove(initialRank, initialFile, newRank, newFile, -1, -1) || //move south west
-					hasValidMove(initialRank, initialFile, newRank, newFile, 1, -1) || //move north west
-					hasValidMove(initialRank, initialFile, newRank, newFile, -1, 1)) //move south east
+			if (hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), 1, 0) || //move up
+					hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), -1, 0) || //move down
+					hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), 0, 1) || //move right
+					hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), 0, -1) || //move left
+					hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), 1, 1) || //move north east
+					hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), -1, -1) || //move south west
+					hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), 1, -1) || //move north west
+					hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), -1, 1)) //move south east
 					{
 						if(this.isWhite()) //TODO
 							Board.getInstance().setLightKingPosition(position);
