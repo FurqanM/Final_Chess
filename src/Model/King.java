@@ -47,7 +47,7 @@ public class King extends Piece
 					hasValidMove(initialRank, initialFile, newRank, newFile, 1, -1) || //move north west
 					hasValidMove(initialRank, initialFile, newRank, newFile, -1, 1)) //move south east
 					{
-						if(this.isWhite())
+						if(this.isWhite()) //TODO
 							Board.getInstance().setLightKingPosition(position);
 						else
 							Board.getInstance().setDarkKingPosition(position);

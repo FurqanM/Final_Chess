@@ -14,7 +14,7 @@ public class Position
 	private String originalString;
 	
 	
-	public Position(String position)
+	public Position(String string)
 	{
 //		String piece = position.substring(0, 2).trim().toLowerCase(); // pl
 //
@@ -23,37 +23,37 @@ public class Position
 //
 //		boolean isWhite = (piece.substring(1, 2).toLowerCase().equals("l"));
 		
-		if (Pattern.matches(Board.getInstance().getCHESS_PATTERN(), position))
+		if (Pattern.matches(Board.getInstance().getCHESS_PATTERN(), string))
 		{
-			if(position.length() == 4)
+			if(string.length() == 4)
 			{
 				// ple4
 
-				String piece = position.substring(0, 2).trim().toLowerCase(); // pl
+				String piece = string.substring(0, 2).trim().toLowerCase(); // pl
 
-				int initialRank = position.substring(2, 3).trim().toLowerCase().charAt(0) - 97; // e
-				int initialFile = position.substring(3).trim().toLowerCase().charAt(0) - 49; // 4
+				int initialRank = string.substring(2, 3).trim().toLowerCase().charAt(0) - 97; // e
+				int initialFile = string.substring(3).trim().toLowerCase().charAt(0) - 49; // 4
 				
 				
-				this.setOriginalString((position.substring(0, 2).trim().toLowerCase()) + //pl
-						(position.substring(2, 3).trim().toLowerCase().charAt(0) - 'a') + //e
-						(position.substring(3).trim().toLowerCase().charAt(0) - '1')); //4
+				this.setOriginalString((string.substring(0, 2).trim().toLowerCase()) + //pl
+						(string.substring(2, 3).trim().toLowerCase().charAt(0) - 'a') + //e
+						(string.substring(3).trim().toLowerCase().charAt(0) - '1')); //4
 			}
 			else
 			{
 				// c7 c5
-				this.setInitialRank(position.substring(0, 1).trim().toLowerCase().charAt(0) - 'a'); // c
+				this.setInitialRank(string.substring(0, 1).trim().toLowerCase().charAt(0) - 'a'); // c
 
-				this.setInitialFile(position.substring(1, 2).trim().charAt(0) - '1'); // 7
+				this.setInitialFile(string.substring(1, 2).trim().charAt(0) - '1'); // 7
 
-				this.setNewRank(position.substring(3, 4).trim().toLowerCase().charAt(0) - 'a'); // c
+				this.setNewRank(string.substring(3, 4).trim().toLowerCase().charAt(0) - 'a'); // c
 
-				this.setNewFile(position.substring(4).trim().charAt(0) - '1'); // 5 maybe *
+				this.setNewFile(string.substring(4).trim().charAt(0) - '1'); // 5 maybe *
 				
-				this.setOriginalString((position.substring(0, 1).trim().toLowerCase().charAt(0) - 'a') +
-						(position.substring(1, 2).trim().charAt(0) - '1') + " " +
-						(position.substring(3, 4).trim().toLowerCase().charAt(0) - 'a') +
-						(position.substring(4).trim().charAt(0) - '1')); //*
+				this.setOriginalString((string.substring(0, 1).trim().toLowerCase().charAt(0) - 'a') +
+						(string.substring(1, 2).trim().charAt(0) - '1') + " " +
+						(string.substring(3, 4).trim().toLowerCase().charAt(0) - 'a') +
+						(string.substring(4).trim().charAt(0) - '1')); //*
 			}
 			
 			
