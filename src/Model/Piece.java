@@ -1,12 +1,10 @@
 package Model;
 
 import Controller.Board;
-import Controller.TeamPlayer;
 
 public abstract class Piece
 {
 	protected boolean isWhite;
-	TeamPlayer tp = new TeamPlayer();
 
 	public Piece(boolean isWhite)
 	{
@@ -66,12 +64,12 @@ public abstract class Piece
 				{
 					if(((Board.getInstance().getPieceAt(north, east).isWhite() != this.isWhite())) && (newFile == north && newRank == east))
 					{
-						//System.out.println("Killed a piece");
+						System.out.println("Killed a piece");
 						return true;
 					}
 					else
 					{
-						//System.out.println("Can't kill your own piece traitor!");
+						System.out.println("Can't kill your own piece traitor!");
 						return false;
 					}
 						
@@ -122,7 +120,7 @@ public abstract class Piece
 		}
 		
 
-		//System.out.println("Not a valid movement or piece blocking path, ignoring command.");
+		System.out.println("Not a valid movement or piece blocking path, ignoring command.");
 		return false;
 
 	}
