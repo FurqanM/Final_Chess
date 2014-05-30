@@ -74,7 +74,7 @@ public class Pawn extends Piece
 		if (newFile == north && (Board.getInstance().getPieceAt(newFile, newRank) == null))
 		{
 			//if the x-axis is the same, if the new Y position is equal to the initial Y position + 2 then it moved up twice
-			System.out.println("Moved a Pawn twice"); //TODO set a boolean flag setting that the pawn has moved for White and Black
+			//System.out.println("Moved a Pawn twice"); //TODO set a boolean flag setting that the pawn has moved for White and Black
 			return true;
 
 		}

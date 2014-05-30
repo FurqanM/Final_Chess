@@ -22,31 +22,42 @@ public class King extends Piece
 	{
 
 		// c7 c5
-		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
-		int initialFile = position.substring(1, 2).trim().charAt(0) - 49; // 7
-		int newRank = position.substring(3, 4).trim().toLowerCase().charAt(0) - 97; // c
+		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 'a'; // c
+		int initialFile = position.substring(1, 2).trim().charAt(0) - '1'; // 7
+		int newRank = position.substring(3, 4).trim().toLowerCase().charAt(0) - 'a'; // c
 		// 5 maybe *
-		int newFile = position.substring(4).trim().charAt(0) - 49;
+		int newFile = position.substring(4).trim().charAt(0) - '1';
 
-		if (hasValidMove(initialRank, initialFile, newRank, newFile, 1, 0) || //move up
-		hasValidMove(initialRank, initialFile, newRank, newFile, -1, 0) || //move down
-		hasValidMove(initialRank, initialFile, newRank, newFile, 0, 1) || //move right
-		hasValidMove(initialRank, initialFile, newRank, newFile, 0, -1) || //move left
-		hasValidMove(initialRank, initialFile, newRank, newFile, 1, 1) || //move north east
-		hasValidMove(initialRank, initialFile, newRank, newFile, -1, -1) || //move south west
-		hasValidMove(initialRank, initialFile, newRank, newFile, 1, -1) || //move north west
-		hasValidMove(initialRank, initialFile, newRank, newFile, -1, 1)) //move south east
-		{
-			if(this.isWhite())
-				Board.getInstance().setLightKingPosition(position);
-			else
-				Board.getInstance().setDarkKingPosition(position);
-			return true;
-		}
-			
-		else
+		if(Board.getInstance().isWhiteTurn() &&
+				(Board.getInstance().getLightKingPosition().equals(position.substring(3, 4).trim().toLowerCase().charAt(0) - 'a' + position.substring(4).trim().charAt(0) - '1'))
+				) //if it's white's turn and the White King's new position == Black king's current position
 			return false;
-
+		
+		else if(Board.getInstance().isWhiteTurn() &&
+				(Board.getInstance().getDarkKingPosition().equals(position.substring(3, 4).trim().toLowerCase().charAt(0) - 'a' + position.substring(4).trim().charAt(0) - '1'))
+				)
+			return false;
+		else
+		{
+			if (hasValidMove(initialRank, initialFile, newRank, newFile, 1, 0) || //move up
+					hasValidMove(initialRank, initialFile, newRank, newFile, -1, 0) || //move down
+					hasValidMove(initialRank, initialFile, newRank, newFile, 0, 1) || //move right
+					hasValidMove(initialRank, initialFile, newRank, newFile, 0, -1) || //move left
+					hasValidMove(initialRank, initialFile, newRank, newFile, 1, 1) || //move north east
+					hasValidMove(initialRank, initialFile, newRank, newFile, -1, -1) || //move south west
+					hasValidMove(initialRank, initialFile, newRank, newFile, 1, -1) || //move north west
+					hasValidMove(initialRank, initialFile, newRank, newFile, -1, 1)) //move south east
+					{
+						if(this.isWhite())
+							Board.getInstance().setLightKingPosition(position);
+						else
+							Board.getInstance().setDarkKingPosition(position);
+						return true;
+					}
+						
+					else
+						return false;
+		}
 	}
 
 	private boolean hasValidMove(int initialRank, int initialFile, int newRank, int newFile, int vertMovement, int horizMovement)
@@ -60,7 +71,7 @@ public class King extends Piece
 
 		if (newRank == east && newFile == north)
 		{
-			System.out.println("Moved a King");
+//			System.out.println("Moved a King");
 			return true;
 		}
 		else
