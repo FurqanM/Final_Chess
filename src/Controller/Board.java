@@ -294,8 +294,45 @@ public class Board
 			//					System.out.println("No piece there to move.");
 			//				}
 		}
-		else
-			System.out.println("Already a piece there, unable to move");
+			else if (this.boardSetup[position.getNewFile()][position.getNewRank()] != null) //there is a piece here
+				{
+					if (this.boardSetup[position.getInitialFile()][position.getInitialRank()].validateMovement(position))
+					{
+						//if the piece at initialFile and initialRank is white and if it's white's turn then allow the player to move
+						//or if the piece at that position is black and if it's black's turn then allow the player to move
+						if ((this.boardSetup[position.getInitialFile()][position.getInitialRank()].isWhite() && this.isWhiteTurn()) || (!this.boardSetup[position.getInitialFile()][position.getInitialRank()].isWhite() && !this.isWhiteTurn()))
+						{
+//							if (checkForCheck(initialFile, initialRank, newFile, newRank, kingString))
+//							{
+//								System.out.println(((this.isWhiteTurn())
+//										? "Dark King"
+//										: "Light King") + " is in check");
+//							}
+							toggleGameState();
+							this.boardSetup[position.getNewFile()][position.getNewRank()] = (this.boardSetup[position.getInitialFile()][position.getInitialRank()]);
+							this.boardSetup[position.getInitialFile()][position.getInitialRank()] = null;
+							System.out.println("\t\t\t\t\t\t\t" + position.getOriginalString().substring(0, 2).trim() + " captures piece at " + position.getOriginalString().substring(3, 5).trim());
+						}
+						else
+						{
+							System.out.println("Nice try! It's not your turn!");
+						}
+	
+					}
+	
+					//				if (this.boardSetup[initialFile][initialRank].validateMovement(moveBoardPosition))
+					//				{
+					//					//if the piece at initialFile and initialRank is white and if it's white's turn then allow the player to move
+					//					//or if the piece at that position is black and if it's black's turn then allow the player to move
+					//					if ((this.boardSetup[initialFile][initialRank].isWhite() && this.isWhiteTurn()) || (!this.boardSetup[initialFile][initialRank].isWhite() && !this.isWhiteTurn()))
+					//					{
+					//						toggleGameState();
+					//						this.boardSetup[newFile][newRank] = (this.boardSetup[initialFile][initialRank]);
+					//						System.out.println("\t\t\t\t\t\t\t" + moveBoardPosition.substring(0, 2).trim() + " captures piece at " + moveBoardPosition.substring(3, 5).trim());
+					//						this.boardSetup[initialFile][initialRank] = null;
+					//					}
+					//				}
+				}
 	}
 
 //	public void killPiece(String moveBoardPosition)
