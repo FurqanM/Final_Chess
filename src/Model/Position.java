@@ -41,8 +41,8 @@ public class Position
 				this.initialRank = initialRank;
 
 				this.originalString = (string.substring(0, 2).trim().toLowerCase()) + //pl
-				(string.substring(2, 3).trim().toLowerCase().charAt(0) - 'a') + //e
-				(string.substring(3).trim().toLowerCase().charAt(0) - '1'); //4
+				(string.substring(2, 3).trim().toLowerCase()) + //e
+				(string.substring(3).trim().toLowerCase()); //4
 			}
 			else
 			{
@@ -55,7 +55,7 @@ public class Position
 
 				this.newFile = (string.substring(4).trim().charAt(0) - '1'); // 5 maybe *
 
-				this.originalString = ((string.substring(0, 1).trim().toLowerCase().charAt(0) - 'a') + (string.substring(1, 2).trim().charAt(0) - '1') + " " + (string.substring(3, 4).trim().toLowerCase().charAt(0) - 'a') + (string.substring(4).trim().charAt(0) - '1')); //*
+				this.originalString = ((string.substring(0, 1).trim().toLowerCase()) + (string.substring(1, 2).trim()) + " " + (string.substring(3, 4).trim().toLowerCase()) + (string.substring(4).trim())); //*
 			}
 
 		}

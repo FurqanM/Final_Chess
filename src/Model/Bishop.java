@@ -15,7 +15,7 @@ public class Bishop extends Piece
 	}
 
 	@Override
-	public boolean validateMovement(String position)
+	public boolean validateMovement(Position position)
 	{
 		return moveCross(position);
 	}

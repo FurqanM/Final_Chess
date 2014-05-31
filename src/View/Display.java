@@ -59,7 +59,7 @@ public class Display
 		// c4 d6*
 		// e1 g1 h1 f1
 
-		Board.getInstance().placePiece(moveCommand);
+		Board.getInstance().movePiece(moveCommand);
 
 	}
 

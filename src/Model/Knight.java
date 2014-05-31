@@ -19,24 +19,19 @@ public class Knight extends Piece
 	
 	
 	@Override
-	public boolean validateMovement(String position)
+	public boolean validateMovement(Position position)
 	{
 		// c7 c5
-		int initialRank = position.substring(0, 1).trim().toLowerCase().charAt(0) - 97; // c
-		int initialFile = position.substring(1, 2).trim().charAt(0) - 49; // 7
-		int newRank = position.substring(3, 4).trim().toLowerCase().charAt(0) - 97; // c
-		// 5 maybe *
-		int newFile = position.substring(4).trim().charAt(0) - 49;
 
 		
-		if(hasValidMove(initialFile, initialRank, newRank, newFile, 2, 1) || //up 2 right 1
-				hasValidMove(initialFile, initialRank, newRank, newFile, -2, 1) || //down 2 right 1
-				hasValidMove(initialFile, initialRank, newRank, newFile, 2, -1) || //up 2 left 1
-				hasValidMove(initialFile, initialRank, newRank, newFile, -2, -1) || //down 2 left 1
-				hasValidMove(initialFile, initialRank, newRank, newFile, 1, 2) || // right 2 up 1
-				hasValidMove(initialFile, initialRank, newRank, newFile, -1, 2) || //right 2 down 1
-				hasValidMove(initialFile, initialRank, newRank, newFile, 1, -2) || //left 2 up 1
-				hasValidMove(initialFile, initialRank, newRank, newFile, -1, -2) // left 2 down 1
+		if(hasValidMove(position.getInitialFile(), position.getInitialRank(), position.getNewRank(), position.getNewFile(), 2, 1) || //up 2 right 1
+				hasValidMove(position.getInitialFile(), position.getInitialRank(), position.getNewRank(), position.getNewFile(), -2, 1) || //down 2 right 1
+				hasValidMove(position.getInitialFile(), position.getInitialRank(), position.getNewRank(), position.getNewFile(), 2, -1) || //up 2 left 1
+				hasValidMove(position.getInitialFile(), position.getInitialRank(), position.getNewRank(), position.getNewFile(), -2, -1) || //down 2 left 1
+				hasValidMove(position.getInitialFile(), position.getInitialRank(), position.getNewRank(), position.getNewFile(), 1, 2) || // right 2 up 1
+				hasValidMove(position.getInitialFile(), position.getInitialRank(), position.getNewRank(), position.getNewFile(), -1, 2) || //right 2 down 1
+				hasValidMove(position.getInitialFile(), position.getInitialRank(), position.getNewRank(), position.getNewFile(), 1, -2) || //left 2 up 1
+				hasValidMove(position.getInitialFile(), position.getInitialRank(), position.getNewRank(), position.getNewFile(), -1, -2) // left 2 down 1
 				)
 		{	
 			return true;

@@ -16,28 +16,23 @@ public class Pawn extends Piece
 	}
 
 	@Override
-	public boolean validateMovement(String moveBoardPosition)
+	public boolean validateMovement(Position position)
 	{
 
 		// c7 c5
-		int initialRank = moveBoardPosition.substring(0, 1).trim().toLowerCase().charAt(0) - 'a'; // c
-		int initialFile = moveBoardPosition.substring(1, 2).trim().charAt(0) - '1'; // 7
-		int newRank = moveBoardPosition.substring(3, 4).trim().toLowerCase().charAt(0) - 'a'; // c
-		// 5 maybe *
-		int newFile = moveBoardPosition.substring(4).trim().charAt(0) - '1';
 
 		if (isWhite)
 		{
 
-			if(moveTwice(initialRank, initialFile, newRank, newFile, 2) && (initialFile == 1)) // if the white pawn is where it is supposed to be to move twice
+			if(moveTwice(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), 2) && (position.getInitialFile() == 1)) // if the white pawn is where it is supposed to be to move twice
 			{
 				return true;
 			}
 				
 
-			else if (hasValidMove(initialRank, initialFile, newRank, newFile, 1, 0) || //light movement
-			hasValidMove(initialRank, initialFile, newRank, newFile, 1, 1) || //if piece to north east kill it
-			hasValidMove(initialRank, initialFile, newRank, newFile, 1, -1)) //if piece to north west kill it
+			else if (hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), 1, 0) || //light movement
+			hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), 1, 1) || //if piece to north east kill it
+			hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), 1, -1)) //if piece to north west kill it
 			{
 				return true;
 			}
@@ -45,15 +40,15 @@ public class Pawn extends Piece
 		else
 		{
 			
-			if(moveTwice(initialRank, initialFile, newRank, newFile, -2) && (initialFile == 6)) // if the white pawn is where it is supposed to be to move twice
+			if(moveTwice(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), -2) && (position.getInitialFile()== 6)) // if the white pawn is where it is supposed to be to move twice
 			{
 				return true;
 			}
 				
 			
-			else if (hasValidMove(initialRank, initialFile, newRank, newFile, -1, 0) || //dark movement
-			hasValidMove(initialRank, initialFile, newRank, newFile, -1, -1) || //if piece to south west then kill it
-			hasValidMove(initialRank, initialFile, newRank, newFile, -1, 1)) //if piece to south east then kill it
+			else if (hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), -1, 0) || //dark movement
+			hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), -1, -1) || //if piece to south west then kill it
+			hasValidMove(position.getInitialRank(), position.getInitialFile(), position.getNewRank(), position.getNewFile(), -1, 1)) //if piece to south east then kill it
 			{
 				return true;
 			}
