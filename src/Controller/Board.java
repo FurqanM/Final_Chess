@@ -57,8 +57,6 @@ public class Board
 	private final int BOARD_FILE = 8;
 	private final int BOARD_RANK = 8;
 	private boolean isWhiteTurn = true; //who's turn is it
-	private Position lightKingPosition;
-	private Position darkKingPosition;
 	TeamPlayer tp = new TeamPlayer();
 
 	private static Board instance = null;
@@ -140,15 +138,14 @@ public class Board
 			newPiece = new King(isWhite); //position.getOriginalString().substring(3, 4).trim().toLowerCase()); //this is setting the position of the DarkKing to track
 			if (newPiece.isWhite())
 			{
-				position.setLightKingFilePosition((position.getOriginalString().substring(0, 1).trim().toLowerCase().charAt(0) - 'a'));
-				position.setLightKingRankPosition(position.getOriginalString().substring(3, 4).trim().toLowerCase().charAt(0) - '1');
+				position.setLightKingFilePosition(position.getInitialFile());
+				position.setLightKingRankPosition(position.getInitialRank());
 			}
 			else
 			{
-				position.setDarkKingFilePosition((position.getOriginalString().substring(0, 1).trim().toLowerCase().charAt(0) - 'a'));
-				position.setDarkKingRankPosition(position.getOriginalString().substring(3, 4).trim().toLowerCase().charAt(0) - '1');
+				position.setDarkKingFilePosition(position.getInitialFile());
+				position.setDarkKingRankPosition(position.getInitialRank());
 			}
-				
 			break;
 		case "r":
 			newPiece = new Rook(isWhite);
@@ -168,7 +165,7 @@ public class Board
 		}
 		this.boardSetup[position.getInitialFile()][position.getInitialRank()] = newPiece;
 		System.out.println("\t\t\t\t\t\t\tPlaced a " + newPiece + " on " + position.getOriginalString().substring(2, 3).trim() + position.getOriginalString().substring(3).trim());
-		this.draw();
+//		this.draw();
 	}
 
 	public void loadFile(String filename) throws FileNotFoundException
@@ -275,6 +272,25 @@ public class Board
 //							}
 //						}
 
+						if((this.boardSetup[position.getInitialFile()][position.getInitialRank()].isWhite()) && this.boardSetup[position.getInitialFile()][position.getInitialRank()].toString().equalsIgnoreCase("k"))
+						{
+							position.setLightKingFilePosition(position.getNewFile());
+							position.setLightKingRankPosition(position.getNewRank());
+						}
+						else if(!(this.boardSetup[position.getInitialFile()][position.getInitialRank()].isWhite()) && this.boardSetup[position.getInitialFile()][position.getInitialRank()].toString().equalsIgnoreCase("k"))
+						{
+							position.setDarkKingFilePosition(position.getNewFile());
+							position.setDarkKingRankPosition(position.getNewRank());
+						}
+						
+
+						
+						System.out.println(position.getLightKingFilePosition());
+						System.out.println(position.getLightKingRankPosition());
+						
+						System.out.println(position.getDarkKingFilePosition());
+						System.out.println(position.getDarkKingRankPosition());
+						
 						toggleGameState();
 						this.boardSetup[position.getNewFile()][position.getNewRank()] = (this.boardSetup[position.getInitialFile()][position.getInitialRank()]);
 						this.boardSetup[position.getInitialFile()][position.getInitialRank()] = null;
@@ -296,6 +312,8 @@ public class Board
 		}
 			else if (this.boardSetup[position.getNewFile()][position.getNewRank()] != null) //there is a piece here
 				{
+				try
+				{
 					if (this.boardSetup[position.getInitialFile()][position.getInitialRank()].validateMovement(position))
 					{
 						//if the piece at initialFile and initialRank is white and if it's white's turn then allow the player to move
@@ -308,6 +326,7 @@ public class Board
 //										? "Dark King"
 //										: "Light King") + " is in check");
 //							}
+							
 							toggleGameState();
 							this.boardSetup[position.getNewFile()][position.getNewRank()] = (this.boardSetup[position.getInitialFile()][position.getInitialRank()]);
 							this.boardSetup[position.getInitialFile()][position.getInitialRank()] = null;
@@ -319,6 +338,13 @@ public class Board
 						}
 	
 					}
+				}
+				catch(NullPointerException e)
+				{
+					System.out.println("No piece there");
+			
+				}
+					
 	
 					//				if (this.boardSetup[initialFile][initialRank].validateMovement(moveBoardPosition))
 					//				{
@@ -432,26 +458,6 @@ public class Board
 		{
 			placePiece(new Position(defaultPieceArrangement[i]));
 		}
-	}
-
-	public Position getDarkKingPosition()
-	{
-		return darkKingPosition;
-	}
-
-	public void setDarkKingPosition(Position darkKingPosition)
-	{
-		this.darkKingPosition = darkKingPosition;
-	}
-
-	public Position getLightKingPosition()
-	{
-		return lightKingPosition;
-	}
-
-	public void setLightKingPosition(Position position)
-	{
-		this.lightKingPosition = position;
 	}
 
 	public Piece getPieceAt(int file, int rank)

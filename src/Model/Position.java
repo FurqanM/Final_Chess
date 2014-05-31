@@ -10,7 +10,6 @@ public class Position
 	private int initialRank;
 	private int newFile;
 	private int newRank;
-	private String piece;
 	private String originalString;
 	private int LightKingFilePosition;
 	private int LightKingRankPosition;
@@ -32,7 +31,7 @@ public class Position
 			{
 				// ple4
 
-				String piece = string.substring(0, 2).trim().toLowerCase(); // pl
+				string.substring(0, 2).trim().toLowerCase();
 
 				int initialRank = string.substring(2, 3).trim().toLowerCase().charAt(0) - 97; // e
 				int initialFile = string.substring(3).trim().toLowerCase().charAt(0) - 49; // 4
@@ -103,39 +102,6 @@ public class Position
 	public void setNewRank(int newRank)
 	{
 		this.newRank = newRank;
-	}
-
-	public boolean killPiece(String position)
-	{
-		if (position.length() == 5)
-			return false;
-		else
-			return false;
-	}
-
-	public boolean placePiece(String position)
-	{
-		if (position.length() == 4)
-			return false;
-		else
-			return false;
-
-	}
-
-	public String getPiece()
-	{
-		return piece;
-	}
-
-	public void setPiece(String piece)
-	{
-		this.piece = piece;
-	}
-
-	@Override
-	public String toString()
-	{
-		return this.getOriginalString();
 	}
 
 	public String getOriginalString()
