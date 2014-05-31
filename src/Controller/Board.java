@@ -57,6 +57,8 @@ public class Board
 	private final int BOARD_FILE = 8;
 	private final int BOARD_RANK = 8;
 	private boolean isWhiteTurn = true; //who's turn is it
+	private int LightKingFile, lightKingRank, darkKingFile, darkKingRank;
+	
 	TeamPlayer tp = new TeamPlayer();
 
 	private static Board instance = null;
@@ -138,13 +140,13 @@ public class Board
 			newPiece = new King(isWhite); //position.getOriginalString().substring(3, 4).trim().toLowerCase()); //this is setting the position of the DarkKing to track
 			if (newPiece.isWhite())
 			{
-				position.setLightKingFilePosition(position.getInitialFile());
-				position.setLightKingRankPosition(position.getInitialRank());
+				this.setLightKingFile(position.getInitialFile());
+				this.setLightKingRank(position.getInitialRank());
 			}
 			else
 			{
-				position.setDarkKingFilePosition(position.getInitialFile());
-				position.setDarkKingRankPosition(position.getInitialRank());
+				this.setDarkKingFile(position.getInitialFile());
+				this.setDarkKingRank(position.getInitialRank());
 			}
 			break;
 		case "r":
@@ -274,22 +276,20 @@ public class Board
 
 						if((this.boardSetup[position.getInitialFile()][position.getInitialRank()].isWhite()) && this.boardSetup[position.getInitialFile()][position.getInitialRank()].toString().equalsIgnoreCase("k"))
 						{
-							position.setLightKingFilePosition(position.getNewFile());
-							position.setLightKingRankPosition(position.getNewRank());
+							this.setLightKingFile(position.getNewFile());
+							this.setLightKingRank(position.getNewRank());
 						}
 						else if(!(this.boardSetup[position.getInitialFile()][position.getInitialRank()].isWhite()) && this.boardSetup[position.getInitialFile()][position.getInitialRank()].toString().equalsIgnoreCase("k"))
 						{
-							position.setDarkKingFilePosition(position.getNewFile());
-							position.setDarkKingRankPosition(position.getNewRank());
+							this.setDarkKingFile(position.getNewFile());
+							this.setDarkKingRank(position.getNewRank());
 						}
 						
-
+						System.out.println(this.getLightKingFile());
+						System.out.println(this.getLightKingRank());
 						
-						System.out.println(position.getLightKingFilePosition());
-						System.out.println(position.getLightKingRankPosition());
-						
-						System.out.println(position.getDarkKingFilePosition());
-						System.out.println(position.getDarkKingRankPosition());
+						System.out.println(this.getDarkKingFile());
+						System.out.println(this.getDarkKingRank());
 						
 						toggleGameState();
 						this.boardSetup[position.getNewFile()][position.getNewRank()] = (this.boardSetup[position.getInitialFile()][position.getInitialRank()]);
@@ -473,6 +473,46 @@ public class Board
 //		return false;
 //
 //	}
+
+	public int getLightKingFile()
+	{
+		return LightKingFile;
+	}
+
+	public void setLightKingFile(int lightKingFile)
+	{
+		LightKingFile = lightKingFile;
+	}
+
+	public int getLightKingRank()
+	{
+		return lightKingRank;
+	}
+
+	public void setLightKingRank(int lightKingRank)
+	{
+		this.lightKingRank = lightKingRank;
+	}
+
+	public int getDarkKingFile()
+	{
+		return darkKingFile;
+	}
+
+	public void setDarkKingFile(int darkKingFile)
+	{
+		this.darkKingFile = darkKingFile;
+	}
+
+	public int getDarkKingRank()
+	{
+		return darkKingRank;
+	}
+
+	public void setDarkKingRank(int darkKingRank)
+	{
+		this.darkKingRank = darkKingRank;
+	}
 
 	public long getUpdateTimer()
 	{

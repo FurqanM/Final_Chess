@@ -114,44 +114,4 @@ public class Position
 		this.originalString = originalString;
 	}
 
-	public int getLightKingFilePosition()
-	{
-		return LightKingFilePosition;
-	}
-
-	public void setLightKingFilePosition(int lightKingFilePosition)
-	{
-		LightKingFilePosition = lightKingFilePosition;
-	}
-
-	public int getLightKingRankPosition()
-	{
-		return LightKingRankPosition;
-	}
-
-	public void setLightKingRankPosition(int lightKingRankPosition)
-	{
-		LightKingRankPosition = lightKingRankPosition;
-	}
-
-	public int getDarkKingFilePosition()
-	{
-		return DarkKingFilePosition;
-	}
-
-	public void setDarkKingFilePosition(int darkKingFilePosition)
-	{
-		DarkKingFilePosition = darkKingFilePosition;
-	}
-
-	public int getDarkKingRankPosition()
-	{
-		return DarkKingRankPosition;
-	}
-
-	public void setDarkKingRankPosition(int darkKingRankPosition)
-	{
-		DarkKingRankPosition = darkKingRankPosition;
-	}
-
 }
