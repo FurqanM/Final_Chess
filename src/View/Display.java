@@ -40,6 +40,7 @@ public class Display
 							? "Light's "
 							: "Dark's ") + "turn");
 					
+					Board.getInstance().draw();
 
 					moveCommand = input.nextLine().toLowerCase();
 					
