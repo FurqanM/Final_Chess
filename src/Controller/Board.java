@@ -168,6 +168,7 @@ public class Board
 		}
 		this.boardSetup[position.getInitialFile()][position.getInitialRank()] = newPiece;
 		System.out.println("\t\t\t\t\t\t\tPlaced a " + newPiece + " on " + position.getOriginalString().substring(2, 3).trim() + position.getOriginalString().substring(3).trim());
+		this.draw();
 	}
 
 	public void loadFile(String filename) throws FileNotFoundException
@@ -223,7 +224,7 @@ public class Board
 			e.printStackTrace();
 		}
 
-		this.draw();
+		//this.draw();
 	}
 
 	public void movePiece(Position position)
@@ -278,6 +279,7 @@ public class Board
 						this.boardSetup[position.getNewFile()][position.getNewRank()] = (this.boardSetup[position.getInitialFile()][position.getInitialRank()]);
 						this.boardSetup[position.getInitialFile()][position.getInitialRank()] = null;
 						System.out.println("\t\t\t\t\t\t\t" + " Moves piece from " + position.getOriginalString().substring(0, 2).trim() + " to " + position.getOriginalString().substring(3, 5).trim());
+						this.draw();
 
 					}
 					else

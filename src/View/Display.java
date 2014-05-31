@@ -30,8 +30,6 @@ public class Display
 				System.out.println("File not found. Resorting to User Play.");
 				Board.getInstance().defaultSetup();
 
-				Board.getInstance().draw();
-
 				while (!gameEnd)
 				{
 
@@ -41,6 +39,7 @@ public class Display
 					System.out.println("It is " + ((Board.getInstance().isWhiteTurn())
 							? "Light's "
 							: "Dark's ") + "turn");
+					
 
 					moveCommand = input.nextLine().toLowerCase();
 					
