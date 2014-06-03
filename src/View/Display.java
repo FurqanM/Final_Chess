@@ -29,6 +29,7 @@ public class Display
 				Board.getInstance().setUpdateTimer(0);
 				System.out.println("File not found. Resorting to User Play.");
 				Board.getInstance().defaultSetup();
+				Board.getInstance().draw();
 
 				while (!gameEnd)
 				{
@@ -40,7 +41,7 @@ public class Display
 							? "Light's "
 							: "Dark's ") + "turn");
 					
-					Board.getInstance().draw();
+//					Board.getInstance().draw();
 
 					moveCommand = input.nextLine().toLowerCase();
 					

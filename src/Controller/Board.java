@@ -243,9 +243,13 @@ public class Board
 				//or if the piece at that position is black and if it's black's turn then allow the player to move
 				if ((this.boardSetup[position.getInitialFile()][position.getInitialRank()].isWhite() && this.isWhiteTurn()) || (!this.boardSetup[position.getInitialFile()][position.getInitialRank()].isWhite() && !this.isWhiteTurn()))
 				{
+					
+					
+					tp.getPieceArray().add(this.boardSetup[position.getInitialFile()][position.getInitialRank()]);
+					
 					anyFile = position.getInitialFile();
 					anyRank = position.getInitialRank();
-
+					
 					System.out.println(((this.isWhiteTurn())
 							? "Dark King"
 							: "Light King") + " is in check");
@@ -337,50 +341,51 @@ public class Board
 		}
 	}
 
-	private void CheckForCheck(Position position)
+	public boolean CheckForCheck(Position position, String kingPosition)
 	{
-		//
-		//		String tempFile = Character.toString((char) (position.getNewFile() + 'a' -1));
-		//		String tempRank = Character.toString((char) (position.getNewRank() + '1' +1));
-		//		
-		//		//concatenated King position
-		//		String thisString = (this.isWhiteTurn())
-		//				? tempFile.trim() + tempFile.trim() + " " + Character.toString((char) (this.getDarkKingFile() + 'a')) + Character.toString((char) (this.getDarkKingRank() + '1')) //newFile and newRank
-		//				: tempRank.trim() + tempRank.trim() + " " + Character.toString((char) (this.getLightKingFile() + 'a')) + Character.toString((char) (this.getLightKingRank() + '1')); //newFile and newRank
-		//
-		//		
-		for (int i = 0; i < BOARD_FILE; i++)
-		{
-			for (int j = 0; j < BOARD_RANK; j++)
-			{
-				String iString = Character.toString((char) (i + 'a'));
-				String jString = Character.toString((char) (j + '1'));
+		
+		
+		
+		
+		if (this.boardSetup[position.getInitialFile()][position.getInitialRank()].validateMovement(new Position(kingPosition)))
+			return true;
 
-				//concatenated King position
-				String kingString = (this.isWhiteTurn())
-						? iString.trim() + jString.trim() + " " + Character.toString((char) (this.getDarkKingFile() + 'a' + 1)) + Character.toString((char) (this.getDarkKingRank() + '1' - 1)) //newFile and newRank
-						: iString.trim() + jString.trim() + " " + Character.toString((char) (this.getLightKingFile() + 'a' + 1)) + Character.toString((char) (this.getLightKingRank() + '1' - 1)); //newFile and newRank
-
-				if (this.boardSetup[i][j] != null)
-				{
-					//|| this.boardSetup[i][j].validateMovement(new Position(thisString)
-					if (this.boardSetup[i][j].validateMovement(new Position(kingString)))
-					{
-						System.out.println(this.boardSetup[i][j] + " put");
-						System.out.println(((this.isWhiteTurn())
-								? "Dark King"
-								: "Light King") + " in check");
-					}
-					else
-					{
-					}
-				}
-				else
-				{
-				}
-
-			}
-		}
+		return false;
+		
+		
+		
+		
+//		for (int i = 0; i < BOARD_FILE; i++)
+//		{
+//			for (int j = 0; j < BOARD_RANK; j++)
+//			{
+//				String iString = Character.toString((char) (i + 'a'));
+//				String jString = Character.toString((char) (j + '1'));
+//
+//				//concatenated King position
+//				String kingString = (this.isWhiteTurn())
+//						? iString.trim() + jString.trim() + " " + Character.toString((char) (this.getDarkKingFile() + 'a' + 1)) + Character.toString((char) (this.getDarkKingRank() + '1' - 1)) //newFile and newRank
+//						: iString.trim() + jString.trim() + " " + Character.toString((char) (this.getLightKingFile() + 'a' + 1)) + Character.toString((char) (this.getLightKingRank() + '1' - 1)); //newFile and newRank
+//
+//				if (this.boardSetup[i][j] != null)
+//				{
+//					if (this.boardSetup[i][j].validateMovement(new Position(kingString)))
+//					{
+//						System.out.println(this.boardSetup[i][j] + " put");
+//						System.out.println(((this.isWhiteTurn())
+//								? "Dark King"
+//								: "Light King") + " in check");
+//					}
+//					else
+//					{
+//					}
+//				}
+//				else
+//				{
+//				}
+//
+//			}
+//		}
 
 	}
 
