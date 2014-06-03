@@ -60,12 +60,12 @@ public abstract class Piece
 				{
 					if(((Board.getInstance().getPieceAt(north, east).isWhite() != this.isWhite())) && (newFile == north && newRank == east))
 					{
-						System.out.println("Killed a piece");
+						//System.out.println("Killed a piece");
 						return true;
 					}
 					else
 					{
-						System.out.println("Can't kill your own piece traitor!");
+						//System.out.println("Can't kill your own piece traitor!");
 						return false;
 					}
 						
@@ -73,7 +73,7 @@ public abstract class Piece
 				}
 				else if ((north == newFile && east == newRank) && Board.getInstance().getPieceAt(north, east) == null)
 				{
-					System.out.println("Moved a Piece");
+					//System.out.println("Moved a Piece");
 					return true;
 				}
 			}
@@ -111,7 +111,7 @@ public abstract class Piece
 		}
 		
 
-		System.out.println("Not a valid movement or piece blocking path, ignoring command.");
+		//System.out.println("Not a valid movement or piece blocking path, ignoring command.");
 		return false;
 
 	}

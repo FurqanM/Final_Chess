@@ -6,15 +6,15 @@ import Controller.Board;
 
 public class Position
 {
+	public static int whiteKingFile;
+	public static int whiteKingRank;
+	public static int blackKingFile;
+	public static int blackKingRank;
 	private int initialFile;
 	private int initialRank;
 	private int newFile;
 	private int newRank;
 	private String originalString;
-	private int LightKingFilePosition;
-	private int LightKingRankPosition;
-	private int DarkKingFilePosition;
-	private int DarkKingRankPosition;
 
 	public Position(String string)
 	{
@@ -33,8 +33,8 @@ public class Position
 
 				string.substring(0, 2).trim().toLowerCase();
 
-				int initialRank = string.substring(2, 3).trim().toLowerCase().charAt(0) - 97; // e
-				int initialFile = string.substring(3).trim().toLowerCase().charAt(0) - 49; // 4
+				int initialRank = string.substring(2, 3).trim().toLowerCase().charAt(0) - 'a'; // e
+				int initialFile = string.substring(3).trim().toLowerCase().charAt(0) - '1'; // 4
 
 				this.initialFile = initialFile;
 				this.initialRank = initialRank;
@@ -46,13 +46,17 @@ public class Position
 			else
 			{
 				// c7 c5
-				this.initialRank = (string.substring(0, 1).trim().toLowerCase().charAt(0) - 'a'); // c
+				int initialRank = (string.substring(0, 1).trim().toLowerCase().charAt(0) - 'a'); // c
+				int initialFile = (string.substring(1, 2).trim().charAt(0) - '1'); // 7
 
-				this.initialFile = (string.substring(1, 2).trim().charAt(0) - '1'); // 7
-
-				this.newRank = (string.substring(3, 4).trim().toLowerCase().charAt(0) - 'a'); // c
-
-				this.newFile = (string.substring(4).trim().charAt(0) - '1'); // 5 maybe *
+				int newRank = (string.substring(3, 4).trim().toLowerCase().charAt(0) - 'a'); // c
+				int newFile = (string.substring(4).trim().charAt(0) - '1'); // 5 maybe *
+				
+				this.initialRank = initialRank;
+				this.initialFile = initialFile;
+				this.newRank = newRank;
+				this.newFile = newFile;
+				
 
 				this.originalString = ((string.substring(0, 1).trim().toLowerCase()) + (string.substring(1, 2).trim()) + " " + (string.substring(3, 4).trim().toLowerCase()) + (string.substring(4).trim())); //*
 			}
