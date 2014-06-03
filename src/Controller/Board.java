@@ -243,16 +243,15 @@ public class Board
 				//or if the piece at that position is black and if it's black's turn then allow the player to move
 				if ((this.boardSetup[position.getInitialFile()][position.getInitialRank()].isWhite() && this.isWhiteTurn()) || (!this.boardSetup[position.getInitialFile()][position.getInitialRank()].isWhite() && !this.isWhiteTurn()))
 				{
-					
-					
-					tp.getPieceArray().add(this.boardSetup[position.getInitialFile()][position.getInitialRank()]);
-					
 					anyFile = position.getInitialFile();
 					anyRank = position.getInitialRank();
-					
-					System.out.println(((this.isWhiteTurn())
-							? "Dark King"
-							: "Light King") + " is in check");
+
+					if(this.CheckForCheck(position))
+					{
+						System.out.println(((this.isWhiteTurn())
+								? "Dark King"
+								: "Light King") + " is in check");
+					}
 
 					if ((this.boardSetup[position.getInitialFile()][position.getInitialRank()].isWhite()) && this.boardSetup[position.getInitialFile()][position.getInitialRank()].toString().equalsIgnoreCase("k"))
 					{
@@ -312,10 +311,12 @@ public class Board
 						this.boardSetup[position.getNewFile()][position.getNewRank()] = (this.boardSetup[position.getInitialFile()][position.getInitialRank()]);
 						this.boardSetup[position.getInitialFile()][position.getInitialRank()] = null;
 						System.out.println("\t\t\t\t\t\t\t" + position.getOriginalString().substring(0, 2).trim() + " captures piece at " + position.getOriginalString().substring(3, 5).trim());
+						this.draw();
 					}
 					else
 					{
 						System.out.println("Nice try! It's not your turn!");
+						this.draw();
 					}
 
 				}
@@ -341,51 +342,37 @@ public class Board
 		}
 	}
 
-	public boolean CheckForCheck(Position position, String kingPosition)
+	private boolean CheckForCheck(Position position)
 	{
-		
-		
-		
-		
-		if (this.boardSetup[position.getInitialFile()][position.getInitialRank()].validateMovement(new Position(kingPosition)))
-			return true;
+		for (int i = 0; i < BOARD_FILE; i++)
+		{
+			for (int j = 0; j < BOARD_RANK; j++)
+			{
+				String iString = Character.toString((char) (i + 'a'));
+				String jString = Character.toString((char) (j + '1'));
 
+				//concatenated King position
+				String kingString = (this.isWhiteTurn())
+						? iString.trim() + jString.trim() + " " + Character.toString((char) (this.getDarkKingFile() + 'a' + 1)) + Character.toString((char) (this.getDarkKingRank() + '1' - 1)) //newFile and newRank
+						: iString.trim() + jString.trim() + " " + Character.toString((char) (this.getLightKingFile() + 'a' + 1)) + Character.toString((char) (this.getLightKingRank() + '1' - 1)); //newFile and newRank
+
+				if (this.boardSetup[i][j] != null)
+				{
+					if (this.boardSetup[i][j].validateMovement(new Position(kingString)))
+					{
+						return true;
+					}
+					else
+					{
+					}
+				}
+				else
+				{
+				}
+
+			}
+		}
 		return false;
-		
-		
-		
-		
-//		for (int i = 0; i < BOARD_FILE; i++)
-//		{
-//			for (int j = 0; j < BOARD_RANK; j++)
-//			{
-//				String iString = Character.toString((char) (i + 'a'));
-//				String jString = Character.toString((char) (j + '1'));
-//
-//				//concatenated King position
-//				String kingString = (this.isWhiteTurn())
-//						? iString.trim() + jString.trim() + " " + Character.toString((char) (this.getDarkKingFile() + 'a' + 1)) + Character.toString((char) (this.getDarkKingRank() + '1' - 1)) //newFile and newRank
-//						: iString.trim() + jString.trim() + " " + Character.toString((char) (this.getLightKingFile() + 'a' + 1)) + Character.toString((char) (this.getLightKingRank() + '1' - 1)); //newFile and newRank
-//
-//				if (this.boardSetup[i][j] != null)
-//				{
-//					if (this.boardSetup[i][j].validateMovement(new Position(kingString)))
-//					{
-//						System.out.println(this.boardSetup[i][j] + " put");
-//						System.out.println(((this.isWhiteTurn())
-//								? "Dark King"
-//								: "Light King") + " in check");
-//					}
-//					else
-//					{
-//					}
-//				}
-//				else
-//				{
-//				}
-//
-//			}
-//		}
 
 	}
 

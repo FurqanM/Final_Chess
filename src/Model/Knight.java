@@ -56,7 +56,7 @@ public class Knight extends Piece
 		//movement logic for moving up 2 right 1
 		if(newFile == north && newRank == east)
 		{
-			System.out.println("Moved a Knight");
+			//System.out.println("Moved a Knight");
 			return true;
 		}
 		
