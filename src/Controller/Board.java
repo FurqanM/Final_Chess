@@ -300,13 +300,6 @@ public class Board
 					//or if the piece at that position is black and if it's black's turn then allow the player to move
 					if ((this.boardSetup[position.getInitialFile()][position.getInitialRank()].isWhite() && this.isWhiteTurn()) || (!this.boardSetup[position.getInitialFile()][position.getInitialRank()].isWhite() && !this.isWhiteTurn()))
 					{
-						//							if (checkForCheck(initialFile, initialRank, newFile, newRank, kingString))
-						//							{
-						//								System.out.println(((this.isWhiteTurn())
-						//										? "Dark King"
-						//										: "Light King") + " is in check");
-						//							}
-
 						toggleGameState();
 						this.boardSetup[position.getNewFile()][position.getNewRank()] = (this.boardSetup[position.getInitialFile()][position.getInitialRank()]);
 						this.boardSetup[position.getInitialFile()][position.getInitialRank()] = null;
@@ -353,13 +346,15 @@ public class Board
 
 				//concatenated King position
 				String kingString = (this.isWhiteTurn())
-						? iString.trim() + jString.trim() + " " + Character.toString((char) (this.getDarkKingFile() + 'a' + 1)) + Character.toString((char) (this.getDarkKingRank() + '1' - 1)) //newFile and newRank
-						: iString.trim() + jString.trim() + " " + Character.toString((char) (this.getLightKingFile() + 'a' + 1)) + Character.toString((char) (this.getLightKingRank() + '1' - 1)); //newFile and newRank
+						? iString.trim() + jString.trim() + " " + Character.toString((char) (this.getDarkKingFile() + 'a'-1)) + Character.toString((char) (this.getDarkKingRank() + '1'+1)) //newFile and newRank
+						: iString.trim() + jString.trim() + " " + Character.toString((char) (this.getLightKingFile() + 'a'-1)) + Character.toString((char) (this.getLightKingRank() + '1'+1)); //newFile and newRank
 
 				if (this.boardSetup[i][j] != null)
 				{
 					if (this.boardSetup[i][j].validateMovement(new Position(kingString)))
 					{
+						System.out.println(this.boardSetup[i][j].toString());
+						System.out.println("WIDHOADIAHWD");
 						return true;
 					}
 					else
